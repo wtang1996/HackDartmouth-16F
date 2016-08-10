@@ -1,0 +1,128 @@
+body {
+  font-family: "Roboto", sans-serif;
+  color: rgb(10%, 10%, 10%);
+  background: url(https://i.kinja-img.com/gawker-media/image/upload/18ixkc0h01ymfjpg.JPG);
+  margin: 50px;
+  font-size: 16px;
+  color: white;
+}
+
+button {
+  border-radius: 4px;
+  padding: 5px;
+  background-color: darken(white, 10%);
+  outline: none;
+  border-width: medium;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.Navbar {
+  display: flex;
+  font-size: 20px;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 15px;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+  background-color: darken(white, 15%)
+}
+.siteName {
+  font-family: fantasy;
+  font-weight: bold;
+}
+
+.postSummary {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 3px;
+  border-width: thin;
+  border-style: solid;
+  border-color: lighten(black, 15%);
+  background-color: darken(white, 15%);
+}
+
+.Title {
+  font-size: 18px;
+}
+
+.tag {
+  color: darkslategray;
+}
+
+.homeDelete {
+  border-color: firebrick;
+  background-color: lighten(firebrick, 2%);
+  color: darken(white, 10%);
+  align-self: center;
+}
+.homeDelete:active {
+  background-color: darken(firebrick, 2%);
+  color: white;
+}
+
+.NewFields {
+  display: flex;
+  flex-direction: column;
+}
+.NewFields input {
+  margin: 8px;
+  padding: 2px;
+  border-radius: 4px;
+  height: 20px;
+}
+.newButton {
+  border-color: orange;
+  background-color: lighten(orange, 2%);
+  color: lighten(black, 20%);
+}
+.newButton:active {
+  background-color: darken(orange, 2%);
+  color: black;
+}
+
+.editButton {
+  background-color: lighten(steelblue, 2%);
+  border-color: steelblue;
+  color: lighten(black, 10%);
+}
+.editButton:active {
+  background-color: darken(steelblue, 2%);
+  color: black;
+}
+
+.doneButton {
+  border-color: mediumseagreen;
+  background-color: lighten(mediumseagreen, 2%);
+  color: lighten(black, 20%);
+}
+.doneButton:active {
+  background-color: darken(mediumseagreen, 2%);
+  color: black;
+}
+
+.deleteButton {
+  border-color: firebrick;
+  background-color: lighten(firebrick, 2%);
+  color: darken(white, 10%);
+}
+.deleteButton:active {
+  background-color: darken(firebrick, 2%);
+  color: white;
+}
+
+a {
+  color: navy;
+  text-decoration: none !important;
+  text-decoration-color: transparent;
+  text-decoration-line: none;
+}
+a:hover, a:active {
+  text-decoration: none !important;
+  text-decoration-color: transparent;
+  background-color: transparent;
+  color: mediumblue;
+}
