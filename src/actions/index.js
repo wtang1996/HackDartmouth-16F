@@ -10,10 +10,10 @@ export const ActionTypes = {
   DELETE_POST: 'DELETE_POST',
 };
 
-// const ROOT_URL = 'https://jedwardsblog.herokuapp.com/api';
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
+// const ROOT_URL = 'http://hw5-weijia.herokuapp.com/api';
 const ROOT_URL = 'http://localhost:9090';
-const API_KEY = '?key=j_edwards';
+const API_KEY = '?key=weijia_tang';
 
 export function fetchPosts() {
   return (dispatch) => {
