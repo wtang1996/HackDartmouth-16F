@@ -44,8 +44,8 @@ class New extends Component {
   render() {
     return (
       <div className="NewFields">
-        <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} />
-        <input onChange={this.onContentChange} placeholder="content" value={this.state.content} />
+        <input onChange={this.onTitleChange} placeholder="Lost Item" value={this.state.title} />
+        <input onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
         <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
         <button onClick={this.onCreation} className="newButton">
           Create New Post
