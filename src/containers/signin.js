@@ -38,8 +38,8 @@ class SignIn extends Component {
   render() {
     return (
       <div>
-        <h1>DigUP</h1>
-        <form onSubmit={this.submit} className="signin">
+        <h1>DigUP Sign in</h1>
+        <form onSubmit={this.submit} className="signin/up">
           Email: <input onChange={this.onEmailChange} value={this.state.email} />
           Password: <input onChange={this.onPasswordChange} value={this.state.password} />
           <button>Sign in</button>
