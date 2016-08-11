@@ -12,7 +12,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h2>Posts</h2>
+        <h2>Item Listings</h2>
         <ul>
         {
           this.props.posts.map((post) => {
@@ -26,7 +26,7 @@ class Home extends Component {
                     );
                   })}
                 </div>
-                <button className="homeDelete" onClick={() => { this.props.deletePost(post.id); }}> Delete Post </button>
+                <button className="homeDelete" onClick={() => { this.props.deletePost(post.id); }}> Delete Item </button>
               </li>
             );
           })

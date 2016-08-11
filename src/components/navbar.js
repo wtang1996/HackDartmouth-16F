@@ -5,8 +5,8 @@ import { Link } from 'react-router';
 const NavBar = () => {
   return (
     <div className="Navbar">
-      <Link to="/" className="siteName">Blogger</Link>
-      <Link to="posts/new">New</Link>
+      <Link to="/" className="siteName">Digup</Link>
+      <Link to="posts/new">New lost or found Item</Link>
     </div>
   );
 };
