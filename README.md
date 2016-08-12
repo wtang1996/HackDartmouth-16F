@@ -10,6 +10,12 @@ Login Page
 Signup Page
 ![Signup Page](/img/signup.png?raw=true "Signup Page")
 
+Main Screen
+![main screen](/img/main-screen.png)
+
+Messages
+![messages](/img/messages.png)
+
 ## Architecture
 
 TODO:  descriptions of code organization and tools and libraries used
