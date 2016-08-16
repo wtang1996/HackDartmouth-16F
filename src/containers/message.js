@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import * as actions from '../actions';
 import MessageList from './message_list';
 import MessageDetail from './message_detail';

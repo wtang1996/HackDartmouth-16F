@@ -1,10 +1,11 @@
 {
   "name": "js-react-starter",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/eslint **.js",
     "start": "node_modules/.bin/webpack-dev-server --inline --hot",
     "build": "WEBPACK_ENV=production node_modules/.bin/webpack --optimize-minimize --progress --color",
     "deploy": "npm run build; surge -p ."
@@ -35,6 +36,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "extract-text-webpack-plugin": "^1.0.1",
+    "git-hooks": "^1.1.0",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",
     "sass-loader": "^4.0.0",
