@@ -39,7 +39,7 @@ class SignIn extends Component {
   render() {
     return (
       <div>
-        <h1>Blog Sign in</h1>
+        <h1>Sign in</h1>
         <form onSubmit={this.submit} className="createPost">
           Email: <input onChange={this.onEmailChange} value={this.state.email} />
           Password: <input onChange={this.onPasswordChange} value={this.state.password} />

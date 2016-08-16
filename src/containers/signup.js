@@ -44,7 +44,7 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <h1>Blog Sign up</h1>
+        <h1>Sign up</h1>
         <form onSubmit={this.submit} className="createPost">
           Username: <input onChange={this.onUsernameChange} value={this.state.username} />
           Email: <input onChange={this.onEmailChange} value={this.state.email} />
