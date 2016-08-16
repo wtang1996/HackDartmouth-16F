@@ -11,7 +11,7 @@ Signup Page
 ![Signup Page](/img/signup.png?raw=true "Signup Page")
 
 Main Screen
-![main screen](/img/main-screen.png)
+![main screen](/img/mainScreen.png)
 
 Messages
 ![messages](/img/messages.png)

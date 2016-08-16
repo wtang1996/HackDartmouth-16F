@@ -13,9 +13,9 @@ export const ActionTypes = {
   AUTH_ERROR: 'AUTH_ERROR',
 };
 
-// const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
+const ROOT_URL = 'https://digup.herokuapp.com/api';
 // const ROOT_URL = 'http://hw5-weijia.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090';
+// const ROOT_URL = 'http://localhost:9090';
 const API_KEY = '?key=weijia_tang';
 
 export function fetchPosts() {
