@@ -12,11 +12,11 @@ import Profile from './containers/profile';
 import Error from './containers/error';
 
 export default(
-  <Route path="/" component={RequireAuth(App)}>
-    <IndexRoute component={Home} />
+  <Route path="/" component={App}>
+    <IndexRoute component={RequireAuth(Home)} />
     <Route path="signin" component={SignIn} />
     <Route path="signup" component={SignUp} />
-    <Route path="posts/new" component={New} />
+    <Route path="posts/new" component={RequireAuth(New)} />
     <Route path="posts/:id" component={Show} />
     <Route path="profile" component={Profile} />
     <Route path="error" component={Error} />
