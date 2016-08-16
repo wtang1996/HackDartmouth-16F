@@ -17,6 +17,8 @@ Messages
 ![messages](/img/messages.png)
 
 ## Architecture
+Using Travis Cl to run automatic linting and automatic pushes to surge, Eslint with Airbnb config, and git-hooks to reduce the chances of accidentally ruining the repositories.
+
 
 TODO:  descriptions of code organization and tools and libraries used
 
