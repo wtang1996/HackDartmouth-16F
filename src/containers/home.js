@@ -12,26 +12,61 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h2>Item Listings</h2>
-        <ul>
-        {
-          this.props.posts.map((post) => {
-            return (
-              <li key={post.id} className="postSummary">
-                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                <div className="tag">
-                  {post.tags.split(',').map((tag) => {
-                    return (
-                      tag
-                    );
-                  })}
-                </div>
-                <button className="homeDelete" onClick={() => { this.props.deletePost(post.id); }}> Delete Item </button>
-              </li>
-            );
-          })
-        }
-        </ul>
+        <div className="newListingBox">
+          <button className="newListing">New Listing +</button>
+        </div>
+        <div className="filters">
+          <div className="filtersBox">
+            <h3>Filters:</h3>
+            <h5>Jacket...Tech...Bike</h5>
+          </div>
+        </div>
+        <div className="lostFoundBoxes">
+          <div className="found">
+            <h2>Found Item Listings</h2>
+            <ul>
+            {
+              this.props.posts.map((post) => {
+                return (
+                  <li key={post.id} className="postSummary">
+                    <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                    <div className="authorLink"> Author Link</div>
+                  </li>
+                );
+              })
+            }
+            </ul>
+          </div>
+          <div className="lost">
+            <h2>Lost Item Listings</h2>
+            <ul>
+            {
+              this.props.posts.map((post) => {
+                return (
+                  <li key={post.id} className="postSummary">
+                    <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                    <div className="authorLink"> Author Link</div>
+                  </li>
+                );
+              })
+            }
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

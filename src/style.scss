@@ -1,42 +1,139 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   color: rgb(10%, 10%, 10%);
-  background: url(http://a.dryicons.com/files/graphics_previews/abstract_layers.jpg);
-  margin: 50px;
+  background: linear-gradient(to bottom right, #0D2C48, #4D6C88);
+  background-repeat: no-repeat;
   font-size: 16px;
   color: white;
+  margin: 0;
 }
 
-button {
-  border-radius: 4px;
-  padding: 5px;
-  background-color: darken(white, 10%);
-  outline: none;
-  border-width: medium;
-  font-size: 16px;
+// Sign in Page
+.signInTitle {
+  text-align: center;
+}
+.signInContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.signInBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 160px;
+  border: solid, thin, darkgray;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  padding: 10px;
+  color: midnightblue;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.signInBox input {
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+.signInBox button {
+  color: #efefef;
   margin: 10px;
+  background-color: darken(limegreen, 10%);
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.signInBox button:hover {
+  background-color: darken(limegreen, 12%);
+}
+.signInBox button:active {
+  background-color: darken(limegreen, 15%);
+}
+.signUpLink {
+  color: midnightblue;
+  font-size: 13px;
+}
+.signUpLink:hover  {
+  color: navy;
+}
+.signUpLink:active {
+  color: navy;
 }
 
+// Navbar
 .Navbar {
   display: flex;
   font-size: 20px;
   justify-content: space-between;
-  padding: 10px;
-  margin: 15px;
-  border-radius: 5px;
-  border-style: solid;
-  border-width: thin;
-  background-color: darken(white, 15%)
+  padding: 15px;
+  border-bottom: solid, thin, darkgray;
+  background-color: #e6e6e6;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
 }
 .siteName {
-  font-family: fantasy;
+  font-size: 24px;
+  font-family: sans-serif;
+  font: helvetica;
   font-weight: bold;
 }
 
+.content {
+  margin: 15px;
+}
+
+// New Listing button
+.newListingBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.newListing {
+  font-size: 18px;
+  margin: 10px;
+}
+
+// Filters box
+.filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.filtersBox {
+  background-color: #e6e6e6;
+  color: midnightblue;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 5px;
+}
+h3 {
+  padding: 10px;
+  margin: 5px;
+}
+h5 {
+  padding: 10px;
+  margin: 5px;
+}
+.lostFoundBoxes {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+ul {
+  padding-left: 0px;
+}
+
 .postSummary {
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 5px;
+  padding: 10px;
   margin: 5px;
   border-radius: 3px;
   border-width: thin;
@@ -51,6 +148,19 @@ button {
 
 .tag {
   color: darkslategray;
+}
+.authorLink {
+  color: midnightblue;
+}
+
+button {
+  border-radius: 4px;
+  padding: 4px;
+  background-color: darken(white, 10%);
+  outline: none;
+  border-width: thin;
+  font-size: 14px;
+  margin: 6px;
 }
 
 .homeDelete {
@@ -115,7 +225,7 @@ button {
 }
 
 a {
-  color: navy;
+  color: midnightblue;
   text-decoration: none !important;
   text-decoration-color: transparent;
   text-decoration-line: none;
@@ -124,5 +234,5 @@ a:hover, a:active {
   text-decoration: none !important;
   text-decoration-color: transparent;
   background-color: transparent;
-  color: mediumblue;
+  color: navy;
 }

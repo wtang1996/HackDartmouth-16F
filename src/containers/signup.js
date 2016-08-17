@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { signupUser } from '../actions';
 
@@ -44,13 +45,16 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <h1>Blog Sign up</h1>
-        <form onSubmit={this.submit} className="createPost">
-          Username: <input onChange={this.onUsernameChange} value={this.state.username} />
-          Email: <input onChange={this.onEmailChange} value={this.state.email} />
-          Password: <input onChange={this.onPasswordChange} value={this.state.password} />
-          <button>Sign up</button>
-        </form>
+        <h1 className="signInTitle">Sign up</h1>
+        <div className="signInContainer">
+          <form onSubmit={this.submit} className="signInBox">
+            Username: <input onChange={this.onUsernameChange} value={this.state.username} />
+            Email: <input onChange={this.onEmailChange} value={this.state.email} />
+            Password: <input onChange={this.onPasswordChange} value={this.state.password} />
+            <button>Sign up</button>
+            <Link to="signin" className="signUpLink">Already have an account? Sign in here!</Link>
+          </form>
+        </div>
       </div>
   ); }
 }
