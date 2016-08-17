@@ -12,6 +12,44 @@ body {
   margin: 0;
 }
 
+// Sign in Page
+.signInContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.signInBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 160px;
+  border: solid, thin, darkgray;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  padding: 10px;
+  color: midnightblue;
+  align-items: center;
+}
+.signInBox input {
+  margin-top: 3px;
+  margin-bottom: 10px;
+}
+.signInBox button {
+  color: midnightblue;
+  padding: 4px;
+  margin: 10px;
+}
+.signUpLink {
+  color: midnightblue;
+  font-size: 13px;
+}
+.signUpLink:hover  {
+  color: navy;
+}
+.signUpLink:active {
+  color: navy;
+}
+
 .Navbar {
   display: flex;
   font-size: 20px;
