@@ -4,5 +4,3 @@ node_js:
 deploy:
   - provider: surge
     domain: digup.surge.sh
-  - provider: heroku
-    api_key: "YOUR HEROKU API KEY"
