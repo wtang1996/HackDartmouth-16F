@@ -1,3 +1,8 @@
 language: node_js
 node_js:
-  - "5.4"
+  - "6"
+deploy:
+  - provider: surge
+    domain: digup.surge.sh
+  - provider: heroku
+    api_key: "YOUR HEROKU API KEY"
