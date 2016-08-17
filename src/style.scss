@@ -13,6 +13,9 @@ body {
 }
 
 // Sign in Page
+.signInTitle {
+  text-align: center;
+}
 .signInContainer {
   display: flex;
   flex-direction: row;
@@ -29,15 +32,25 @@ body {
   padding: 10px;
   color: midnightblue;
   align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .signInBox input {
   margin-top: 3px;
   margin-bottom: 10px;
 }
 .signInBox button {
-  color: midnightblue;
-  padding: 4px;
+  color: #efefef;
   margin: 10px;
+  background-color: darken(limegreen, 10%);
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.signInBox button:hover {
+  background-color: darken(limegreen, 12%);
+}
+.signInBox button:active {
+  background-color: darken(limegreen, 15%);
 }
 .signUpLink {
   color: midnightblue;
@@ -50,6 +63,7 @@ body {
   color: navy;
 }
 
+// Navbar
 .Navbar {
   display: flex;
   font-size: 20px;
@@ -57,6 +71,7 @@ body {
   padding: 15px;
   border-bottom: solid, thin, darkgray;
   background-color: #e6e6e6;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
 }
 .siteName {
   font-size: 24px;
@@ -69,6 +84,7 @@ body {
   margin: 15px;
 }
 
+// New Listing button
 .newListingBox {
   display: flex;
   flex-direction: row;
@@ -79,6 +95,7 @@ body {
   margin: 10px;
 }
 
+// Filters box
 .filters {
   display: flex;
   flex-direction: row;
@@ -141,7 +158,7 @@ button {
   padding: 4px;
   background-color: darken(white, 10%);
   outline: none;
-  border-width: medium;
+  border-width: thin;
   font-size: 14px;
   margin: 6px;
 }
