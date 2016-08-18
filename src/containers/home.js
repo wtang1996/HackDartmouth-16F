@@ -13,7 +13,7 @@ class Home extends Component {
     return (
       <div>
         <div className="newListingBox">
-          <button className="newListing">New Listing +</button>
+          <Link to="posts/new" className="newListing">New Listing +</Link>
         </div>
         <div className="filters">
           <div className="filtersBox">
