@@ -38,6 +38,9 @@ body {
 .signInBox input {
   margin-top: 3px;
   margin-bottom: 10px;
+  outline: none;
+  font-size: 13px;
+  padding: 5px 10px;
 }
 .signInBox button {
   color: #efefef;
