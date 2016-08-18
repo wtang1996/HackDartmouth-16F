@@ -129,7 +129,7 @@ class Home extends Component {
         </div>
         <div className="filters">
           <div className="filtersBox">
-            <div className="tagTitle"> Tags </div>
+            <div className="tagTitle"> Filter Results by Tags </div>
             {this.renderTags()}
           </div>
         </div>
