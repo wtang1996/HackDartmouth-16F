@@ -13,7 +13,7 @@ body {
 }
 
 // Sign in Page
-.signInTitle {
+.submissionTitle {
   text-align: center;
 }
 .signInContainer {
@@ -40,7 +40,7 @@ body {
   margin-bottom: 10px;
   outline: none;
   font-size: 13px;
-  padding: 5px 10px;
+  padding: 5px 5px;
 }
 .signInBox button {
   color: #efefef;
@@ -82,6 +82,9 @@ body {
   font: helvetica;
   font-weight: bold;
 }
+.nbSignout {
+  padding: 15px;
+}
 
 .content {
   margin: 15px;
@@ -96,6 +99,16 @@ body {
 .newListing {
   font-size: 18px;
   margin: 10px;
+  padding: 3px;
+  background-color: #e6e6e6;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
+  transition-duration: 0.5s;
+}
+.newListing:hover {
+  background-color: #f6f6f6;
+  color: navy;
+  transition-duration: 0.5s;
 }
 
 // Filters box
@@ -112,6 +125,7 @@ body {
   flex-direction: row;
   justify-content: center;
   margin: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 h3 {
   padding: 10px;
@@ -128,6 +142,83 @@ h5 {
   justify-content: space-around;
 }
 
+// posts/new
+.newFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.postBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  border: solid, thin, darkgray;
+  border-radius: 5px;
+  background-color: #e6e6e6;
+  padding: 10px;
+  color: midnightblue;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.postBox input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  outline: none;
+  font-size: 13px;
+  padding: 5px 5px;
+  border: thin solid lightgray;
+  transition-duration: .5s;
+  border-radius: 3px;
+  width: 180px;
+}
+.postBox input:focus {
+  border: thin solid gray;
+  transition-duration: .5s;
+}
+.postBox textarea {
+  font-size: 13px;
+  border: thin solid lightgray;
+  outline: none;
+  margin: 10px;
+  max-width: 180px;
+  max-height: 200px;
+  width: 180px;
+  transition: border .5s;
+}
+.postBox textarea:focus {
+  border: thin solid gray;
+  transition: border .5s;
+}
+.postBox button {
+  color: #efefef;
+  margin: 10px;
+  background-color: darken(limegreen, 10%);
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.postBox button:hover {
+  background-color: darken(limegreen, 12%);
+}
+.postBox button:active {
+  background-color: darken(limegreen, 15%);
+}
+.postCancel {
+  font-size: 14px;
+  background-color: firebrick;
+  color: white;
+  border-radius: 4px;
+  padding: 5px;
+  border: thin solid lightgray;
+}
+.postCancel:hover {
+  background-color: darken(firebrick, 5%);
+  color: white;
+}
+
+
+
 ul {
   padding-left: 0px;
 }
@@ -143,6 +234,7 @@ ul {
   border-style: solid;
   border-color: lighten(black, 15%);
   background-color: darken(white, 15%);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
 }
 
 .Title {
