@@ -12,7 +12,9 @@ body {
   margin: 0;
 }
 
-// Sign in Page
+/***********************************/
+/********* Sign in/up Page *********/
+/***********************************/
 .submissionTitle {
   text-align: center;
 }
@@ -66,7 +68,9 @@ body {
   color: navy;
 }
 
-// Navbar
+/***********************************/
+/************* Navbar **************/
+/***********************************/
 .Navbar {
   display: flex;
   font-size: 20px;
@@ -90,19 +94,21 @@ body {
   margin: 15px;
 }
 
-// New Listing button
+/***********************************/
+/********** New Listing ************/
+/***********************************/
 .newListingBox {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
 }
 .newListing {
   font-size: 18px;
-  margin: 10px;
-  padding: 3px;
+  margin: 3px;
+  padding: 10px;
   background-color: #e6e6e6;
-  border-radius: 2px;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
   transition-duration: 0.5s;
 }
 .newListing:hover {
@@ -111,7 +117,9 @@ body {
   transition-duration: 0.5s;
 }
 
-// Filters box
+/***********************************/
+/********** Filters box ************/
+/***********************************/
 .filters {
   display: flex;
   flex-direction: row;
@@ -122,19 +130,22 @@ body {
   color: midnightblue;
   border-radius: 5px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   margin: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-h3 {
-  padding: 10px;
-  margin: 5px;
+.tagTitle {
+  font-size: 20px;
+  margin-top: 8px;
 }
-h5 {
-  padding: 10px;
-  margin: 5px;
+.homeTags {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
+
 .lostFoundBoxes {
   margin-top: 25px;
   display: flex;
@@ -142,7 +153,9 @@ h5 {
   justify-content: space-around;
 }
 
-// posts/new
+/***********************************/
+/********** New Post Page **********/
+/***********************************/
 .newFields {
   display: flex;
   flex-direction: row;
@@ -152,15 +165,31 @@ h5 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 30%;
+  width: 450px;
   border: solid, thin, darkgray;
   border-radius: 5px;
   background-color: #e6e6e6;
-  padding: 10px;
+  padding: 20px;
   color: midnightblue;
   align-items: center;
   text-align: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+}
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 10px;
+}
+.checksContainer {
+  padding-top: 15px;
+  margin: 10px;
 }
 .postBox input {
   margin-top: 5px;
@@ -171,7 +200,7 @@ h5 {
   border: thin solid lightgray;
   transition-duration: .5s;
   border-radius: 3px;
-  width: 180px;
+  width: 195px;
 }
 .postBox input:focus {
   border: thin solid gray;
@@ -181,22 +210,23 @@ h5 {
   font-size: 13px;
   border: thin solid lightgray;
   outline: none;
-  margin: 10px;
-  max-width: 180px;
-  max-height: 200px;
-  width: 180px;
+  margin: 10px 0;
+  max-width: 200px;
+  max-height: 240px;
+  width: 200px;
   transition: border .5s;
+  border-radius: 3px;
 }
 .postBox textarea:focus {
   border: thin solid gray;
   transition: border .5s;
 }
 .postBox button {
+  font-size: 16px;
   color: #efefef;
   margin: 10px;
   background-color: darken(limegreen, 10%);
-  padding-left: 7px;
-  padding-right: 7px;
+  padding: 6px 10px;
 }
 .postBox button:hover {
   background-color: darken(limegreen, 12%);
@@ -205,18 +235,74 @@ h5 {
   background-color: darken(limegreen, 15%);
 }
 .postCancel {
-  font-size: 14px;
+  font-size: 16px;
   background-color: firebrick;
   color: white;
   border-radius: 4px;
-  padding: 5px;
+  padding: 6px 10px;
   border: thin solid lightgray;
+  margin: 10px;
 }
 .postCancel:hover {
   background-color: darken(firebrick, 5%);
   color: white;
 }
-
+// Checkboxes
+.check {
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 16px;
+  border: thin solid lightgray;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+  padding-bottom: 4px;
+}
+.checkTitle {
+  margin: 5px;
+  color: #606060;
+}
+.checkboxDiv {
+  width: 20px;
+  position: relative;
+  margin: 5px;
+}
+.checkboxDiv label {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: lightgray;
+  border-radius: 4px;
+}
+.checkboxDiv label:after {
+  content: '';
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 3.5px;
+  left: 3.5px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.checkboxDiv label:hover::after {
+  opacity: 0.5;
+}
+.checkboxDiv input[type=checkbox] {
+  visibility: hidden;
+}
+.checkboxDiv input[type=checkbox]:checked + label:after {
+  opacity: 1;
+}
 
 
 ul {
@@ -228,7 +314,7 @@ ul {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  margin: 5px;
+  margin: 7px 0;
   border-radius: 3px;
   border-width: thin;
   border-style: solid;
@@ -240,9 +326,14 @@ ul {
 .Title {
   font-size: 18px;
 }
-
+.tagsAndAuthor {
+  display:flex;
+  flex-direction: row;
+  justify-content: right;
+}
 .tag {
   color: darkslategray;
+  padding: 0 8px;
 }
 .authorLink {
   color: midnightblue;
