@@ -45,7 +45,7 @@ class SignIn extends Component {
             Email: <input onChange={this.onEmailChange} value={this.state.email} />
             Password: <input onChange={this.onPasswordChange} value={this.state.password} />
             <button>Sign in</button>
-            <Link to="signup" className="signUpLink">No Account? Sign up here!</Link>
+            <Link to="signup" className="signUpLink">New to Digup? Sign up here!</Link>
           </form>
         </div>
       </div>

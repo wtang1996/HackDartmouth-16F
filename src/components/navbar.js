@@ -12,14 +12,19 @@ class NavBar extends Component {
     this.state = {};
 
     this.renderSign = this.renderSign.bind(this);
+    this.onSignOut = this.onSignOut.bind(this);
+  }
+
+  onSignOut() {
+    this.props.signoutUser();
   }
 
   renderSign() {
     if (this.props.authenticated) {
       return (
         <div>
-          <Link to="posts/new">New lost or found Item</Link>
-          <button onClick={() => this.props.signoutUser()}>Sign out</button>
+          <Link to="/">Messages</Link>
+          <Link to="/" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
           <Link to="profile">Profile</Link>
         </div>
       );
