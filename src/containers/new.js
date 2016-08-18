@@ -19,6 +19,7 @@ class New extends Component {
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onCreation = this.onCreation.bind(this);
     this.submit = this.submit.bind(this);
+    this.renderTags = this.renderTags.bind(this);
   }
 
   onTitleChange(event) {
@@ -57,13 +58,41 @@ class New extends Component {
     }
   }
 
-// previous render returned stuff
-  // <input onChange={this.onTitleChange} placeholder="Lost Item" value={this.state.title} />
-  // <input onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
-  // <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
-  // <button onClick={this.onCreation} className="newButton">
-  //   Create New Post
-  // </button>
+  renderTags() {
+    return (
+      <div>
+        Tags
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" />
+            <label htmlFor="clothingCheck"></label>
+          </div>
+        </div>
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" />
+            <label htmlFor="techCheck"></label>
+          </div>
+        </div>
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" />
+            <label htmlFor="bikeCheck"></label>
+          </div>
+        </div>
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" />
+            <label htmlFor="otherCheck"></label>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   render() {
     return (
@@ -71,12 +100,27 @@ class New extends Component {
         <h1 className="submissionTitle">New Post</h1>
         <div className="newFields">
           <form onSubmit={this.submit} className="postBox">
-            <input onChange={this.onTitleChange} placeholder="Listing Title" value={this.state.title} />
-            <textarea rows="4" cols="24" onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
-            <input onChange={this.onTagsChange} placeholder="Tags" value={this.state.tags} />
-            <div className="postButtons">
-              <button>Submit</button>
-              <Link to="/" className="postCancel">Cancel</Link>
+            <div className="infoContainer">
+              <div className="textContainer">
+                <input onChange={this.onTitleChange} placeholder="Listing Title" value={this.state.title} />
+                <textarea rows="8" cols="24" onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
+                <div className="check">
+                  <div className="checkTitle"> Post Anonymously </div>
+                  <div className="checkboxDiv">
+                    <input type="checkbox" value="None" id="anonCheck" name="check" />
+                    <label htmlFor="anonCheck"></label>
+                  </div>
+                </div>
+              </div>
+              <div className="checksContainer">
+                {this.renderTags()}
+              </div>
+            </div>
+            <div className="buttonContainer">
+              <div className="postButtons">
+                <button>Submit</button>
+                <Link to="/" className="postCancel">Cancel</Link>
+              </div>
             </div>
           </form>
         </div>

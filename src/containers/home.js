@@ -4,9 +4,121 @@ import { Link } from 'react-router';
 import * as actions from '../actions';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    // init component state here
+    this.state = {};
+
+    this.renderLost = this.renderLost.bind(this);
+    this.renderFound = this.renderFound.bind(this);
+    this.renderTags = this.renderTags.bind(this);
+  }
 
   componentWillMount() {
     this.props.fetchPosts();
+  }
+
+  // Function to render the found item listings
+  renderFound() {
+    return (
+      <div className="found">
+        <h2>Found Item Listings</h2>
+        <ul>
+        {
+          this.props.posts.map((post) => {
+            return (
+              <li key={post.id} className="postSummary">
+                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                <div className="tagsAndAuthor">
+                  <div className="tag">
+                    {post.tags.split(',').map((tag) => {
+                      return (
+                        tag
+                      );
+                    })}
+                  </div>
+                  <div className="authorLink"> Author Link</div>
+                </div>
+              </li>
+            );
+          })
+        }
+        </ul>
+      </div>
+    );
+  }
+
+  // Function to render the lost item listings
+  renderLost() {
+    return (
+      <div className="lost">
+        <h2>Lost Item Listings</h2>
+        <ul>
+        {
+          this.props.posts.map((post) => {
+            return (
+              <li key={post.id} className="postSummary">
+                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                <div className="tagsAndAuthor">
+                  <div className="tag">
+                    {post.tags.split(',').map((tag) => {
+                      return (
+                        tag
+                      );
+                    })}
+                  </div>
+                  <div className="authorLink"> Author Link</div>
+                </div>
+              </li>
+            );
+          })
+        }
+        </ul>
+      </div>
+    );
+  }
+
+  // Renders the tag/filters box
+  renderTags() {
+    return (
+      <div>
+        <div className="homeTags">
+          <div className="colOne">
+            <div className="check">
+              <div className="checkTitle"> Clothing </div>
+              <div className="checkboxDiv">
+                <input type="checkbox" value="None" id="clothingCheck" name="check" />
+                <label htmlFor="clothingCheck"></label>
+              </div>
+            </div>
+            <div className="check">
+              <div className="checkTitle"> Technology </div>
+              <div className="checkboxDiv">
+                <input type="checkbox" value="None" id="techCheck" name="check" />
+                <label htmlFor="techCheck"></label>
+              </div>
+            </div>
+          </div>
+          <div className="colTwo">
+            <div className="check">
+              <div className="checkTitle"> Bike </div>
+              <div className="checkboxDiv">
+                <input type="checkbox" value="None" id="bikeCheck" name="check" />
+                <label htmlFor="bikeCheck"></label>
+              </div>
+            </div>
+            <div className="check">
+              <div className="checkTitle"> Other </div>
+              <div className="checkboxDiv">
+                <input type="checkbox" value="None" id="otherCheck" name="check" />
+                <label htmlFor="otherCheck"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -17,55 +129,13 @@ class Home extends Component {
         </div>
         <div className="filters">
           <div className="filtersBox">
-            <h3>Filters:</h3>
-            <h5>Jacket...Tech...Bike</h5>
+            <div className="tagTitle"> Filter Results by Tags </div>
+            {this.renderTags()}
           </div>
         </div>
         <div className="lostFoundBoxes">
-          <div className="found">
-            <h2>Found Item Listings</h2>
-            <ul>
-            {
-              this.props.posts.map((post) => {
-                return (
-                  <li key={post.id} className="postSummary">
-                    <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                    <div className="tag">
-                      {post.tags.split(',').map((tag) => {
-                        return (
-                          tag
-                        );
-                      })}
-                    </div>
-                    <div className="authorLink"> Author Link</div>
-                  </li>
-                );
-              })
-            }
-            </ul>
-          </div>
-          <div className="lost">
-            <h2>Lost Item Listings</h2>
-            <ul>
-            {
-              this.props.posts.map((post) => {
-                return (
-                  <li key={post.id} className="postSummary">
-                    <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                    <div className="tag">
-                      {post.tags.split(',').map((tag) => {
-                        return (
-                          tag
-                        );
-                      })}
-                    </div>
-                    <div className="authorLink"> Author Link</div>
-                  </li>
-                );
-              })
-            }
-            </ul>
-          </div>
+          {this.renderLost()}
+          {this.renderFound()}
         </div>
       </div>
     );
