@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-const MessageDetail = ({ message }) => {
-  if (!message) {
-    return <div>One second...</div>;
+const url = `https://digup.herokuapp.com/api/${this.props.message.id}`;
+
+class MessageDetail extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
   }
-  const messageId = message.id.messageId;
-  const url = `https://www.URLGOESHERE.com/messages/${messageId}`;
-  return (
-    <div className="embed-responsive embed-responsive-16by9">
-      <iframe className="embed-responsive-item" src={url}></iframe>
-      <div className="details">
-        <div>{message.title}</div>
-        <div>{message.chatlog}</div>
+
+  componentWillMount() {
+    this.props.fetchMessage();
+  }
+
+  render() {
+    return (
+      <div className="embed-responsive embed-responsive-16by9">
+        <iframe className="embed-responsive-item" src={url}></iframe>
+        <div className="details">
+          <div>{this.props.message.user}</div>
+          <div>{this.props.message.content}</div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+
 
 const mapStateToProps = (state) => (
   {
-    posts: state.posts.all,
+    message: state.messages.message,
   }
 );
+
 export default connect(mapStateToProps, null)(MessageDetail);
