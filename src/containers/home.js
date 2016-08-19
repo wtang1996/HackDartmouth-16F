@@ -8,15 +8,69 @@ class Home extends Component {
     super(props);
 
     // init component state here
-    this.state = {};
+    this.state = {
+      tagsToShow: [],
+    };
 
     this.renderLost = this.renderLost.bind(this);
     this.renderFound = this.renderFound.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    this.addClothing = this.addClothing.bind(this);
+    this.addBike = this.addBike.bind(this);
+    this.addTech = this.addTech.bind(this);
+    this.addOther = this.addOther.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchPosts();
+  }
+
+  addClothing() {
+    if (this.state.tagsToShow.indexOf('Clothing') === -1) {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.push('Clothing');
+      this.setState({ tagsToShow });
+    } else {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.splice(this.state.tagsToShow.indexOf('Clothing', 1));
+      this.setState({ tagsToShow });
+    }
+  }
+
+  addBike() {
+    if (this.state.tagsToShow.indexOf('Bike') === -1) {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.push('Bike');
+      this.setState({ tagsToShow });
+    } else {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.splice(this.state.tagsToShow.indexOf('Bike', 1));
+      this.setState({ tagsToShow });
+    }
+  }
+
+  addOther() {
+    if (this.state.tagsToShow.indexOf('Other') === -1) {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.push('Other');
+      this.setState({ tagsToShow });
+    } else {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.splice(this.state.tagsToShow.indexOf('Other', 1));
+      this.setState({ tagsToShow });
+    }
+  }
+
+  addTech() {
+    if (this.state.tagsToShow.indexOf('Technology') === -1) {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.push('Technology');
+      this.setState({ tagsToShow });
+    } else {
+      let tagsToShow = this.state.tagsToShow.slice();
+      tagsToShow.splice(this.state.tagsToShow.indexOf('Technology', 1));
+      this.setState({ tagsToShow });
+    }
   }
 
   // Function to render the found item listings
@@ -88,14 +142,14 @@ class Home extends Component {
             <div className="check">
               <div className="checkTitle"> Clothing </div>
               <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="clothingCheck" name="check" />
+                <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} />
                 <label htmlFor="clothingCheck"></label>
               </div>
             </div>
             <div className="check">
               <div className="checkTitle"> Technology </div>
               <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="techCheck" name="check" />
+                <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} />
                 <label htmlFor="techCheck"></label>
               </div>
             </div>
@@ -104,14 +158,14 @@ class Home extends Component {
             <div className="check">
               <div className="checkTitle"> Bike </div>
               <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="bikeCheck" name="check" />
+                <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} />
                 <label htmlFor="bikeCheck"></label>
               </div>
             </div>
             <div className="check">
               <div className="checkTitle"> Other </div>
               <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="otherCheck" name="check" />
+                <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} />
                 <label htmlFor="otherCheck"></label>
               </div>
             </div>
@@ -122,6 +176,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.state.tagsToShow);
     return (
       <div>
         <div className="newListingBox">
