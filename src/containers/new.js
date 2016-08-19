@@ -13,11 +13,13 @@ class New extends Component {
       content: '',
       title: '',
       tags: '',
+      lost: false,
+      anonymous: false,
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
-    this.onCreation = this.onCreation.bind(this);
+    // this.onCreation = this.onCreation.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
   }
@@ -34,15 +36,24 @@ class New extends Component {
     console.log(event.target.value);
     this.setState({ tags: event.target.value });
   }
-
-  onCreation(event) {
-    this.props.createPost(this.state);
-    this.setState({
-      title: '',
-      content: '',
-      tags: '',
-    });
+  onLostChange(event) {
+    this.setState({ lost: true });
   }
+  onFoundChange(event) {
+    this.setState({ lost: false });
+  }
+  onAnonymousChange(event) {
+    this.setState({ anonymous: true });
+  }
+
+  // onCreation(event) {
+  //   this.props.createPost(this.state);
+  //   this.setState({
+  //     title: '',
+  //     content: '',
+  //     tags: '',
+  //   });
+  // }
 
   submit(e) {
     e.preventDefault();
@@ -52,6 +63,8 @@ class New extends Component {
         title: '',
         content: '',
         tags: '',
+        lost: false,
+        anonymous: false,
       });
     } else {
       console.log('Requires title and description');

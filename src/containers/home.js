@@ -27,21 +27,24 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            return (
-              <li key={post.id} className="postSummary">
-                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                <div className="tagsAndAuthor">
-                  <div className="tag">
-                    {post.tags.split(',').map((tag) => {
-                      return (
-                        tag
-                      );
-                    })}
+            if (!post.lost) {
+              return (
+                <li key={post.id} className="postSummary">
+                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                  <div className="tagsAndAuthor">
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                    <div className="authorLink"> Author Link</div>
                   </div>
-                  <div className="authorLink"> Author Link</div>
-                </div>
-              </li>
-            );
+                </li>
+              );
+            }
+            return <div />;
           })
         }
         </ul>
@@ -57,21 +60,24 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            return (
-              <li key={post.id} className="postSummary">
-                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                <div className="tagsAndAuthor">
-                  <div className="tag">
-                    {post.tags.split(',').map((tag) => {
-                      return (
-                        tag
-                      );
-                    })}
+            if (!post.lost) {
+              return (
+                <li key={post.id} className="postSummary">
+                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                  <div className="tagsAndAuthor">
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                    <div className="authorLink"> Author Link</div>
                   </div>
-                  <div className="authorLink"> Author Link</div>
-                </div>
-              </li>
-            );
+                </li>
+              );
+            }
+            return <div />;
           })
         }
         </ul>
