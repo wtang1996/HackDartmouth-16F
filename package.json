@@ -8,7 +8,7 @@
     "test": "./node_modules/.bin/eslint **.js",
     "start": "node_modules/.bin/webpack-dev-server --inline --hot",
     "build": "WEBPACK_ENV=production node_modules/.bin/webpack --optimize-minimize --progress --color",
-    "deploy": "npm run build; surge -p ."
+    "deploy": "npm run build; surge -p . -d digup.surge.sh"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,7 @@
     "postcss-loader": "^0.9.1",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
-    "webpack": "^1.13.1",
+    "webpack": "^1.13.2",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
