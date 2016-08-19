@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { signupUser } from '../actions';
 
@@ -11,10 +12,12 @@ class SignUp extends Component {
     this.state = {
       email: '',
       password: '',
+      username: '',
     };
 
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.onUsernameChange = this.onUsernameChange.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -26,10 +29,14 @@ class SignUp extends Component {
     this.setState({ password: event.target.value });
   }
 
+  onUsernameChange(event) {
+    this.setState({ username: event.target.value });
+  }
+
   submit(e) {
     e.preventDefault();
-    if (this.state.email !== '' && this.state.password !== '') {
-      this.props.signupUser({ email: this.state.email, password: this.state.password });
+    if (this.state.email !== '' && this.state.password !== '' && this.state.username !== '') {
+      this.props.signupUser({ email: this.state.email, password: this.state.password, username: this.state.username });
     } else {
       console.log('All fields required input values!');
     }
@@ -38,12 +45,16 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <h1>DigUP Sign up</h1>
-        <form onSubmit={this.submit} className="signin/up">
-          Email: <input onChange={this.onEmailChange} value={this.state.email} />
-          Password: <input onChange={this.onPasswordChange} value={this.state.password} />
-          <button>Sign up</button>
-        </form>
+        <h1 className="submissionTitle">Sign up</h1>
+        <div className="signInContainer">
+          <form onSubmit={this.submit} className="signInBox">
+            Username: <input onChange={this.onUsernameChange} value={this.state.username} />
+            Email: <input onChange={this.onEmailChange} value={this.state.email} />
+            Password: <input onChange={this.onPasswordChange} value={this.state.password} />
+            <button>Sign up</button>
+            <Link to="signin" className="signUpLink">Already have an account? Sign in here!</Link>
+          </form>
+        </div>
       </div>
   ); }
 }
