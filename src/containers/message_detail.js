@@ -17,4 +17,10 @@ const MessageDetail = ({ message }) => {
     </div>
   );
 };
-export default connect(null, null)(MessageDetail);
+
+const mapStateToProps = (state) => (
+  {
+    posts: state.posts.all,
+  }
+);
+export default connect(mapStateToProps, null)(MessageDetail);
