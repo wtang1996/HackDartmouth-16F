@@ -8,6 +8,11 @@ export const ActionTypes = {
   CREATE_POST: 'CREATE_POST',
   UPDATE_POST: 'UPDATE_POST',
   DELETE_POST: 'DELETE_POST',
+  FETCH_MESSAGES: 'FETCH_MESSAGES',
+  FETCH_MESSAGE: 'FETCH_MESSAGE',
+  CREATE_MESSAGE: 'CREATE_MESSAGE',
+  UPDATE_MESSAGE: 'UPDATE_MESSAGE',
+  DELETE_MESSAGE: 'DELETE_MESSAGE',
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
@@ -79,6 +84,65 @@ export function deletePost(id) {
       browserHistory.push('/');
     }).catch(error => {
       dispatch(errorMessage(`Error deleting post: ${error.response.data}`));
+    });
+  };
+}
+
+// Message functions here (FIX ALL THE time: message.time)
+
+export function fetchMessages() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/Messages${API_KEY}`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
+    }).catch(error => {
+      dispatch(errorMessage(`Error fetching all messages: ${error.response.data}`));
+    });
+  };
+}
+
+export function createMessage(message) {
+  return (dispatch) => {
+    const fields = { user: message.user, content: message.content, time: message.time };
+    axios.post(`${ROOT_URL}/messages${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { fields } });
+      browserHistory.push('/');
+    }).catch(error => {
+      dispatch(errorMessage(`Error creating message: ${error.response.data}`));
+    });
+  };
+}
+
+export function updateMessage(message, id) {
+  return (dispatch) => {
+    const fields = { user: message.user, content: message.content, time: message.time };
+    axios.put(`${ROOT_URL}/messages/${id}${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch({ type: ActionTypes.UPDATE_MESSAGE, fields, id });
+    }).catch(error => {
+      dispatch(errorMessage(`Error updating message: ${error.response.data}`));
+    });
+  };
+}
+
+export function fetchMessage(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/messages/${id}${API_KEY}`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
+    }).catch(error => {
+      dispatch(errorMessage(`Error fetching message: ${error.response.data}`));
+    });
+  };
+}
+
+export function deleteMessage(id) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });
+      browserHistory.push('/');
+    }).catch(error => {
+      dispatch(errorMessage(`Error deleting message: ${error.response.data}`));
     });
   };
 }

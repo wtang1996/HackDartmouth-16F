@@ -422,3 +422,21 @@ a:hover, a:active {
   background-color: transparent;
   color: navy;
 }
+
+/***********************************/
+/********** Message Page ***********/
+/***********************************/
+#message-section {
+  display: flex;
+
+  li {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    width: 25vw;
+    padding: 10px;
+  }
+  li:hover {
+    background: darken( $backgroundcolor, 10% );
+  }
+}
