@@ -23,7 +23,7 @@ class NavBar extends Component {
     if (this.props.authenticated) {
       return (
         <div>
-          <Link to="/">Messages</Link>
+          <Link to="messages">Messages</Link>
           <Link to="/" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
           <Link to="profile">Profile</Link>
         </div>

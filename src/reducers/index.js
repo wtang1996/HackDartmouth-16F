@@ -4,11 +4,13 @@ import PostsReducer from './posts-reducer';
 import AuthReducer from './auth-reducer';
 import UserReducer from './user-reducer';
 import ErrorReducer from './error-reducer';
+import MessagesReducer from './messages-reducer';
 
 const rootReducer = combineReducers({
   posts: PostsReducer,
   auth: AuthReducer,
   profile: UserReducer,
+  messages: MessagesReducer,
   error: ErrorReducer,
 });
 
