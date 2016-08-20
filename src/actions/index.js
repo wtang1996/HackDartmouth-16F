@@ -8,6 +8,11 @@ export const ActionTypes = {
   CREATE_POST: 'CREATE_POST',
   UPDATE_POST: 'UPDATE_POST',
   DELETE_POST: 'DELETE_POST',
+  FETCH_MESSAGES: 'FETCH_MESSAGES',
+  FETCH_MESSAGE: 'FETCH_MESSAGE',
+  CREATE_MESSAGE: 'CREATE_MESSAGE',
+  UPDATE_MESSAGE: 'UPDATE_MESSAGE',
+  DELETE_MESSAGE: 'DELETE_MESSAGE',
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
@@ -16,7 +21,7 @@ export const ActionTypes = {
 };
 
 const ROOT_URL = 'https://digup.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090';
+// const ROOT_URL = 'http://localhost:9090/api';
 const API_KEY = '?key=weijia_tang';
 
 export function errorMessage(error) {
@@ -82,10 +87,65 @@ export function deletePost(id) {
     });
   };
 }
+// Message actions
 
+export function fetchMessages() {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/messages${API_KEY}`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
+    }).catch(error => {
+      dispatch(errorMessage(`Error fetching all messages: ${error.response.data}`));
+    });
+  };
+}
 
-// deletes token from localstorage
-// and deauths
+export function createMessage(message) {
+  return (dispatch) => {
+    const fields = { user: message.user, content: message.content, time: message.time };
+    axios.post(`${ROOT_URL}/messages${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { fields } });
+      browserHistory.push('/');
+    }).catch(error => {
+      dispatch(errorMessage(`Error creating message: ${error.response.data}`));
+    });
+  };
+}
+
+export function updateMessage(message, id) {
+  return (dispatch) => {
+    const fields = { user: message.user, content: message.content, time: message.time };
+    axios.put(`${ROOT_URL}/messages/${id}${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch({ type: ActionTypes.UPDATE_MESSAGE, fields, id });
+    }).catch(error => {
+      dispatch(errorMessage(`Error updating message: ${error.response.data}`));
+    });
+  };
+}
+
+export function fetchMessage(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/messages/${id}${API_KEY}`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
+    }).catch(error => {
+      dispatch(errorMessage(`Error fetching message: ${error.response.data}`));
+    });
+  };
+}
+
+export function deleteMessage(id) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });
+      browserHistory.push('/');
+    }).catch(error => {
+      dispatch(errorMessage(`Error deleting message: ${error.response.data}`));
+    });
+  };
+}
+
 export function signoutUser() {
   return (dispatch) => {
     localStorage.removeItem('token');
@@ -94,8 +154,6 @@ export function signoutUser() {
   };
 }
 
-// trigger to deauth if there is error
-// can also use in your error reducer if you have one to display an error message
 export function authError(error) {
   return (dispatch) => {
     dispatch({ type: ActionTypes.AUTH_ERROR });
@@ -104,13 +162,6 @@ export function authError(error) {
 }
 
 export function signinUser({ email, password }) {
-  // takes in an object with email and password (minimal user object)
-  // returns a thunk method that takes dispatch as an argument (just like our create post method really)
-  // does an axios.post on the /signin endpoint
-  // on success does:
-  //  dispatch({ type: ActionTypes.AUTH_USER });
-  //  localStorage.setItem('token', response.data.token);
-  // on error should dispatch(authError(`Sign In Failed: ${error.response.data}`));
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signin`, { email, password }).then(response => {
       dispatch({ type: ActionTypes.AUTH_USER });
@@ -124,13 +175,6 @@ export function signinUser({ email, password }) {
 
 
 export function signupUser({ email, password, username }) {
-  // takes in an object with email and password (minimal user object)
-  // returns a thunk method that takes dispatch as an argument (just like our create post method really)
-  // does an axios.post on the /signup endpoint (only difference from above)
-  // on success does:
-  //  dispatch({ type: ActionTypes.AUTH_USER });
-  //  localStorage.setItem('token', response.data.token);
-  // on error should dispatch(authError(`Sign Up Failed: ${error.response.data}`));
   return (dispatch) => {
     axios.post(`${ROOT_URL}/signup`, { email, password, username }).then(response => {
       dispatch({ type: ActionTypes.AUTH_USER });

@@ -506,3 +506,24 @@ a:hover, a:active {
   background-color: transparent;
   color: navy;
 }
+
+/***********************************/
+/********** Message Page ***********/
+/***********************************/
+
+.message-section {
+  display: flex;
+}
+.message-section li {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  width: 25vw;
+  padding: 10px;
+}
+.message-section li:hover {
+  text-decoration: none !important;
+  text-decoration-color: transparent;
+  background-color: transparent;
+  color: navy;
+}
