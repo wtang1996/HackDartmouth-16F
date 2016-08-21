@@ -67,7 +67,7 @@ class Show extends Component {
   render() {
     if (this.props.post) {
       // CHANGE THIS LATER TO BE IF(THIS IS NOT THE USER'S OWN PAGE) {}
-      if (false) {
+      if (this.props.post.authorId !== this.props.user.id) {
         if (this.state.editing) {
           return (
             <div className="showPostContainer">
@@ -137,6 +137,7 @@ const mapStateToProps = (state) => (
   {
     posts: state.posts.all,
     post: state.posts.post,
+    user: state.profile.user,
   }
 );
 

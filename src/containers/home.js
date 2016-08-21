@@ -18,6 +18,7 @@ class Home extends Component {
 
   componentWillMount() {
     this.props.fetchPosts();
+    this.props.fetchUser();
   }
 
   // Function to render the found item listings
@@ -90,7 +91,11 @@ class Home extends Component {
     if (post.anonymous) {
       return <div className="authorLink"> Anonymous</div>;
     } else {
-      return <Link to={`profile/${post.authorId}`} className="authorLink"> Author Link</Link>;
+      if (post.authorId === this.props.user.id) {
+        return <Link to={'profile'} className="authorLink"> Author Link</Link>;
+      } else {
+        return <Link to={`profile/${post.authorId}`} className="authorLink"> Author Link</Link>;
+      }
     }
   }
 
@@ -160,6 +165,7 @@ class Home extends Component {
 const mapStateToProps = (state) => (
   {
     posts: state.posts.all,
+    user: state.profile.user,
   }
 );
 
