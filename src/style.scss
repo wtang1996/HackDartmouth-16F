@@ -3,6 +3,7 @@ html {
 }
 
 body {
+  position: relative;
   font-family: "Roboto", sans-serif;
   color: rgb(10%, 10%, 10%);
   background: linear-gradient(to right, #0D2C48, #4D6C88);
@@ -10,6 +11,9 @@ body {
   font-size: 16px;
   color: white;
   margin: 0;
+  padding: 0;
+  min-height: 100%;
+  padding-bottom: 50px;
 }
 
 /***********************************/
@@ -93,6 +97,25 @@ body {
 .content {
   margin: 15px;
 }
+
+/***********************************/
+/************* Footer **************/
+/***********************************/
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  padding: 15px;
+  background-color: #e0e0e0;
+  border-top: thin solid lightgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+
 
 /***********************************/
 /********** New Listing ************/
