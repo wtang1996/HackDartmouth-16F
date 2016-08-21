@@ -17,6 +17,7 @@ export const ActionTypes = {
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_USER: 'FETCH_USER',
+  FETCH_AUTHOR: 'FETCH_AUTHOR',
   ERROR_MESSAGE: 'ERROR_MESSAGE',
 };
 
@@ -193,6 +194,18 @@ export function fetchUser() {
       } });
     }).catch(error => {
       dispatch(errorMessage(`Cannot get user data: ${error.response.data}`));
+    });
+  };
+}
+
+export function fetchAuthor(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/profile/${id}`, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
+      dispatch({ type: ActionTypes.FETCH_AUTHOR, payload: {
+        author: response.data,
+      } });
+    }).catch(error => {
+      dispatch(errorMessage(`Cannot get author data: ${error.response.data}`));
     });
   };
 }

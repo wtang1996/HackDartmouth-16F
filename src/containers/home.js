@@ -13,6 +13,7 @@ class Home extends Component {
     this.renderLost = this.renderLost.bind(this);
     this.renderFound = this.renderFound.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    this.renderAuthor = this.renderAuthor.bind(this);
   }
 
   componentWillMount() {
@@ -39,7 +40,7 @@ class Home extends Component {
                         );
                       })}
                     </div>
-                    <div className="authorLink"> Author Link</div>
+                    {this.renderAuthor(post)}
                   </div>
                 </li>
               );
@@ -72,7 +73,7 @@ class Home extends Component {
                         );
                       })}
                     </div>
-                    <div className="authorLink"> Author Link</div>
+                    {this.renderAuthor(post)}
                   </div>
                 </li>
               );
@@ -83,6 +84,14 @@ class Home extends Component {
         </ul>
       </div>
     );
+  }
+
+  renderAuthor(post) {
+    if (post.anonymous) {
+      return <div className="authorLink"> Anonymous</div>;
+    } else {
+      return <Link to={`profile/${post.authorId}`} className="authorLink"> Author Link</Link>;
+    }
   }
 
   // Renders the tag/filters box
