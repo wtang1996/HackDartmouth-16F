@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 
@@ -66,32 +66,60 @@ class Show extends Component {
 
   render() {
     if (this.props.post) {
-      if (this.state.editing) {
-        return (
-          <div className="NewFields">
-            <button onClick={this.onEditChange} className="doneButton">
-              Done
-            </button>
-            <button onClick={this.onDeletion} className="deleteButton">
-              Delete Post
-            </button>
-            <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} />
-            <input onChange={this.onContentChange} placeholder="content" value={this.state.content} />
-            <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
-          </div>
-        );
+      // CHANGE THIS LATER TO BE IF(THIS IS NOT THE USER'S OWN PAGE) {}
+      if (false) {
+        if (this.state.editing) {
+          return (
+            <div className="showPostContainer">
+              <div className="showPostBox">
+                This will be changed to mimic the new post page...
+                Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} />
+                Content: <input onChange={this.onContentChange} placeholder="content" value={this.state.content} />
+                Tags: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
+                <button onClick={this.onEditChange} className="doneButton">
+                  Done
+                </button>
+                <button onClick={this.onDeletion} className="deleteButton">
+                  Delete Post
+                </button>
+              </div>
+            </div>
+          );
+        } else {
+          return (
+            <div className="showPostContainer">
+              <div className="showPostBox">
+                <div className="showPostTitle">{this.props.post.title}</div>
+                <div className="showPostContent">Item Description: {this.props.post.content}</div>
+                <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
+                <div className="showPostContent"> Say here if the post is lost or found</div>
+                <div className="showPostContent"> Posted by: </div>
+                <button onClick={this.onEditChange} className="editButton">
+                  Edit
+                </button>
+                <button onClick={this.onDeletion} className="deleteButton">
+                  Delete Post
+                </button>
+                <button onClick={this.onDeletion} className="resolveButton">
+                  Mark Post as Resolved
+                </button>
+              </div>
+            </div>
+          );
+        }
       } else {
         return (
-          <div className="NewFields">
-            <button onClick={this.onEditChange} className="editButton">
-              Edit
-            </button>
-            <button onClick={this.onDeletion} className="deleteButton">
-              Delete Post
-            </button>
-            <h3>{this.props.post.title}</h3>
-            <p>{this.props.post.content}</p>
-            <div>Tags: {this.props.post.tags}</div>
+          <div>
+            <div className="showPostContainer">
+              <div className="showPostBox">
+                <div className="showPostTitle">{this.props.post.title}</div>
+                <div className="showPostContent">Item Description: {this.props.post.content}</div>
+                <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
+                <div className="showPostContent"> Say here if the post is lost or found</div>
+                <div className="showPostContent"> Posted by: </div>
+                <Link to="/" className="showPostContact"> Contact Me! (add functionality) </Link>
+              </div>
+            </div>
           </div>
         );
       }

@@ -1,27 +1,94 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-import MessageList from './message_list';
-import MessageDetail from './message_detail';
-
-// we need to add actions, reducers, routing,
-
 
 class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [],
-      selectedMessage: null,
+      user: '',
+      content: '',
+      time: '',
+      currentMessage: this.props.messages.message,
     };
+    this.onContentChange = this.onContentChange.bind(this);
+    this.onDeletion = this.onDeletion.bind(this);
+    this.renderUserList = this.renderUserList.bind(this);
+    this.renderConversation = this.renderConversation.bind(this);
   }
+
+  componentWillMount() {
+    this.props.fetchMessages();
+    this.props.fetchMessage(this.props.params.id);
+  }
+
+  onContentChange(event) {
+    this.setState({ content: event.target.value });
+  }
+
+  onDeletion(event) {
+    this.props.deleteMessage(this.props.params.id);
+    this.setState({
+      user: '',
+      content: '',
+      time: '',
+    });
+  }
+
+  renderUserList() {
+    if (this.props.messages.length === 0) {
+      return (
+        <div>
+          <h1>No Messages</h1>
+        </div>
+      );
+    } else {
+      return (
+        <ul>
+        {
+          this.props.messages.map((message) => {
+            return (
+              <li key={message.id}>
+                <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.user}</button>
+              </li>
+            );
+          })
+        }
+        </ul>
+      );
+    }
+  }
+
+  renderConversation() {
+    // console.log(this.state.currentMessage);
+    if (typeof this.state.currentMessage !== 'undefined') {
+      return (
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item"></iframe>
+          <div className="details">
+            <div>{this.state.currentMessage}</div>
+            <button onClick={this.onDeletion} className="deleteButton">
+              Delete Message
+            </button>
+            <textarea onChange={this.onContentChange} value={this.state.currentMessage} />
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h1>No Selected Message</h1>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
-        <div id="message-section">
-          <MessageList onMessageSelect={selectedMessage => this.setState({ selectedMessage })} messages={this.state.messages} />
-          <MessageDetail message={this.state.selectedMessage} />
-        </div>
+        <h1>Inbox</h1>
+        {this.renderUserList()}
+        {this.renderConversation()}
       </div>
     );
   }
@@ -30,6 +97,7 @@ class Message extends Component {
 const mapStateToProps = (state) => (
   {
     messages: state.messages.all,
+    message: state.messages.message,
   }
 );
 

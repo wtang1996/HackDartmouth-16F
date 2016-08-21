@@ -4,3 +4,5 @@ node_js:
 deploy:
   - provider: surge
     domain: digup.surge.sh
+    on:
+      all_branches: true

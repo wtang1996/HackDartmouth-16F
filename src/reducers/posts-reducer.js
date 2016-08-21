@@ -3,10 +3,6 @@ import { ActionTypes } from '../actions';
 const initialState = { all: [], post: null };
 
 const PostsReducer = (state = initialState, action) => {
-  /* (state = { all: [
-  { id: 1, title: 'First', content: 'This is my first blog post!', tags: ['fun ', 'happy '] }],
-  post: { id: 1, title: 'First', content: 'This is my first blog post!', tags: ['fun ', 'happy '] } }, action) => {
-*/
   switch (action.type) {
     case ActionTypes.FETCH_POSTS:
       return Object.assign({}, state, {

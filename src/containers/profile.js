@@ -19,10 +19,13 @@ class Profile extends Component {
   render() {
     if (this.props.user != null) {
       return (
-        <div>
-          <h1>Profile Page</h1>
-          <div>Username: {this.props.user.username}</div>
-          <div>Email: {this.props.user.email}</div>
+        <div className="profileContainer">
+          <div className="profileBox">
+            <div className="profileTitle">Profile for {this.props.user.username}</div>
+            <div className="profileContent">Email: {this.props.user.email}</div>
+            <div className="profileContent">Add User posts here</div>
+            <div className="profileContent">Maybe start conversation button?</div>
+          </div>
         </div>
       );
     } else {
