@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 import { fetchUser } from '../actions';
 
@@ -10,10 +11,43 @@ class Profile extends Component {
     // init component state here
     this.state = {
     };
+
+    this.renderUserPosts = this.renderUserPosts.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchUser();
+  }
+
+  renderUserPosts() {
+    return (
+      <div className="profileContent">
+        <h2>Your Posts</h2>
+        <ul>
+        {
+          this.props.posts.map((post) => {
+            if (post.authorId === this.props.user.id) {
+              return (
+                <li key={post.id} className="postSummary">
+                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                  <div className="tagsAndAuthor">
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+            return undefined;
+          })
+        }
+        </ul>
+      </div>
+    );
   }
 
   render() {
@@ -23,7 +57,7 @@ class Profile extends Component {
           <div className="profileBox">
             <div className="profileTitle">Profile for {this.props.user.username}</div>
             <div className="profileContent">Email: {this.props.user.email}</div>
-            <div className="profileContent">Add User posts here</div>
+            {this.renderUserPosts()}
             <div className="profileContent">Maybe start conversation button?</div>
           </div>
         </div>
