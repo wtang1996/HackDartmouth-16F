@@ -43,10 +43,9 @@ export function fetchPosts() {
 
 export function createPost(post) {
   return (dispatch) => {
-    const fields = { title: post.title, content: post.content, tags: post.tags };
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.CREATE_POST, payload: { fields } });
+      dispatch({ type: ActionTypes.CREATE_POST, payload: { post } });
       browserHistory.push('/');
     }).catch(error => {
       dispatch(errorMessage(`Error creating post: ${error.response.data}`));

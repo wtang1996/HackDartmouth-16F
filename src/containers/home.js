@@ -44,7 +44,7 @@ class Home extends Component {
                 </li>
               );
             }
-            return <div />;
+            return undefined;
           })
         }
         </ul>
@@ -60,7 +60,7 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            if (!post.lost) {
+            if (post.lost) {
               return (
                 <li key={post.id} className="postSummary">
                   <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
@@ -77,7 +77,7 @@ class Home extends Component {
                 </li>
               );
             }
-            return <div />;
+            return undefined;
           })
         }
         </ul>

@@ -19,7 +19,9 @@ class New extends Component {
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
-    // this.onCreation = this.onCreation.bind(this);
+    this.onLostChange = this.onLostChange.bind(this);
+    // this.onFoundChange = this.onFoundChange.bind(this);
+    this.onAnonymousChange = this.onAnonymousChange.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
   }
@@ -37,28 +39,20 @@ class New extends Component {
     this.setState({ tags: event.target.value });
   }
   onLostChange(event) {
-    this.setState({ lost: true });
+    this.setState({ lost: !this.state.lost });
   }
-  onFoundChange(event) {
-    this.setState({ lost: false });
-  }
-  onAnonymousChange(event) {
-    this.setState({ anonymous: true });
-  }
-
-  // onCreation(event) {
-  //   this.props.createPost(this.state);
-  //   this.setState({
-  //     title: '',
-  //     content: '',
-  //     tags: '',
-  //   });
+  // onFoundChange(event) {
+  //   this.setState({ lost: false });
   // }
+  onAnonymousChange(event) {
+    this.setState({ anonymous: !this.state.anonymous });
+  }
 
   submit(e) {
     e.preventDefault();
     if (this.state.title !== '' && this.state.content !== '') {
       this.props.createPost(this.state);
+      console.log(this.state);
       this.setState({
         title: '',
         content: '',
@@ -120,8 +114,20 @@ class New extends Component {
                 <div className="check">
                   <div className="checkTitle"> Post Anonymously </div>
                   <div className="checkboxDiv">
-                    <input type="checkbox" value="None" id="anonCheck" name="check" />
+                    <input type="checkbox" value="None" id="anonCheck" name="check" onClick={this.onAnonymousChange} />
                     <label htmlFor="anonCheck"></label>
+                  </div>
+                </div>
+                <div className="check">
+                  <div className="checkTitle"> Lost Item </div>
+                  <div className="checkboxDiv">
+                    <input type="checkbox" value="None" id="lostCheck" name="check" onClick={this.onLostChange} />
+                    <label htmlFor="lostCheck"></label>
+                  </div>
+                  <div className="checkTitle"> Found Item </div>
+                  <div className="checkboxDiv">
+                    <input type="checkbox" value="None" id="foundCheck" name="check" />
+                    <label htmlFor="foundCheck"></label>
                   </div>
                 </div>
               </div>
