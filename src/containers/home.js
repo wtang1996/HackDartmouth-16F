@@ -94,7 +94,7 @@ class Home extends Component {
       if (post.authorId === this.props.user.id) {
         return <Link to={'profile'} className="authorLink"> Author Link</Link>;
       } else {
-        return <Link to={`profile/${post.authorId}`} className="authorLink"> Author Link</Link>;
+        return <Link to={`profile/${post.authorId}`} className="authorLink"> {post.authorName}</Link>;
       }
     }
   }
