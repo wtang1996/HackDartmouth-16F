@@ -1,5 +1,6 @@
 html {
   height: 100%;
+  box-sizing: border-box;
 }
 
 body {
@@ -12,8 +13,10 @@ body {
   color: white;
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  min-height: 94%;
   padding-bottom: 50px;
+}
+.pageContainer {
 }
 
 /***********************************/
@@ -123,14 +126,15 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
-  height: 20px;
-  padding: 15px;
+  height: 4%;
+  padding: 1%;
   background-color: #e0e0e0;
   border-top: thin solid lightgray;
   display: flex;
   flex-direction: row;
   justify-content: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+  font-size: 20px;
 }
 
 
