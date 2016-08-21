@@ -38,13 +38,14 @@ class Message extends Component {
   renderUserList() {
     if (this.props.messages.length === 0) {
       return (
-        <div>
-          <h1>No Messages</h1>
+        <div className="noMessages">
+          No Messages
         </div>
       );
     } else {
       return (
-        <ul>
+        <ul className="messagesList">
+        Conversations
         {
           this.props.messages.map((message) => {
             return (
@@ -76,8 +77,8 @@ class Message extends Component {
       );
     } else {
       return (
-        <div>
-          <h1>No Selected Message</h1>
+        <div className="noSelectMessage">
+          No Selected Message
         </div>
       );
     }
@@ -85,10 +86,13 @@ class Message extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Inbox</h1>
-        {this.renderUserList()}
-        {this.renderConversation()}
+      <div className="messagesPageContainer">
+        <div className="messagesListContainer">
+          {this.renderUserList()}
+        </div>
+        <div className="messagesDetailContainer">
+          {this.renderConversation()}
+        </div>
       </div>
     );
   }
