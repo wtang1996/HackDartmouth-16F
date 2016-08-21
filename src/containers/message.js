@@ -20,8 +20,6 @@ class Message extends Component {
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchMessage(this.props.params.id);
-    console.log(this.props.messages);
-    console.log(this.props.message);
   }
 
   onContentChange(event) {
@@ -51,7 +49,7 @@ class Message extends Component {
           this.props.messages.map((message) => {
             return (
               <li key={message.id}>
-                <div onClick={() => { this.state.currentMessage = message; }}>{message.user}</div>
+                <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.user}</button>
               </li>
             );
           })
@@ -62,7 +60,7 @@ class Message extends Component {
   }
 
   renderConversation() {
-    console.log(this.state.currentMessage);
+    // console.log(this.state.currentMessage);
     if (typeof this.state.currentMessage !== 'undefined') {
       return (
         <div className="embed-responsive embed-responsive-16by9">
@@ -88,6 +86,7 @@ class Message extends Component {
   render() {
     return (
       <div>
+        <h1>Inbox</h1>
         {this.renderUserList()}
         {this.renderConversation()}
       </div>
