@@ -59,7 +59,7 @@ export function updatePost(post, id) {
     const fields = { title: post.title, content: post.content, tags: post.tags };
     axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.UPDATE_POST, fields, id });
+      dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error updating post: ${error.response.data}`));
     });
