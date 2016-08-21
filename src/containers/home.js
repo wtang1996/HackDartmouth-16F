@@ -13,6 +13,7 @@ class Home extends Component {
     this.renderLost = this.renderLost.bind(this);
     this.renderFound = this.renderFound.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    this.renderAuthor = this.renderAuthor.bind(this);
   }
 
   componentWillMount() {
@@ -27,21 +28,24 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            return (
-              <li key={post.id} className="postSummary">
-                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                <div className="tagsAndAuthor">
-                  <div className="tag">
-                    {post.tags.split(',').map((tag) => {
-                      return (
-                        tag
-                      );
-                    })}
+            if (!post.lost) {
+              return (
+                <li key={post.id} className="postSummary">
+                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                  <div className="tagsAndAuthor">
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                    {this.renderAuthor(post)}
                   </div>
-                  <div className="authorLink"> Author Link</div>
-                </div>
-              </li>
-            );
+                </li>
+              );
+            }
+            return undefined;
           })
         }
         </ul>
@@ -57,26 +61,37 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            return (
-              <li key={post.id} className="postSummary">
-                <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                <div className="tagsAndAuthor">
-                  <div className="tag">
-                    {post.tags.split(',').map((tag) => {
-                      return (
-                        tag
-                      );
-                    })}
+            if (post.lost) {
+              return (
+                <li key={post.id} className="postSummary">
+                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                  <div className="tagsAndAuthor">
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                    {this.renderAuthor(post)}
                   </div>
-                  <div className="authorLink"> Author Link</div>
-                </div>
-              </li>
-            );
+                </li>
+              );
+            }
+            return undefined;
           })
         }
         </ul>
       </div>
     );
+  }
+
+  renderAuthor(post) {
+    if (post.anonymous) {
+      return <div className="authorLink"> Anonymous</div>;
+    } else {
+      return <Link to={`profile/${post.authorId}`} className="authorLink"> Author Link</Link>;
+    }
   }
 
   // Renders the tag/filters box

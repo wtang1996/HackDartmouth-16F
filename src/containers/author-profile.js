@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchUser } from '../actions';
+import { fetchAuthor } from '../actions';
 
-class Profile extends Component {
+class authorProfile extends Component {
   constructor(props) {
     super(props);
 
@@ -13,17 +13,16 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchUser();
+    this.props.fetchAuthor(this.props.params.id);
   }
 
   render() {
-    if (this.props.user != null) {
+    if (this.props.author != null) {
       return (
         <div className="profileContainer">
           <div className="profileBox">
-            <div className="profileTitle">Profile for {this.props.user.username}</div>
-            <div className="profileContent">Email: {this.props.user.email}</div>
-            <div className="profileContent">Add User posts here</div>
+            <div className="profileTitle">Profile for {this.props.author.username}</div>
+            <div className="profileContent">Email: {this.props.author.email}</div>
             <div className="profileContent">Maybe start conversation button?</div>
           </div>
         </div>
@@ -37,11 +36,10 @@ class Profile extends Component {
 // connects particular parts of redux state to this components props
 const mapStateToProps = (state) => (
   {
-    user: state.profile.user,
-    posts: state.posts.all,
+    author: state.profile.author,
   }
 );
 
 
 // react-redux glue -- outputs Container that knows how to call actions
-export default connect(mapStateToProps, { fetchUser })(Profile);
+export default connect(mapStateToProps, { fetchAuthor })(authorProfile);
