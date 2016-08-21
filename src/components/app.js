@@ -8,15 +8,27 @@ class App extends Component {
 
     // init component state here
     this.state = {};
+    this.renderFooter = this.renderFooter.bind(this);
+  }
+
+  renderFooter() {
+    return (
+      <footer>
+        <a href="mailto:digupdartmouth@gmail.com">
+          Contact the Digup Team
+        </a>
+      </footer>
+    );
   }
 
   render() {
     return (
-      <div>
+      <div className="pageContainer">
         <NavBar />
         <div className="content">
           {this.props.children}
         </div>
+        {this.renderFooter()}
       </div>
     );
   }

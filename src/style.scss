@@ -3,13 +3,17 @@ html {
 }
 
 body {
+  position: relative;
   font-family: "Roboto", sans-serif;
   color: rgb(10%, 10%, 10%);
-  background: linear-gradient(to bottom right, #0D2C48, #4D6C88);
-  background-repeat: no-repeat;
+  background: linear-gradient(to right, #0D2C48, #4D6C88);
+  background-repeat: repeat-y;
   font-size: 16px;
   color: white;
   margin: 0;
+  padding: 0;
+  min-height: 100%;
+  padding-bottom: 50px;
 }
 
 /***********************************/
@@ -93,6 +97,25 @@ body {
 .content {
   margin: 15px;
 }
+
+/***********************************/
+/************* Footer **************/
+/***********************************/
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 20px;
+  padding: 15px;
+  background-color: #e0e0e0;
+  border-top: thin solid lightgray;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.14);
+}
+
 
 /***********************************/
 /********** New Listing ************/
@@ -511,19 +534,61 @@ a:hover, a:active {
 /********** Message Page ***********/
 /***********************************/
 
+.messagesPageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.messagesListContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  padding: 0 25px;
+  background-color: #e6e6e6;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
+  color: midnightblue;
+}
+.messagesDetailContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  padding: 25px;
+  background-color: #e6e6e6;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
+  color: midnightblue;
+}
 .message-section {
   display: flex;
 }
-.message-section li {
+.messagesList {
+  font-size: 24px;
   list-style: none;
-  cursor: pointer;
-  display: flex;
-  width: 25vw;
-  padding: 10px;
 }
-.message-section li:hover {
-  text-decoration: none !important;
-  text-decoration-color: transparent;
-  background-color: transparent;
-  color: navy;
+.messagesList li {
+  list-style: none;
+  display: flex;
+}
+.messagesList button {
+  font-size: 16px;
+  background-color: #f6f6f6;
+  width: 200px;
+  color: midnightblue;
+  padding: 10px;
+  border: thin solid lightgray;
+  transition-duration: 0.25s;
+}
+.messagesList button:hover {
+  background-color: #f1f1f1;
+  transition-duration: 0.25s;
+  border-color: darken(lightgray, 10%);
+}
+.noSelectMessage {
+  font-size: 32px;
+  align-self: center;
+}
+.noMessages {
+  font-size: 24px;
+  align-self: center;
 }

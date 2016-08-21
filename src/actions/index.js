@@ -17,6 +17,7 @@ export const ActionTypes = {
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_USER: 'FETCH_USER',
+  FETCH_AUTHOR: 'FETCH_AUTHOR',
   ERROR_MESSAGE: 'ERROR_MESSAGE',
 };
 
@@ -43,10 +44,9 @@ export function fetchPosts() {
 
 export function createPost(post) {
   return (dispatch) => {
-    const fields = { title: post.title, content: post.content, tags: post.tags };
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.CREATE_POST, payload: { fields } });
+      dispatch({ type: ActionTypes.CREATE_POST, payload: { post } });
       browserHistory.push('/');
     }).catch(error => {
       dispatch(errorMessage(`Error creating post: ${error.response.data}`));
@@ -194,6 +194,18 @@ export function fetchUser() {
       } });
     }).catch(error => {
       dispatch(errorMessage(`Cannot get user data: ${error.response.data}`));
+    });
+  };
+}
+
+export function fetchAuthor(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/profile/${id}`, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
+      dispatch({ type: ActionTypes.FETCH_AUTHOR, payload: {
+        author: response.data,
+      } });
+    }).catch(error => {
+      dispatch(errorMessage(`Cannot get author data: ${error.response.data}`));
     });
   };
 }
