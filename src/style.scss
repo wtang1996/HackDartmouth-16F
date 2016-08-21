@@ -511,6 +511,20 @@ a:hover, a:active {
 /********** Message Page ***********/
 /***********************************/
 
+.messagesPageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.messagesDetailContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  padding: 25px;
+  background-color: #e6e6e6;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
+}
 .message-section {
   display: flex;
 }

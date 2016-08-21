@@ -46,11 +46,11 @@ class Message extends Component {
       );
     } else {
       return (
-        <ul>
+        <ul className="messagesList">
         {
           this.props.messages.map((message) => {
             return (
-              <li key={message.id}>
+              <li key={message.id} className="messagesListItem">
                 <div onClick={() => { this.state.currentMessage = message; }}>{message.user}</div>
               </li>
             );
@@ -87,9 +87,13 @@ class Message extends Component {
 
   render() {
     return (
-      <div>
-        {this.renderUserList()}
-        {this.renderConversation()}
+      <div className="messagesPageContainer">
+        <div className="messagesDetailContainer">
+          {this.renderUserList()}
+        </div>
+        <div className="messagesDetailContainer">
+          {this.renderConversation()}
+        </div>
       </div>
     );
   }
