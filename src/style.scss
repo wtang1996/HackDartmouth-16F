@@ -80,13 +80,30 @@ body {
   background-color: #e6e6e6;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
 }
+
+.rightLinks a:hover {
+  background-color: darkgray;
+  border-radius: 4px;
+  border-color: darkgray;
+}
+
 .siteName {
   font-size: 24px;
   font-family: sans-serif;
   font: helvetica;
   font-weight: bold;
+  // padding: 7px;
 }
+
 .nbSignout {
+  padding: 15px;
+}
+
+.messages {
+  padding: 15px;
+}
+
+.profile {
   padding: 15px;
 }
 

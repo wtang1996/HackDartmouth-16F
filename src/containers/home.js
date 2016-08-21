@@ -90,7 +90,7 @@ class Home extends Component {
     if (post.anonymous) {
       return <div className="authorLink"> Anonymous</div>;
     } else {
-      return <Link to={`profile/${post.authorId}`} className="authorLink"> Author Link</Link>;
+      return <Link to={`profile/${post.authorId}`} className="authorLink">{post.authorName}</Link>;
     }
   }
 
