@@ -8,7 +8,7 @@
     "start": "node_modules/.bin/webpack-dev-server --inline --hot",
     "dev": "nodemon app/server.js --exec babel-node",
     "build": "WEBPACK_ENV=production node_modules/.bin/webpack --optimize-minimize --progress --color",
-    "deploy": "npm run build; surge -p ."
+    "deploy": "npm run build; surge -p . -d 'digup.surge.sh' "
   },
   "repository": {
     "type": "git",
