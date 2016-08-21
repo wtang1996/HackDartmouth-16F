@@ -43,7 +43,7 @@ class SignIn extends Component {
         <div className="signInContainer">
           <form onSubmit={this.submit} className="signInBox">
             Email: <input onChange={this.onEmailChange} value={this.state.email} />
-            Password: <input onChange={this.onPasswordChange} value={this.state.password} />
+            Password: <input type="password" onChange={this.onPasswordChange} value={this.state.password} />
             <button>Sign in</button>
             <Link to="signup" className="signUpLink">New to Digup? Sign up here!</Link>
           </form>
