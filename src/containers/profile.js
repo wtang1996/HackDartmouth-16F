@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
-import { fetchUser } from '../actions';
+import { fetchUser, fetchPosts } from '../actions';
 
 class Profile extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class Profile extends Component {
 
   componentWillMount() {
     this.props.fetchUser();
+    this.props.fetchPosts();
   }
 
   renderUserPosts() {
@@ -78,4 +79,4 @@ const mapStateToProps = (state) => (
 
 
 // react-redux glue -- outputs Container that knows how to call actions
-export default connect(mapStateToProps, { fetchUser })(Profile);
+export default connect(mapStateToProps, { fetchUser, fetchPosts })(Profile);
