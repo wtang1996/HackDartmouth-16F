@@ -27,11 +27,12 @@ class Message extends Component {
   }
 
   onDeletion(event) {
-    this.props.deleteMessage(this.props.params.id);
+    this.props.deleteMessage(this.state.currentMessage.id);
     this.setState({
       user: '',
       content: '',
       time: '',
+      currentMessage: this.props.messages.message,
     });
   }
 
@@ -61,17 +62,14 @@ class Message extends Component {
   }
 
   renderConversation() {
-    // console.log(this.state.currentMessage);
     if (typeof this.state.currentMessage !== 'undefined') {
       return (
-        <div className="embed-responsive embed-responsive-16by9">
-          <div className="details">
-            <div>{this.state.currentMessage}</div>
-            <button onClick={this.onDeletion} className="deleteButton">
-              Delete Message
-            </button>
-            <textarea onChange={this.onContentChange} value={this.state.currentMessage} />
-          </div>
+        <div>
+          {this.state.currentMessage.user}
+          <button onClick={this.onDeletion} className="deleteButton">
+          Delete Message
+          </button>
+          <textarea onChange={this.onContentChange} value={this.state.currentMessage.content} />
         </div>
       );
     } else {
