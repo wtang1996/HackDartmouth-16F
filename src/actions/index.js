@@ -136,6 +136,7 @@ export function fetchMessage(id) {
 
 export function deleteMessage(id) {
   return (dispatch) => {
+    console.log(`${id}`);
     axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });
