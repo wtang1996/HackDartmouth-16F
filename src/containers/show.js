@@ -20,6 +20,7 @@ class Show extends Component {
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onEditChange = this.onEditChange.bind(this);
     this.onDeletion = this.onDeletion.bind(this);
+    this.renderAuthor = this.renderAuthor.bind(this);
   }
 
   componentWillMount() {
@@ -64,6 +65,14 @@ class Show extends Component {
     });
   }
 
+  renderAuthor() {
+    if (this.props.post.anonymous) {
+      return <div className="authorLink"> Anonymous</div>;
+    } else {
+      return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.author}</Link>;
+    }
+  }
+
   render() {
     if (this.props.post) {
       // CHANGE THIS LATER TO BE IF(THIS IS NOT THE USER'S OWN PAGE) {}
@@ -93,7 +102,7 @@ class Show extends Component {
                 <div className="showPostContent">Item Description: {this.props.post.content}</div>
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
                 <div className="showPostContent"> Say here if the post is lost or found</div>
-                <div className="showPostContent"> Posted by: </div>
+                <div className="showPostContent"> Posted by: {this.renderAuthor()} </div>
                 <button onClick={this.onEditChange} className="editButton">
                   Edit
                 </button>
@@ -116,7 +125,7 @@ class Show extends Component {
                 <div className="showPostContent">Item Description: {this.props.post.content}</div>
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
                 <div className="showPostContent"> Say here if the post is lost or found</div>
-                <div className="showPostContent"> Posted by: </div>
+                <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
                 <Link to="/" className="showPostContact"> Contact Me! (add functionality) </Link>
               </div>
             </div>

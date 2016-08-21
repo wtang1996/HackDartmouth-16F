@@ -50,7 +50,7 @@ class SignUp extends Component {
           <form onSubmit={this.submit} className="signInBox">
             Username: <input onChange={this.onUsernameChange} value={this.state.username} />
             Email: <input onChange={this.onEmailChange} value={this.state.email} />
-            Password: <input onChange={this.onPasswordChange} value={this.state.password} />
+            Password: <input type="password" onChange={this.onPasswordChange} value={this.state.password} />
             <button>Sign up</button>
             <Link to="signin" className="signUpLink">Already have an account? Sign in here!</Link>
           </form>
