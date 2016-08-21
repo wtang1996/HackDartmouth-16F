@@ -22,10 +22,10 @@ class NavBar extends Component {
   renderSign() {
     if (this.props.authenticated) {
       return (
-        <div>
-          <Link to="messages">Messages</Link>
+        <div className="rightLinks">
+          <Link to="messages" className="messages">Messages</Link>
           <Link to="/" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
-          <Link to="profile">Profile</Link>
+          <Link to="profile" className="profile">Profile</Link>
         </div>
       );
     } else {
