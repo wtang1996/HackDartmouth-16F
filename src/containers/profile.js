@@ -59,7 +59,6 @@ class Profile extends Component {
             <div className="profileTitle">Profile for {this.props.user.username}</div>
             <div className="profileContent">Email: {this.props.user.email}</div>
             {this.renderUserPosts()}
-            <div className="profileContent">Maybe start conversation button?</div>
           </div>
         </div>
       );
