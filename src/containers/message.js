@@ -65,7 +65,6 @@ class Message extends Component {
     if (typeof this.state.currentMessage !== 'undefined') {
       return (
         <div className="embed-responsive embed-responsive-16by9">
-          <iframe className="embed-responsive-item"></iframe>
           <div className="details">
             <div>{this.state.currentMessage}</div>
             <button onClick={this.onDeletion} className="deleteButton">
