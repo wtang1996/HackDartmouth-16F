@@ -25,7 +25,7 @@ class Home extends Component {
   renderFound() {
     return (
       <div className="found">
-        <h2>Found Item Listings</h2>
+        <div className="listTitle">Found Item Listings</div>
         <ul>
         {
           this.props.posts.map((post) => {
@@ -58,7 +58,7 @@ class Home extends Component {
   renderLost() {
     return (
       <div className="lost">
-        <h2>Lost Item Listings</h2>
+        <div className="listTitle">Lost Item Listings</div>
         <ul>
         {
           this.props.posts.map((post) => {
@@ -89,7 +89,7 @@ class Home extends Component {
 
   renderAuthor(post) {
     if (post.anonymous) {
-      return <div className="authorLink"> Anonymous</div>;
+      return <div className="nonLinkText"> Anonymous</div>;
     } else {
       if (post.authorId === this.props.user.id) {
         return <Link to={'profile'} className="authorLink"> {post.authorName}</Link>;
