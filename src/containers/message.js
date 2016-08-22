@@ -39,7 +39,7 @@ class Message extends Component {
     if (this.state.currentMessage.content) {
       content = this.state.currentMessage.content;
     }
-    content.push(this.state.input);
+    content.push(`${this.props.user.username}: ${this.state.input}`);
     this.props.updateMessage({ content }, this.state.currentMessage.id);
     this.setState({
       input: '',
