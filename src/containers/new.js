@@ -27,23 +27,18 @@ class New extends Component {
   }
 
   onTitleChange(event) {
-    console.log(event.target.value);
     this.setState({ title: event.target.value });
   }
   onContentChange(event) {
-    console.log(event.target.value);
     this.setState({ content: event.target.value });
   }
   onTagsChange(event) {
-    console.log(event.target.value);
     this.setState({ tags: event.target.value });
   }
   onLostChange(event) {
     this.setState({ lost: !this.state.lost });
   }
-  // onFoundChange(event) {
-  //   this.setState({ lost: false });
-  // }
+
   onAnonymousChange(event) {
     this.setState({ anonymous: !this.state.anonymous });
   }
@@ -52,7 +47,6 @@ class New extends Component {
     e.preventDefault();
     if (this.state.title !== '' && this.state.content !== '') {
       this.props.createPost(this.state);
-      console.log(this.state);
       this.setState({
         title: '',
         content: '',
@@ -61,7 +55,7 @@ class New extends Component {
         anonymous: false,
       });
     } else {
-      console.log('Requires title and description');
+      alert('You need to provide title and description fields');
     }
   }
 

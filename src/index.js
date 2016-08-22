@@ -21,8 +21,6 @@ if (token) {
   store.dispatch({ type: ActionTypes.AUTH_USER });
 }
 
-// entry point that just renders app
-// could be used for routing at some point
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
