@@ -24,7 +24,7 @@ class NavBar extends Component {
       return (
         <div className="rightLinks">
           <Link to="messages" className="messages">Messages</Link>
-          <Link to="/" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
+          <Link to="/signin" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
           <Link to="profile" className="profile">Profile</Link>
         </div>
       );
