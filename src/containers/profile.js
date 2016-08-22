@@ -1,28 +1,64 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
-import { fetchUser } from '../actions';
+import { fetchUser, fetchPosts } from '../actions';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
 
-    // init component state here
     this.state = {
     };
+
+    this.renderUserPosts = this.renderUserPosts.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchUser();
+    this.props.fetchPosts();
+  }
+
+  renderUserPosts() {
+    return (
+      <div className="profileContent">
+        <h2>Your Posts</h2>
+        <ul>
+        {
+          this.props.posts.map((post) => {
+            if (post.authorId === this.props.user.id) {
+              return (
+                <li key={post.id} className="postSummary">
+                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                  <div className="tagsAndAuthor">
+                    <div className="tag">
+                      {post.tags.split(',').map((tag) => {
+                        return (
+                          tag
+                        );
+                      })}
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+            return undefined;
+          })
+        }
+        </ul>
+      </div>
+    );
   }
 
   render() {
     if (this.props.user != null) {
       return (
-        <div>
-          <h1>Profile Page</h1>
-          <div>Username: {this.props.user.username}</div>
-          <div>Email: {this.props.user.email}</div>
+        <div className="profileContainer">
+          <div className="profileBox">
+            <div className="profileTitle">Profile for {this.props.user.username}</div>
+            <div className="profileContent">Email: {this.props.user.email}</div>
+            {this.renderUserPosts()}
+          </div>
         </div>
       );
     } else {
@@ -31,13 +67,11 @@ class Profile extends Component {
   }
 }
 
-// connects particular parts of redux state to this components props
 const mapStateToProps = (state) => (
   {
     user: state.profile.user,
+    posts: state.posts.all,
   }
 );
 
-
-// react-redux glue -- outputs Container that knows how to call actions
-export default connect(mapStateToProps, { fetchUser })(Profile);
+export default connect(mapStateToProps, { fetchUser, fetchPosts })(Profile);

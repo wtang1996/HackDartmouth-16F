@@ -1,8 +1,3 @@
 language: node_js
 node_js:
   - "6.2.2"
-deploy:
-  - provider: surge
-    domain: digup.surge.sh
-    on:
-      all_branches: true
