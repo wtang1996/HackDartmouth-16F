@@ -89,7 +89,7 @@ class Home extends Component {
 
   renderAuthor(post) {
     if (post.anonymous) {
-      return <div className="authorLink"> Anonymous</div>;
+      return <div className="nonLinkText"> Anonymous</div>;
     } else {
       if (post.authorId === this.props.user.id) {
         return <Link to={'profile'} className="authorLink"> {post.authorName}</Link>;
