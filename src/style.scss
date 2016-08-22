@@ -317,7 +317,7 @@ ul {
   border: thin solid lightgray;
   transition-duration: .5s;
   border-radius: 3px;
-  width: 195px;
+  width: 225px;
 }
 .postBox input:focus {
   border: thin solid gray;
@@ -328,9 +328,9 @@ ul {
   border: thin solid lightgray;
   outline: none;
   margin: 10px 0;
-  max-width: 200px;
+  max-width: 230px;
   max-height: 200px;
-  width: 200px;
+  width: 230px;
   transition: border .5s;
   border-radius: 3px;
 }
@@ -497,6 +497,63 @@ ul {
 .deleteButton:active {
   background-color: darken(firebrick, 2%);
   color: white;
+}
+.editPostBox {
+  background-color: #e6e6e6;
+  padding: 30px;
+  margin: 20px;
+  width: 400px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: midnightblue;
+}
+.editPostBox input {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  outline: none;
+  font-size: 13px;
+  padding: 5px 5px;
+  border: thin solid lightgray;
+  transition-duration: .5s;
+  border-radius: 3px;
+  width: 195px;
+}
+.editPostBox input:focus {
+  border: thin solid gray;
+  transition-duration: .5s;
+}
+.editPostBox textarea {
+  font-size: 13px;
+  border: thin solid lightgray;
+  outline: none;
+  margin: 10px 0;
+  max-width: 200px;
+  max-height: 200px;
+  width: 200px;
+  transition: border .5s;
+  border-radius: 3px;
+}
+.editPostBox textarea:focus {
+  border: thin solid gray;
+  transition: border .5s;
+}
+.editPostTitle {
+  align-self: center;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.editPostContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 5px;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+  border: thin solid lightgray;
 }
 
 /***********************************/

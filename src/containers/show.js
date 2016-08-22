@@ -105,11 +105,12 @@ class Show extends Component {
         if (this.state.editing) {
           return (
             <div className="showPostContainer">
-              <div className="showPostBox">
-                This will be changed to mimic the new post page...
-                <div className="showPostTitle">Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} /> </div>
-                Content: <input onChange={this.onContentChange} placeholder="content" value={this.state.content} />
-                Tags: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
+              <div className="editPostBox">
+                <div className="editPostTitle">Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} /> </div>
+                <div className="editPostContent">
+                  Item Description: <textarea rows="8" cols="24" onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
+                </div>
+                <div className="editPostContent">Category: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} /> </div>
                 <button onClick={this.onEditChange} className="doneButton">
                   Done
                 </button>
