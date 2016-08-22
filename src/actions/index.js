@@ -114,10 +114,10 @@ export function createMessage(message) {
 
 export function updateMessage(message, id) {
   return (dispatch) => {
-    const fields = { user: message.user, content: message.content, time: message.time };
-    axios.put(`${ROOT_URL}/messages/${id}${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    axios.put(`${ROOT_URL}/messages/${id}${API_KEY}`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.UPDATE_MESSAGE, fields, id });
+      console.log(response.data);
+      dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error updating message: ${error.response.data}`));
     });
