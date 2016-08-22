@@ -8,13 +8,14 @@ class Message extends Component {
     this.state = {
       user: '',
       content: '',
-      time: '',
       currentMessage: this.props.messages.message,
     };
     this.onContentChange = this.onContentChange.bind(this);
     this.onDeletion = this.onDeletion.bind(this);
     this.renderUserList = this.renderUserList.bind(this);
     this.renderConversation = this.renderConversation.bind(this);
+    this.onSend = this.onSend.bind(this);
+    this.updateConversation = this.updateConversation.bind(this);
   }
 
   componentWillMount() {
@@ -31,10 +32,27 @@ class Message extends Component {
     this.setState({
       user: '',
       content: '',
-      time: '',
       currentMessage: this.props.messages.message,
     });
   }
+
+  onSend(event) {
+    this.props.updateMessage(this.state, this.state.currentMessage.id);
+    this.setState({
+      user: '',
+      content: '',
+      currentMessage: this.props.messages.message,
+    });
+  }
+
+  updateConversation() {
+    if (this.state.content !== this.props.message.content) {
+      setInterval(this.setState({
+        content: this.props.message.content,
+      }), 5000);
+    }
+  }
+
 
   renderUserList() {
     if (this.props.messages.length === 0) {
@@ -51,7 +69,7 @@ class Message extends Component {
           this.props.messages.map((message) => {
             return (
               <li key={message.id}>
-                <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.user}</button>
+                <button onClick={() => { this.setState({ currentMessage: message, content: message.content }); }}>{message.user}</button>
               </li>
             );
           })
@@ -66,10 +84,9 @@ class Message extends Component {
       return (
         <div>
           {this.state.currentMessage.user}
-          <button onClick={this.onDeletion} className="deleteButton">
-          Delete Message
-          </button>
-          <textarea onChange={this.onContentChange} value={this.state.currentMessage.content} />
+          <button onClick={this.onDeletion} className="deleteButton">Delete Message</button>
+          <textarea onChange={this.onContentChange} value={this.state.content} />
+          <button onClick={this.onSend} className="sendButton">Send</button>
         </div>
       );
     } else {
@@ -102,6 +119,4 @@ const mapStateToProps = (state) => (
   }
 );
 
-
-// react-redux glue -- outputs Container that knows how to call actions
 export default connect(mapStateToProps, actions)(Message);
