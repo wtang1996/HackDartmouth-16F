@@ -20,6 +20,7 @@ class New extends Component {
     this.onCreation = this.onCreation.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    this.renderRadio = this.renderRadio.bind(this);
   }
 
   onTitleChange(event) {
@@ -56,6 +57,19 @@ class New extends Component {
     } else {
       console.log('Requires title and description');
     }
+  }
+
+  renderRadio() {
+    return (
+      <div>
+        <select name="cars">
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="fiat">Fiat</option>
+          <option value="audi">Audi</option>
+        </select>
+      </div>
+    );
   }
 
   renderTags() {
@@ -112,9 +126,9 @@ class New extends Component {
                   </div>
                 </div>
               </div>
-              <div className="checksContainer">
-                {this.renderTags()}
-              </div>
+              // <div className="checksContainer">
+                {this.renderRadio()}
+              // </div>
             </div>
             <div className="buttonContainer">
               <div className="postButtons">
