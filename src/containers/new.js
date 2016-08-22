@@ -24,7 +24,17 @@ class New extends Component {
     this.onAnonymousChange = this.onAnonymousChange.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
-    this.renderRadio = this.renderRadio.bind(this);
+    // this.renderRadio = this.renderRadio.bind(this);
+
+    this.renderClothing = this.renderClothing.bind(this);
+    this.renderBike = this.renderBike.bind(this);
+    this.renderTechnology = this.renderTechnology.bind(this);
+    this.renderOther = this.renderOther.bind(this);
+
+    this.changeBike = this.changeBike.bind(this);
+    this.changeTech = this.changeTech.bind(this);
+    this.changeOther = this.changeOther.bind(this);
+    this.changeClothing = this.changeClothing.bind(this);
   }
 
   onTitleChange(event) {
@@ -66,56 +76,211 @@ class New extends Component {
     }
   }
 
-  renderRadio() {
-    return (
-      <div>
-        <select name="cars">
-          <option value="volvo">Volvo</option>
-          <option value="saab">Saab</option>
-          <option value="fiat">Fiat</option>
-          <option value="audi">Audi</option>
-        </select>
-      </div>
-    );
+  // renderRadio() {
+  //   return (
+  //     <div>
+  //       <select name="cars">
+  //         <option value="volvo">Volvo</option>
+  //         <option value="saab">Saab</option>
+  //         <option value="fiat">Fiat</option>
+  //         <option value="audi">Audi</option>
+  //       </select>
+  //     </div>
+  //   );
+  // }
+
+  changeClothing() {
+    if (this.state.tags !== 'clothing') {
+      this.setState({
+        tags: 'clothing',
+      });
+    }
   }
+
+  changeBike() {
+    if (this.state.tags !== 'bike') {
+      this.setState({
+        tags: 'bike',
+      });
+    }
+  }
+
+  changeTech() {
+    if (this.state.tags !== 'tech') {
+      this.setState({
+        tags: 'tech',
+      });
+    }
+  }
+
+  changeOther() {
+    if (this.state.tags !== 'other') {
+      this.setState({
+        tags: 'other',
+      });
+    }
+  }
+
+  // renderRadio() {
+  //   return (
+  //     <div className="tagselect">
+  //       <input type="radio" name="group1" value="male" id="1" /> <label >Male </label>
+  //       <input type="radio" name="group1" value="female" /> Female
+  //       <input type="radio" name="group1" value="other" /> Other
+  //     </div>
+  //   );
+  // }
+
+  renderClothing() {
+    if (this.state.tags === 'clothing') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" checked />
+            <label htmlFor="clothingCheck" onClick={this.changeClothing}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" />
+            <label htmlFor="clothingCheck" onClick={this.changeClothing}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderTechnology() {
+    if (this.state.tags === 'tech') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" checked />
+            <label htmlFor="techCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" />
+            <label htmlFor="techCheck" onClick={this.changeTech}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderBike() {
+    if (this.state.tags === 'bike') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" checked />
+            <label htmlFor="bikeCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" />
+            <label htmlFor="bikeCheck" onClick={this.changeBike}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderOther() {
+    if (this.state.tags === 'other') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" checked />
+            <label htmlFor="otherCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" />
+            <label htmlFor="otherCheck" onClick={this.changeOther}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // renderTags() {
+  //   return (
+  //     <div>
+  //       Tags
+  //       <div className="check">
+  //         <div className="checkTitle"> Clothing </div>
+  //         <div className="checkboxDiv">
+  //           <input type="checkbox" value="None" id="clothingCheck" name="check" />
+  //           <label htmlFor="clothingCheck"></label>
+  //         </div>
+  //       </div>
+  //
+  //       <div className="check">
+  //         <div className="checkTitle"> Technology </div>
+  //         <div className="checkboxDiv">
+  //           <input type="checkbox" value="None" id="techCheck" name="check" />
+  //           <label htmlFor="techCheck"></label>
+  //         </div>
+  //       </div>
+  //
+  //       <div className="check">
+  //         <div className="checkTitle"> Bike </div>
+  //         <div className="checkboxDiv">
+  //           <input type="checkbox" value="None" id="bikeCheck" name="check" />
+  //           <label htmlFor="bikeCheck"></label>
+  //         </div>
+  //       </div>
+  //
+  //       <div className="check">
+  //         <div className="checkTitle"> Other </div>
+  //         <div className="checkboxDiv">
+  //           <input type="checkbox" value="None" id="otherCheck" name="check" />
+  //           <label htmlFor="otherCheck"></label>
+  //         </div>
+  //       </div>
+  //
+  //     </div>
+  //   );
+  // }
 
   renderTags() {
     return (
       <div>
         Tags
-        <div className="check">
-          <div className="checkTitle"> Clothing </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="clothingCheck" name="check" />
-            <label htmlFor="clothingCheck"></label>
-          </div>
-        </div>
-        <div className="check">
-          <div className="checkTitle"> Technology </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="techCheck" name="check" />
-            <label htmlFor="techCheck"></label>
-          </div>
-        </div>
-        <div className="check">
-          <div className="checkTitle"> Bike </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="bikeCheck" name="check" />
-            <label htmlFor="bikeCheck"></label>
-          </div>
-        </div>
-        <div className="check">
-          <div className="checkTitle"> Other </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="otherCheck" name="check" />
-            <label htmlFor="otherCheck"></label>
-          </div>
-        </div>
+        {this.renderClothing()}
+        {this.renderBike()}
+        {this.renderTechnology()}
+        {this.renderOther()}
       </div>
     );
   }
 
   render() {
+    console.log(this.state.tags);
     return (
       <div>
         <h1 className="submissionTitle">New Post</h1>
@@ -145,9 +310,8 @@ class New extends Component {
                   </div>
                 </div>
               </div>
-              // <div className="checksContainer">
-                {this.renderRadio()}
-              // </div>
+              {this.renderTags()}
+
             </div>
             <div className="buttonContainer">
               <div className="postButtons">
