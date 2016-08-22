@@ -67,11 +67,14 @@ class Message extends Component {
         Conversations
         {
           this.props.messages.map((message) => {
-            return (
-              <li key={message.id}>
-                <button onClick={() => { this.setState({ currentMessage: message, content: message.content }); }}>{message.user}</button>
-              </li>
-            );
+            if (message.userID === this.props.post.authorId || message.myID === this.props.user.id) {
+              return (
+                <li key={message.id}>
+                  <button onClick={() => { this.setState({ currentMessage: message, content: message.content }); }}>{message.user}</button>
+                </li>
+              );
+            }
+            return undefined;
           })
         }
         </ul>
