@@ -77,7 +77,7 @@ class Show extends Component {
       return undefined;
     });
     if (!exist) {
-      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.post.author });
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.post.author, anonymous: this.props.post.anonymous });
     } else {
       browserHistory.push('/messages');
     }
