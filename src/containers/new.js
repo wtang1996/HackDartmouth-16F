@@ -55,7 +55,7 @@ class New extends Component {
         anonymous: false,
       });
     } else {
-      console.log('Requires title and description');
+      alert('You need to provide title and description fields');
     }
   }
 
