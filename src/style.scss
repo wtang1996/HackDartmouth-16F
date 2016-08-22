@@ -1,3 +1,7 @@
+
+/***********************************/
+/********* General Styling *********/
+/***********************************/
 html {
   height: 100%;
   box-sizing: border-box;
@@ -16,7 +20,29 @@ body {
   min-height: 94%;
   padding-bottom: 50px;
 }
-.pageContainer {
+.content {
+  margin: 15px;
+}
+button {
+  border-radius: 4px;
+  padding: 4px;
+  background-color: darken(white, 10%);
+  outline: none;
+  border-width: thin;
+  font-size: 14px;
+  margin: 6px;
+}
+a {
+  color: midnightblue;
+  text-decoration: none !important;
+  text-decoration-color: transparent;
+  text-decoration-line: none;
+}
+a:hover, a:active {
+  text-decoration: none !important;
+  text-decoration-color: transparent;
+  background-color: transparent;
+  color: #3939c6;
 }
 
 /***********************************/
@@ -110,9 +136,6 @@ body {
 .profile {
   padding: 19px 15px;
 }
-.content {
-  margin: 15px;
-}
 
 /***********************************/
 /************* Footer **************/
@@ -136,7 +159,7 @@ footer {
 
 
 /***********************************/
-/********** New Listing ************/
+/******** New Listing Link *********/
 /***********************************/
 .newListingBox {
   display: flex;
@@ -187,6 +210,9 @@ footer {
   justify-content: center;
 }
 
+/***********************************/
+/******** Home Page Lists **********/
+/***********************************/
 .lostFoundBoxes {
   margin-top: 25px;
   margin-bottom: 50px;
@@ -194,7 +220,6 @@ footer {
   flex-direction: row;
   justify-content: space-around;
 }
-
 .lost {
   display: flex;
   flex-direction: column;
@@ -207,11 +232,44 @@ footer {
   align-content: center;
   align-items: center;
 }
-
 .listTitle {
   font-size: 26px;
 }
-
+ul {
+  padding-left: 0px;
+}
+.postSummary {
+  // width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 7px 0;
+  margin-right: 10px;
+  border-radius: 3px;
+  border-width: thin;
+  border-style: solid;
+  border-color: lighten(black, 15%);
+  background-color: darken(white, 15%);
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
+}
+.Title {
+  font-size: 18px;
+}
+.tagsAndAuthor {
+  display:flex;
+  flex-direction: row;
+  justify-content: right;
+}
+.tag {
+  color: darkslategray;
+  padding: 0 8px;
+}
+.authorLink {
+  color: midnightblue;
+}
+.nonLinkText {
+  color: darkslategray;
+}
 
 /***********************************/
 /********** New Post Page **********/
@@ -415,6 +473,33 @@ footer {
   color: white;
   background-color: darken(limegreen, 15%);
 }
+.editButton {
+  background-color: lighten(steelblue, 2%);
+  border-color: steelblue;
+  color: lighten(black, 10%);
+}
+.editButton:active {
+  background-color: darken(steelblue, 2%);
+  color: black;
+}
+.doneButton {
+  border-color: mediumseagreen;
+  background-color: lighten(mediumseagreen, 2%);
+  color: lighten(black, 20%);
+}
+.doneButton:active {
+  background-color: darken(mediumseagreen, 2%);
+  color: black;
+}
+.deleteButton {
+  border-color: firebrick;
+  background-color: lighten(firebrick, 2%);
+  color: darken(white, 10%);
+}
+.deleteButton:active {
+  background-color: darken(firebrick, 2%);
+  color: white;
+}
 
 
 /***********************************/
@@ -455,132 +540,9 @@ footer {
   border: thin solid #c6c6c6;
 }
 
-ul {
-  padding-left: 0px;
-}
-
-.postSummary {
-  // width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 7px 0;
-  margin-right: 10px;
-  border-radius: 3px;
-  border-width: thin;
-  border-style: solid;
-  border-color: lighten(black, 15%);
-  background-color: darken(white, 15%);
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15), 0 4px 15px 0 rgba(0, 0, 0, 0.14);
-}
-
-.Title {
-  font-size: 18px;
-}
-.tagsAndAuthor {
-  display:flex;
-  flex-direction: row;
-  justify-content: right;
-}
-.tag {
-  color: darkslategray;
-  padding: 0 8px;
-}
-.authorLink {
-  color: midnightblue;
-}
-.nonLinkText {
-  color: darkslategray;
-}
-
-button {
-  border-radius: 4px;
-  padding: 4px;
-  background-color: darken(white, 10%);
-  outline: none;
-  border-width: thin;
-  font-size: 14px;
-  margin: 6px;
-}
-
-.homeDelete {
-  border-color: firebrick;
-  background-color: lighten(firebrick, 2%);
-  color: darken(white, 10%);
-  align-self: center;
-}
-.homeDelete:active {
-  background-color: darken(firebrick, 2%);
-  color: white;
-}
-
-.NewFields {
-  display: flex;
-  flex-direction: column;
-}
-.NewFields input {
-  margin: 8px;
-  padding: 2px;
-  border-radius: 4px;
-  height: 20px;
-}
-.newButton {
-  border-color: orange;
-  background-color: lighten(orange, 2%);
-  color: lighten(black, 20%);
-}
-.newButton:active {
-  background-color: darken(orange, 2%);
-  color: black;
-}
-
-.editButton {
-  background-color: lighten(steelblue, 2%);
-  border-color: steelblue;
-  color: lighten(black, 10%);
-}
-.editButton:active {
-  background-color: darken(steelblue, 2%);
-  color: black;
-}
-
-.doneButton {
-  border-color: mediumseagreen;
-  background-color: lighten(mediumseagreen, 2%);
-  color: lighten(black, 20%);
-}
-.doneButton:active {
-  background-color: darken(mediumseagreen, 2%);
-  color: black;
-}
-
-.deleteButton {
-  border-color: firebrick;
-  background-color: lighten(firebrick, 2%);
-  color: darken(white, 10%);
-}
-.deleteButton:active {
-  background-color: darken(firebrick, 2%);
-  color: white;
-}
-
-a {
-  color: midnightblue;
-  text-decoration: none !important;
-  text-decoration-color: transparent;
-  text-decoration-line: none;
-}
-a:hover, a:active {
-  text-decoration: none !important;
-  text-decoration-color: transparent;
-  background-color: transparent;
-  color: #3939c6;
-}
-
 /***********************************/
 /********** Message Page ***********/
 /***********************************/
-
 .messagesPageContainer {
   display: flex;
   flex-direction: row;
@@ -639,7 +601,6 @@ a:hover, a:active {
   font-size: 24px;
   align-self: center;
 }
-
 
 /***********************************/
 /****** Responsive Formatting ******/
