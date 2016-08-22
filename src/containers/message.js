@@ -20,6 +20,7 @@ class Message extends Component {
 
   componentWillMount() {
     this.props.fetchMessages();
+    this.props.fetchUser();
   }
 
   onContentChange(event) {
@@ -124,23 +125,26 @@ class Message extends Component {
   }
 
   render() {
-    return (
-      <div className="messagesPageContainer">
-        <div className="messagesListContainer">
-          {this.renderUserList()}
+    if (this.props.user !== null) {
+      return (
+        <div className="messagesPageContainer">
+          <div className="messagesListContainer">
+            {this.renderUserList()}
+          </div>
+          <div className="messagesDetailContainer">
+            {this.renderConversation()}
+          </div>
         </div>
-        <div className="messagesDetailContainer">
-          {this.renderConversation()}
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return <div>Loading......</div>;
+    }
   }
 }
 
 const mapStateToProps = (state) => (
   {
     messages: state.messages.all,
-    message: state.messages.message,
     user: state.profile.user,
   }
 );
