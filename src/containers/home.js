@@ -142,23 +142,27 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="newListingBox">
-          <Link to="posts/new" className="newListing">New Listing +</Link>
-        </div>
-        <div className="filters">
-          <div className="filtersBox">
-            <div className="tagTitle"> Filter Results by Tags </div>
-            {this.renderTags()}
+    if (this.props.posts.length > 0 && this.props.user !== null) {
+      return (
+        <div>
+          <div className="newListingBox">
+            <Link to="posts/new" className="newListing">New Listing +</Link>
+          </div>
+          <div className="filters">
+            <div className="filtersBox">
+              <div className="tagTitle"> Filter Results by Tags </div>
+              {this.renderTags()}
+            </div>
+          </div>
+          <div className="lostFoundBoxes">
+            {this.renderLost()}
+            {this.renderFound()}
           </div>
         </div>
-        <div className="lostFoundBoxes">
-          {this.renderLost()}
-          {this.renderFound()}
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return <div>Loading......</div>;
+    }
   }
 }
 
@@ -169,6 +173,4 @@ const mapStateToProps = (state) => (
   }
 );
 
-
-// react-redux glue -- outputs Container that knows how to call actions
 export default connect(mapStateToProps, actions)(Home);
