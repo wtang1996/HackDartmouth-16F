@@ -101,7 +101,6 @@ export function fetchMessages() {
 
 export function createMessage(message) {
   return (dispatch) => {
-    console.log(message);
     axios.post(`${ROOT_URL}/messages`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { message } });
@@ -116,7 +115,6 @@ export function updateMessage(message, id) {
   return (dispatch) => {
     axios.put(`${ROOT_URL}/messages/${id}`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      console.log(response.data);
       dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error updating message: ${error.response.data}`));

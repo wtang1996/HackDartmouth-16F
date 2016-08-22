@@ -31,15 +31,12 @@ class Show extends Component {
   }
 
   onTitleChange(event) {
-    console.log(event.target.value);
     this.setState({ title: event.target.value });
   }
   onContentChange(event) {
-    console.log(event.target.value);
     this.setState({ content: event.target.value });
   }
   onTagsChange(event) {
-    console.log(event.target.value);
     this.setState({ tags: event.target.value });
   }
 
