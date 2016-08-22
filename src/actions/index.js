@@ -101,11 +101,11 @@ export function fetchMessages() {
 
 export function createMessage(message) {
   return (dispatch) => {
-    const fields = { user: message.user, content: message.content, time: message.time };
-    axios.post(`${ROOT_URL}/messages${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    console.log(message);
+    axios.post(`${ROOT_URL}/messages`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { fields } });
-      browserHistory.push('/');
+      dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { message } });
+      browserHistory.push('/messages');
     }).catch(error => {
       dispatch(errorMessage(`Error creating message: ${error.response.data}`));
     });

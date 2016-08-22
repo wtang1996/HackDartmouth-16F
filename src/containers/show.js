@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 
@@ -22,10 +22,12 @@ class Show extends Component {
     this.onDeletion = this.onDeletion.bind(this);
     this.renderAuthor = this.renderAuthor.bind(this);
     this.renderLost = this.renderLost.bind(this);
+    this.startConversation = this.startConversation.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchPost(this.props.params.id);
+    this.props.fetchMessages();
   }
 
   onTitleChange(event) {
@@ -64,6 +66,21 @@ class Show extends Component {
       title: '',
       tags: '',
     });
+  }
+
+  startConversation() {
+    let exist = false;
+    this.props.messages.map(message => {
+      if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
+        exist = true;
+      }
+      return undefined;
+    });
+    if (!exist) {
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.post.authorName });
+    } else {
+      browserHistory.push('/messages');
+    }
   }
 
   renderAuthor() {
@@ -134,7 +151,7 @@ class Show extends Component {
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
                 <div className="showPostContent"> Say here if the post is lost or found</div>
                 <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
-                <Link to="/" className="showPostContact"> Contact Me! (add functionality) </Link>
+                <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
               </div>
             </div>
           </div>
@@ -155,6 +172,7 @@ const mapStateToProps = (state) => (
     posts: state.posts.all,
     post: state.posts.post,
     user: state.profile.user,
+    messages: state.messages.all,
   }
 );
 
