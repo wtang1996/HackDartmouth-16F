@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 
@@ -69,7 +69,18 @@ class Show extends Component {
   }
 
   startConversation() {
-    this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.user.username });
+    let exist = false;
+    this.props.messages.map(message => {
+      if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
+        exist = true;
+      }
+      return undefined;
+    });
+    if (!exist) {
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.user.username });
+    } else {
+      browserHistory.push('/messages');
+    }
   }
 
   renderAuthor() {
@@ -161,6 +172,7 @@ const mapStateToProps = (state) => (
     posts: state.posts.all,
     post: state.posts.post,
     user: state.profile.user,
+    messages: state.messages.all,
   }
 );
 
