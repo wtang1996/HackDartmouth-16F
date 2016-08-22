@@ -119,6 +119,7 @@ const mapStateToProps = (state) => (
   {
     messages: state.messages.all,
     message: state.messages.message,
+    user: state.profile.user,
   }
 );
 
