@@ -37,7 +37,7 @@ export function fetchPosts() {
     axios.get(`${ROOT_URL}/posts${API_KEY}`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POSTS, posts: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching all posts: ${error.response.data}`));
+      dispatch(errorMessage(`Error fetching all posts: ${error.response}`));
     });
   };
 }
