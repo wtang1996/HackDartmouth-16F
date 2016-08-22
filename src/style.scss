@@ -231,7 +231,6 @@ footer {
   border-radius: 5px;
   background-color: #e6e6e6;
   padding: 20px;
-  margin-bottom: 50px;
   color: midnightblue;
   align-items: center;
   text-align: center;
@@ -274,7 +273,7 @@ footer {
   outline: none;
   margin: 10px 0;
   max-width: 200px;
-  max-height: 240px;
+  max-height: 200px;
   width: 200px;
   transition: border .5s;
   border-radius: 3px;
@@ -658,5 +657,8 @@ a:hover, a:active {
   }
   .profile {
     padding: 19px 10px;
+  }
+  .messagesPageContainer {
+    flex-direction: column;
   }
 }
