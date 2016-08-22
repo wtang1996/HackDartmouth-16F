@@ -55,12 +55,17 @@ class Message extends Component {
   }
 
   renderContent() {
-    if (this.state.currentMessage.content) {
-      this.state.currentMessage.content.map(line => {
-        return <div>{line}</div>;
-      });
-    }
-    return undefined;
+    let key = 0;
+    return (
+      <div>
+      {
+        this.state.currentMessage.content.map(line => {
+          key++;
+          return <div key={key} > {line} </div>;
+        })
+      }
+      </div>
+    );
   }
 
 
