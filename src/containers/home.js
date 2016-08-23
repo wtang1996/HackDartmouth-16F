@@ -39,16 +39,10 @@ class Home extends Component {
       this.setState({
         tagsToShow: this.state.tagsToShow.delete('Clothing'),
       });
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.push('Clothing');
-      // this.setState({ tagsToShow });
     } else {
       this.setState({
         tagsToShow: this.state.tagsToShow.add('Clothing'),
       });
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.splice(this.state.tagsToShow.indexOf('Clothing', 1));
-      // this.setState({ tagsToShow });
     }
   }
 
@@ -57,24 +51,15 @@ class Home extends Component {
       this.setState({
         tagsToShow: this.state.tagsToShow.delete('Bike'),
       });
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.push('Bike');
-      // this.setState({ tagsToShow });
     } else {
       this.setState({
         tagsToShow: this.state.tagsToShow.add('Bike'),
       });
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.splice(this.state.tagsToShow.indexOf('Bike', 1));
-      // this.setState({ tagsToShow });
     }
   }
 
   addOther() {
     if (this.state.tagsToShow.get('Other')) {
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.push('Other');
-      // this.setState({ tagsToShow });
       this.setState({
         tagsToShow: this.state.tagsToShow.delete('Other'),
       });
@@ -82,17 +67,11 @@ class Home extends Component {
       this.setState({
         tagsToShow: this.state.tagsToShow.add('Other'),
       });
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.splice(this.state.tagsToShow.indexOf('Other', 1));
-      // this.setState({ tagsToShow });
     }
   }
 
   addTech() {
     if (this.state.tagsToShow.get('Technology')) {
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.push('Technology');
-      // this.setState({ tagsToShow });
       this.setState({
         tagsToShow: this.state.tagsToShow.delete('Technology'),
       });
@@ -100,9 +79,6 @@ class Home extends Component {
       this.setState({
         tagsToShow: this.state.tagsToShow.add('Technology'),
       });
-      // let tagsToShow = this.state.tagsToShow.slice();
-      // tagsToShow.splice(this.state.tagsToShow.indexOf('Technology', 1));
-      // this.setState({ tagsToShow });
     }
   }
 
@@ -294,53 +270,6 @@ class Home extends Component {
       );
     }
   }
-
-  // Renders the tag/filters box
-  // renderTags() {
-  //   return (
-  //     <div>
-  //       <div className="homeTags">
-  //         <div className="colOne">
-  //           <div className="check">
-  //             <div className="checkTitle"> Clothing </div>
-  //             <div className="checkboxDiv">
-  //               <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} />
-  //               <label htmlFor="clothingCheck"></label>
-  //             </div>
-  //           </div>
-  //
-  //           <div className="check">
-  //             <div className="checkTitle"> Technology </div>
-  //             <div className="checkboxDiv">
-  //               <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} />
-  //               <label htmlFor="techCheck"></label>
-  //             </div>
-  //           </div>
-  //
-  //         </div>
-  //         <div className="colTwo">
-  //
-  //           <div className="check">
-  //             <div className="checkTitle"> Bike </div>
-  //             <div className="checkboxDiv">
-  //               <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} />
-  //               <label htmlFor="bikeCheck"></label>
-  //             </div>
-  //           </div>
-  //
-  //           <div className="check">
-  //             <div className="checkTitle"> Other </div>
-  //             <div className="checkboxDiv">
-  //               <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} />
-  //               <label htmlFor="otherCheck"></label>
-  //             </div>
-  //           </div>
-  //
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   renderTags() {
     return (
