@@ -396,6 +396,23 @@ footer {
   background-color: darken(limegreen, 15%);
 }
 
+.imagebox {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imagebox a:hover {
+  // position:relative;
+  // top:-25px;
+  // left:-35px;
+  // width:500px;
+  // height:auto;
+  // display:block;
+  // z-index:999;
+  width: 500px;
+}
+
 
 /***********************************/
 /********** Profile Page ***********/

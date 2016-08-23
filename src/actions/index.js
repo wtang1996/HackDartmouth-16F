@@ -21,9 +21,9 @@ export const ActionTypes = {
   ERROR_MESSAGE: 'ERROR_MESSAGE',
 };
 
-const ROOT_URL = 'https://digup.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
-const API_KEY = '?key=weijia_tang';
+// const ROOT_URL = 'https://digup.herokuapp.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
+// const API_KEY = '?key=weijia_tang';
 
 export function errorMessage(error) {
   return (dispatch) => {
@@ -34,7 +34,7 @@ export function errorMessage(error) {
 
 export function fetchPosts() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts${API_KEY}`).then(response => {
+    axios.get(`${ROOT_URL}/posts`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POSTS, posts: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error fetching all posts: ${error.response.data}`));
@@ -44,7 +44,7 @@ export function fetchPosts() {
 
 export function createPost(post) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts${API_KEY}`, post, { headers: { authorization: localStorage.getItem('token') } })
+    axios.post(`${ROOT_URL}/posts`, post, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.CREATE_POST, payload: { post } });
       browserHistory.push('/');
@@ -57,7 +57,7 @@ export function createPost(post) {
 export function updatePost(post, id) {
   return (dispatch) => {
     const fields = { title: post.title, content: post.content, tags: post.tags };
-    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    axios.put(`${ROOT_URL}/posts/${id}`, fields, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
     }).catch(error => {
@@ -68,7 +68,7 @@ export function updatePost(post, id) {
 
 export function fetchPost(id) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then(response => {
+    axios.get(`${ROOT_URL}/posts/${id}`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error fetching post: ${error.response.data}`));
@@ -91,7 +91,7 @@ export function deletePost(id) {
 
 export function fetchMessages() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/messages${API_KEY}`).then(response => {
+    axios.get(`${ROOT_URL}/messages`).then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error fetching all messages: ${error.response.data}`));
@@ -114,7 +114,7 @@ export function createMessage(message) {
 
 export function updateMessage(message, id) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/messages/${id}${API_KEY}`, message, { headers: { authorization: localStorage.getItem('token') } })
+    axios.put(`${ROOT_URL}/messages/${id}`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       console.log(response.data);
       dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
@@ -126,7 +126,7 @@ export function updateMessage(message, id) {
 
 export function fetchMessage(id) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/messages/${id}${API_KEY}`).then(response => {
+    axios.get(`${ROOT_URL}/messages/${id}`).then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error fetching message: ${error.response.data}`));

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Dropzone from 'react-dropzone';
+
 
 import * as actions from '../actions';
 
@@ -15,6 +17,8 @@ class New extends Component {
       tags: '',
       lost: false,
       anonymous: false,
+      pic: '',
+      files: [],
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
@@ -24,6 +28,8 @@ class New extends Component {
     this.onAnonymousChange = this.onAnonymousChange.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    this.callback = this.callback.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   onTitleChange(event) {
@@ -48,6 +54,34 @@ class New extends Component {
     this.setState({ anonymous: !this.state.anonymous });
   }
 
+
+  onDrop(files) {
+    const reader = new FileReader();
+    reader.onload = this.callback;
+    reader.onload = (upload) => {
+      this.setState({ pic: upload.target.result });
+      console.log(upload.target.result);
+    };
+
+    reader.onerror = function asdf(stuff) {
+      console.log('error', stuff);
+      console.log(stuff.getMessage());
+    };
+
+    reader.readAsDataURL(files[0]);
+
+   // const newArray = this.state.files.slice();
+    console.log('Received files: ', files);
+   // newArray.push(files);
+    console.log('first is ', files[0]);
+  }
+
+  callback(data) {
+    console.log('storing all the data');
+    this.setState({ pic: data.target.result });
+  }
+
+
   submit(e) {
     e.preventDefault();
     if (this.state.title !== '' && this.state.content !== '') {
@@ -59,9 +93,34 @@ class New extends Component {
         tags: '',
         lost: false,
         anonymous: false,
+        pic: '',
+        files: [],
       });
     } else {
       console.log('Requires title and description');
+    }
+  }
+
+  renderPhoto() {
+    if (!this.state.pic) {
+      return (
+        <div className="Newphoto">
+          <div id="ns-header"></div>
+          <div className="ns-options">
+            <div className="ns-icons">
+              <div id="ns-Dropzone">
+                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
+                  <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
+                </Dropzone>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>Photo uploaded</div>
+      );
     }
   }
 
@@ -118,6 +177,7 @@ class New extends Component {
                     <label htmlFor="anonCheck"></label>
                   </div>
                 </div>
+                <div> {this.renderPhoto()} </div>
                 <div className="check">
                   <div className="checkTitle"> Lost Item </div>
                   <div className="checkboxDiv">
