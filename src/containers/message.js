@@ -41,7 +41,11 @@ class Message extends Component {
     if (this.state.currentMessage.content) {
       content = this.state.currentMessage.content;
     }
-    content.push(`${this.props.user.username}: ${this.state.input}`);
+    if (this.state.currentMessage.anonymous) {
+      content.push(`${this.props.user.id}: ${this.state.input}`);
+    } else {
+      content.push(`${this.props.user.username}: ${this.state.input}`);
+    }
     this.props.updateMessage({ content }, this.state.currentMessage.id);
     this.setState({
       input: '',
@@ -63,6 +67,7 @@ class Message extends Component {
         <span className="messagesTitle">Messages:</span>
       {
         this.state.currentMessage.content.map(line => {
+          console.log(line);
           key++;
           return <div key={key} > {line} </div>;
         })
