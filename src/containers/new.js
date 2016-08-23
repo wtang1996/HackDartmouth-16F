@@ -94,7 +94,7 @@ class New extends Component {
       console.log(upload.target.result);
     };
 
-    reader.onerror = function asdf(stuff) {
+    reader.onerror = function randomfunction(stuff) {
       console.log('error', stuff);
       console.log(stuff.getMessage());
     };

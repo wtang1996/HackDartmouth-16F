@@ -212,7 +212,6 @@ class Home extends Component {
   }
 
   render() {
-    // if (this.props.posts.length > 0 && this.props.user !== null) {
     if (this.props.user !== null) {
       return (
         <div>
