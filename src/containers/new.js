@@ -42,7 +42,10 @@ class New extends Component {
     this.setFound = this.setFound.bind(this);
     this.resetType = this.resetType.bind(this);
 
-
+    this.renderClothing = this.renderClothing.bind(this);
+    this.renderBike = this.renderBike.bind(this);
+    this.renderTechnology = this.renderTechnology.bind(this);
+    this.renderOther = this.renderOther.bind(this);
     this.changeBike = this.changeBike.bind(this);
     this.changeTech = this.changeTech.bind(this);
     this.changeOther = this.changeOther.bind(this);
