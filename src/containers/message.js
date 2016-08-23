@@ -93,7 +93,7 @@ class Message extends Component {
         Conversations
         {
           this.props.messages.map((message) => {
-            if (message.anonymous) {
+            if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
                   <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.anonTitle}</button>
