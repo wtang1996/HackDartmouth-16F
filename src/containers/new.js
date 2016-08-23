@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import Dropzone from 'react-dropzone';
+
 
 import * as actions from '../actions';
 
@@ -15,6 +17,8 @@ class New extends Component {
       tags: '',
       type: '',
       anonymous: false,
+      pic: '',
+      files: [],
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
@@ -43,26 +47,23 @@ class New extends Component {
     this.changeTech = this.changeTech.bind(this);
     this.changeOther = this.changeOther.bind(this);
     this.changeClothing = this.changeClothing.bind(this);
+    this.callback = this.callback.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
 
   onTitleChange(event) {
-    console.log(event.target.value);
     this.setState({ title: event.target.value });
   }
   onContentChange(event) {
-    console.log(event.target.value);
     this.setState({ content: event.target.value });
   }
   onTagsChange(event) {
-    console.log(event.target.value);
     this.setState({ tags: event.target.value });
   }
   onLostChange(event) {
     this.setState({ lost: !this.state.lost });
   }
-  // onFoundChange(event) {
-  //   this.setState({ lost: false });
-  // }
+
   onAnonymousChange(event) {
     this.setState({ anonymous: !this.state.anonymous });
   }
@@ -85,20 +86,71 @@ class New extends Component {
     });
   }
 
+  onDrop(files) {
+    const reader = new FileReader();
+    reader.onload = this.callback;
+    reader.onload = (upload) => {
+      this.setState({ pic: upload.target.result });
+      console.log(upload.target.result);
+    };
+
+    reader.onerror = function asdf(stuff) {
+      console.log('error', stuff);
+      console.log(stuff.getMessage());
+    };
+
+    reader.readAsDataURL(files[0]);
+
+   // const newArray = this.state.files.slice();
+    console.log('Received files: ', files);
+   // newArray.push(files);
+    console.log('first is ', files[0]);
+  }
+
+  callback(data) {
+    console.log('storing all the data');
+    this.setState({ pic: data.target.result });
+  }
+
+
   submit(e) {
     e.preventDefault();
     if (this.state.title !== '' && this.state.content !== '') {
       this.props.createPost(this.state);
-      console.log(this.state);
       this.setState({
         title: '',
         content: '',
         tags: '',
         type: '',
         anonymous: false,
+        pic: '',
+        files: [],
       });
     } else {
-      console.log('Requires title and description');
+      alert('You need to provide title and description fields');
+    }
+  }
+
+  renderPhoto() {
+    if (!this.state.pic) {
+      return (
+        <div className="Newphoto">
+          <div id="ns-header"></div>
+          <div className="ns-options">
+            <div className="ns-icons">
+              <div id="ns-Dropzone">
+                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
+                  <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
+                </Dropzone>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>Photo uploaded</div>
+      );
     }
   }
 
@@ -420,7 +472,7 @@ class New extends Component {
                     <label htmlFor="anonCheck"></label>
                   </div>
                 </div>
-
+                <div> {this.renderPhoto()} </div>
                 <div className="check">
 
                   {this.renderLostItem()}

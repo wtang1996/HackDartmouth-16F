@@ -20,6 +20,7 @@ class Message extends Component {
 
   componentWillMount() {
     this.props.fetchMessages();
+    this.props.fetchUser();
   }
 
   onContentChange(event) {
@@ -39,7 +40,7 @@ class Message extends Component {
     if (this.state.currentMessage.content) {
       content = this.state.currentMessage.content;
     }
-    content.push(this.state.input);
+    content.push(`${this.props.user.username}: ${this.state.input}`);
     this.props.updateMessage({ content }, this.state.currentMessage.id);
     this.setState({
       input: '',
@@ -82,7 +83,19 @@ class Message extends Component {
         Conversations
         {
           this.props.messages.map((message) => {
-            if (message.userID === this.props.user.id || message.myID === this.props.user.id) {
+            if (message.anonymous) {
+              return (
+                <li key={message.id}>
+                  <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.anonTitle}</button>
+                </li>
+              );
+            } else if (message.userID === this.props.user.id) {
+              return (
+                <li key={message.id}>
+                  <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.myName}</button>
+                </li>
+              );
+            } else if (message.myID === this.props.user.id) {
               return (
                 <li key={message.id}>
                   <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.user}</button>
@@ -101,7 +114,7 @@ class Message extends Component {
     if (this.state.currentMessage) {
       return (
         <div>
-          {this.state.currentMessage.user}
+          {this.state.currentMessage.anonTitle || this.state.currentMessage.user}
           <button onClick={this.onDeletion} className="deleteButton">Delete Message</button>
           {this.renderContent()}
           <textarea onChange={this.onContentChange} value={this.state.input} />
@@ -118,23 +131,26 @@ class Message extends Component {
   }
 
   render() {
-    return (
-      <div className="messagesPageContainer">
-        <div className="messagesListContainer">
-          {this.renderUserList()}
+    if (this.props.user !== null) {
+      return (
+        <div className="messagesPageContainer">
+          <div className="messagesListContainer">
+            {this.renderUserList()}
+          </div>
+          <div className="messagesDetailContainer">
+            {this.renderConversation()}
+          </div>
         </div>
-        <div className="messagesDetailContainer">
-          {this.renderConversation()}
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return <div>Loading......</div>;
+    }
   }
 }
 
 const mapStateToProps = (state) => (
   {
     messages: state.messages.all,
-    message: state.messages.message,
     user: state.profile.user,
   }
 );
