@@ -170,9 +170,9 @@ export function signinUser({ email, password }) {
 }
 
 
-export function signupUser({ email, password, username }) {
+export function signupUser({ email, password, username, pic }) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup`, { email, password, username }).then(response => {
+    axios.post(`${ROOT_URL}/signup`, { email, password, username, pic }).then(response => {
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/');
@@ -181,6 +181,7 @@ export function signupUser({ email, password, username }) {
     });
   };
 }
+
 
 export function fetchUser() {
   return (dispatch) => {
