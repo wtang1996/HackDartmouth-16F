@@ -32,7 +32,7 @@ class SignIn extends Component {
     if (this.state.email !== '' && this.state.password !== '') {
       this.props.signinUser({ email: this.state.email, password: this.state.password });
     } else {
-      console.log('All fields required input values!');
+      alert('Please sign in with valid email and password');
     }
   }
 

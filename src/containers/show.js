@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
+import jQuery from 'jquery';
 
 
 // function based "dumb" component with no state
@@ -14,6 +15,8 @@ class Show extends Component {
       content: '',
       title: '',
       tags: '',
+      pictureURL: '',
+      data: '',
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
@@ -31,15 +34,12 @@ class Show extends Component {
   }
 
   onTitleChange(event) {
-    console.log(event.target.value);
     this.setState({ title: event.target.value });
   }
   onContentChange(event) {
-    console.log(event.target.value);
     this.setState({ content: event.target.value });
   }
   onTagsChange(event) {
-    console.log(event.target.value);
     this.setState({ tags: event.target.value });
   }
 
@@ -77,7 +77,13 @@ class Show extends Component {
       return undefined;
     });
     if (!exist) {
-      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.post.author });
+      if (!this.props.post.anonymous) {
+        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: null });
+      } else {
+        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `Anonymous: ${this.props.post.title}` });
+      }
     } else {
       browserHistory.push('/messages');
     }
@@ -98,6 +104,35 @@ class Show extends Component {
       return <span> found </span>;
     }
   }
+
+  renderPhoto() {
+    console.log(this.props.post.pictureURL);
+    if (this.props.post.pictureURL) {
+      jQuery.get(this.props.post.pictureURL, (response) => {
+        console.log('THIS IS THE PHOTO DATA');
+        this.setState({ data: response });
+      });
+
+      if (this.state.data) {
+        return (
+          <div className="imagefull">
+            <div className="imagebox">
+              <img role="presentation" width="400" src={this.state.data} />
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div> Loading ... </div>
+        );
+      }
+    } else {
+      return (
+        <div> No photo </div>
+      );
+    }
+  }
+
 
   render() {
     if (this.props.post) {
@@ -127,6 +162,7 @@ class Show extends Component {
                 <div className="showPostTitle">{this.props.post.title}</div>
                 <div className="showPostContent">Item Description: {this.props.post.content}</div>
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
+                <div> {this.renderPhoto()}</div>
                 <div className="showPostContent"> {this.renderAuthor()} {this.renderLost()} this item.</div>
                 <button onClick={this.onEditChange} className="editButton">
                   Edit
@@ -150,6 +186,7 @@ class Show extends Component {
                 <div className="showPostContent">Item Description: {this.props.post.content}</div>
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
                 <div className="showPostContent"> Say here if the post is lost or found</div>
+                <div> {this.renderPhoto()}</div>
                 <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
                 <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
               </div>

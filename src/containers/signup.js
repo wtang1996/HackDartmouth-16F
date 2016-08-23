@@ -38,7 +38,7 @@ class SignUp extends Component {
     if (this.state.email !== '' && this.state.password !== '' && this.state.username !== '') {
       this.props.signupUser({ email: this.state.email, password: this.state.password, username: this.state.username });
     } else {
-      console.log('All fields required input values!');
+      alert('Please fill out all fields for registering!');
     }
   }
 
