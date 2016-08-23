@@ -83,6 +83,7 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
+            // if (!post.type === 'found') {
             if (!post.lost) {
               return (
                 <li key={post.id} className="postSummary">
@@ -116,6 +117,7 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
+            // if (post.type === 'lost') {
             if (post.lost) {
               return (
                 <li key={post.id} className="postSummary">
@@ -196,6 +198,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.props.posts);
     console.log(this.state.tagsToShow);
     if (this.props.posts.length > 0 && this.props.user !== null) {
       return (

@@ -101,6 +101,7 @@ class Show extends Component {
 
   render() {
     if (this.props.post) {
+      console.log(this.props.post);
       // CHANGE THIS LATER TO BE IF(THIS IS NOT THE USER'S OWN PAGE) {}
       if (this.props.post.authorId === this.props.user.id) {
         if (this.state.editing) {
