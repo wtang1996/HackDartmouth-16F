@@ -2,23 +2,121 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as actions from '../actions';
+import Immutable from 'immutable';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     // init component state here
-    this.state = {};
+    this.state = {
+      tagsToShow: Immutable.Set(),
+    };
 
     this.renderLost = this.renderLost.bind(this);
     this.renderFound = this.renderFound.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    this.renderClothing = this.renderClothing.bind(this);
+    this.renderTechnology = this.renderTechnology.bind(this);
+    this.renderBike = this.renderBike.bind(this);
+    this.renderOther = this.renderOther.bind(this);
+
+    this.addClothing = this.addClothing.bind(this);
+    this.addBike = this.addBike.bind(this);
+    this.addTech = this.addTech.bind(this);
+    this.addOther = this.addOther.bind(this);
     this.renderAuthor = this.renderAuthor.bind(this);
+    this.displayPost = this.displayPost.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchPosts();
     this.props.fetchUser();
+  }
+
+  addClothing() {
+    if (this.state.tagsToShow.get('Clothing')) {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Clothing'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Clothing');
+      // this.setState({ tagsToShow });
+    } else {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Clothing'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Clothing', 1));
+      // this.setState({ tagsToShow });
+    }
+  }
+
+  addBike() {
+    if (this.state.tagsToShow.get('Bike')) {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Bike'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Bike');
+      // this.setState({ tagsToShow });
+    } else {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Bike'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Bike', 1));
+      // this.setState({ tagsToShow });
+    }
+  }
+
+  addOther() {
+    if (this.state.tagsToShow.get('Other')) {
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Other');
+      // this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Other'),
+      });
+    } else {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Other'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Other', 1));
+      // this.setState({ tagsToShow });
+    }
+  }
+
+  addTech() {
+    if (this.state.tagsToShow.get('Technology')) {
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Technology');
+      // this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Technology'),
+      });
+    } else {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Technology'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Technology', 1));
+      // this.setState({ tagsToShow });
+    }
+  }
+
+  displayPost(tag) {
+    // console.log(tag);
+    if (this.state.tagsToShow.size === 0) {
+      // console.log('empty tags');
+      return true;
+    } else if (this.state.tagsToShow.get(tag)) {
+      // console.log('tag shows up');
+      return true;
+    }
+    // console.log('doesnt show up');
+    return false;
   }
 
   // Function to render the found item listings
@@ -29,7 +127,9 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            if (!post.lost) {
+            // if (!post.type === 'found') {
+            if (post.lost === false && this.displayPost(post.tags)) {
+            // if (true) {
               return (
                 <li key={post.id} className="postSummary">
                   <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
@@ -62,7 +162,7 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            if (post.lost) {
+            if (post.lost === true && this.displayPost(post.tags)) {
               return (
                 <li key={post.id} className="postSummary">
                   <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
@@ -99,42 +199,160 @@ class Home extends Component {
     }
   }
 
+  renderClothing() {
+    if (this.state.tagsToShow.get('Clothing')) {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} checked />
+            <label htmlFor="clothingCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} />
+            <label htmlFor="clothingCheck"></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderTechnology() {
+    if (this.state.tagsToShow.get('Technology')) {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} checked />
+            <label htmlFor="techCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} />
+            <label htmlFor="techCheck"></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderBike() {
+    if (this.state.tagsToShow.get('Bike')) {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} checked />
+            <label htmlFor="bikeCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} />
+            <label htmlFor="bikeCheck"></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderOther() {
+    if (this.state.tagsToShow.get('Other')) {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} checked />
+            <label htmlFor="otherCheck"></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} />
+            <label htmlFor="otherCheck"></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
   // Renders the tag/filters box
+  // renderTags() {
+  //   return (
+  //     <div>
+  //       <div className="homeTags">
+  //         <div className="colOne">
+  //           <div className="check">
+  //             <div className="checkTitle"> Clothing </div>
+  //             <div className="checkboxDiv">
+  //               <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} />
+  //               <label htmlFor="clothingCheck"></label>
+  //             </div>
+  //           </div>
+  //
+  //           <div className="check">
+  //             <div className="checkTitle"> Technology </div>
+  //             <div className="checkboxDiv">
+  //               <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} />
+  //               <label htmlFor="techCheck"></label>
+  //             </div>
+  //           </div>
+  //
+  //         </div>
+  //         <div className="colTwo">
+  //
+  //           <div className="check">
+  //             <div className="checkTitle"> Bike </div>
+  //             <div className="checkboxDiv">
+  //               <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} />
+  //               <label htmlFor="bikeCheck"></label>
+  //             </div>
+  //           </div>
+  //
+  //           <div className="check">
+  //             <div className="checkTitle"> Other </div>
+  //             <div className="checkboxDiv">
+  //               <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} />
+  //               <label htmlFor="otherCheck"></label>
+  //             </div>
+  //           </div>
+  //
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
   renderTags() {
     return (
       <div>
         <div className="homeTags">
           <div className="colOne">
-            <div className="check">
-              <div className="checkTitle"> Clothing </div>
-              <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="clothingCheck" name="check" />
-                <label htmlFor="clothingCheck"></label>
-              </div>
-            </div>
-            <div className="check">
-              <div className="checkTitle"> Technology </div>
-              <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="techCheck" name="check" />
-                <label htmlFor="techCheck"></label>
-              </div>
-            </div>
+            {this.renderClothing()}
+            {this.renderTechnology()}
           </div>
           <div className="colTwo">
-            <div className="check">
-              <div className="checkTitle"> Bike </div>
-              <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="bikeCheck" name="check" />
-                <label htmlFor="bikeCheck"></label>
-              </div>
-            </div>
-            <div className="check">
-              <div className="checkTitle"> Other </div>
-              <div className="checkboxDiv">
-                <input type="checkbox" value="None" id="otherCheck" name="check" />
-                <label htmlFor="otherCheck"></label>
-              </div>
-            </div>
+            {this.renderBike()}
+            {this.renderOther()}
           </div>
         </div>
       </div>
@@ -142,6 +360,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.state.tagsToShow);
     if (this.props.user !== null) {
       return (
         <div>
