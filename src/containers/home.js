@@ -25,7 +25,7 @@ class Home extends Component {
   renderFound() {
     return (
       <div className="found">
-        <h2>Found Item Listings</h2>
+        <div className="listTitle">Found Item Listings</div>
         <ul>
         {
           this.props.posts.map((post) => {
@@ -58,7 +58,7 @@ class Home extends Component {
   renderLost() {
     return (
       <div className="lost">
-        <h2>Lost Item Listings</h2>
+        <div className="listTitle">Lost Item Listings</div>
         <ul>
         {
           this.props.posts.map((post) => {
@@ -89,7 +89,7 @@ class Home extends Component {
 
   renderAuthor(post) {
     if (post.anonymous) {
-      return <div className="authorLink"> Anonymous</div>;
+      return <div className="nonLinkText"> Anonymous</div>;
     } else {
       if (post.authorId === this.props.user.id) {
         return <Link to={'profile'} className="authorLink"> {post.authorName}</Link>;
@@ -142,23 +142,27 @@ class Home extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="newListingBox">
-          <Link to="posts/new" className="newListing">New Listing +</Link>
-        </div>
-        <div className="filters">
-          <div className="filtersBox">
-            <div className="tagTitle"> Filter Results by Tags </div>
-            {this.renderTags()}
+    if (this.props.posts.length > 0 && this.props.user !== null) {
+      return (
+        <div>
+          <div className="newListingBox">
+            <Link to="posts/new" className="newListing">New Listing +</Link>
+          </div>
+          <div className="filters">
+            <div className="filtersBox">
+              <div className="tagTitle"> Filter Results by Tags </div>
+              {this.renderTags()}
+            </div>
+          </div>
+          <div className="lostFoundBoxes">
+            {this.renderLost()}
+            {this.renderFound()}
           </div>
         </div>
-        <div className="lostFoundBoxes">
-          {this.renderLost()}
-          {this.renderFound()}
-        </div>
-      </div>
-    );
+      );
+    } else {
+      return <div>Loading......</div>;
+    }
   }
 }
 
@@ -169,6 +173,4 @@ const mapStateToProps = (state) => (
   }
 );
 
-
-// react-redux glue -- outputs Container that knows how to call actions
 export default connect(mapStateToProps, actions)(Home);

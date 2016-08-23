@@ -34,15 +34,12 @@ class Show extends Component {
   }
 
   onTitleChange(event) {
-    console.log(event.target.value);
     this.setState({ title: event.target.value });
   }
   onContentChange(event) {
-    console.log(event.target.value);
     this.setState({ content: event.target.value });
   }
   onTagsChange(event) {
-    console.log(event.target.value);
     this.setState({ tags: event.target.value });
   }
 
@@ -80,7 +77,13 @@ class Show extends Component {
       return undefined;
     });
     if (!exist) {
-      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id, content: [], user: this.props.post.author });
+      if (!this.props.post.anonymous) {
+        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: null });
+      } else {
+        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `Anonymous: ${this.props.post.title}` });
+      }
     } else {
       browserHistory.push('/messages');
     }

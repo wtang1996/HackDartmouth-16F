@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
 
-// keys for actiontypes
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
@@ -21,9 +20,9 @@ export const ActionTypes = {
   ERROR_MESSAGE: 'ERROR_MESSAGE',
 };
 
-// const ROOT_URL = 'https://digup.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
-// const API_KEY = '?key=weijia_tang';
+
+const ROOT_URL = 'https://digup.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 
 export function errorMessage(error) {
   return (dispatch) => {
@@ -37,7 +36,7 @@ export function fetchPosts() {
     axios.get(`${ROOT_URL}/posts`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POSTS, posts: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching all posts: ${error.response.data}`));
+      dispatch(errorMessage(`Error fetching all posts: ${error.response}`));
     });
   };
 }
@@ -87,7 +86,6 @@ export function deletePost(id) {
     });
   };
 }
-// Message actions
 
 export function fetchMessages() {
   return (dispatch) => {
@@ -101,7 +99,6 @@ export function fetchMessages() {
 
 export function createMessage(message) {
   return (dispatch) => {
-    console.log(message);
     axios.post(`${ROOT_URL}/messages`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { message } });
@@ -116,7 +113,6 @@ export function updateMessage(message, id) {
   return (dispatch) => {
     axios.put(`${ROOT_URL}/messages/${id}`, message, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      console.log(response.data);
       dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error updating message: ${error.response.data}`));
@@ -136,7 +132,6 @@ export function fetchMessage(id) {
 
 export function deleteMessage(id) {
   return (dispatch) => {
-    console.log(`${id}`);
     axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });

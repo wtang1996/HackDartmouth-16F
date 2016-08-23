@@ -21,7 +21,7 @@ export default(
     <Route path="signup" component={SignUp} />
     <Route path="posts/new" component={RequireAuth(New)} />
     <Route path="posts/:id" component={Show} />
-    <Route path="profile" component={Profile} />
+    <Route path="profile" component={RequireAuth(Profile)} />
     <Route path="profile/:id" component={authProfile} />
     <Route path="messages" component={RequireAuth(Messages)} />
     <Route path="error" component={Error} />

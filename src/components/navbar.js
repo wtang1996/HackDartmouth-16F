@@ -24,7 +24,7 @@ class NavBar extends Component {
       return (
         <div className="rightLinks">
           <Link to="messages" className="messages">Messages</Link>
-          <Link to="/" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
+          <Link to="/signin" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
           <Link to="profile" className="profile">Profile</Link>
         </div>
       );
@@ -34,12 +34,21 @@ class NavBar extends Component {
   }
 
   render() {
-    return (
-      <div className="Navbar">
-        <Link to="/" className="siteName">Digup</Link>
-        {this.renderSign()}
-      </div>
-    );
+    if (this.props.authenticated) {
+      return (
+        <div className="Navbar">
+          <Link to="/" className="siteName">Digup</Link>
+          {this.renderSign()}
+        </div>
+      );
+    } else {
+      return (
+        <div className="Navbar">
+          <Link to="/signin" className="siteName">Digup</Link>
+          {this.renderSign()}
+        </div>
+      );
+    }
   }
 }
 
