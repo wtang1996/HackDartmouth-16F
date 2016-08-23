@@ -690,6 +690,7 @@ ul {
   border-radius: 4px;
   background-color: #fafafa;
   border: thin solid lightgray;
+  word-wrap: break-word;
 }
 .messageContent textarea {
   font-size: 13px;
@@ -697,8 +698,8 @@ ul {
   outline: none;
   margin: 10px 0;
   max-width: 132px;
-  max-height: 50px;
-  width: 125px;
+  max-height: 60px;
+  width: 132px;
   transition: border .5s;
   border-radius: 3px;
 }
@@ -735,7 +736,7 @@ ul {
 .messageDeleteButton {
   border-color: lightgray;
   background-color: #e6d0d0;
-  color: midnightblue;
+  color: black;
   transition-duration: .25s;
 }
 .messageDeleteButton:hover {
@@ -751,13 +752,16 @@ ul {
 .messageSendButton {
   // width: 60px;
   padding: 5px;
-  height: 40px;
-  border:  solid #3fa63f;
-  color: #3fa63f;
-  border-width: 2px;
+  height: 38px;
+  margin-top: 10px;
+  border: thin solid #3fa63f;
+  color: black;
+  background-color: #d0e6d0;
+  // border-width: 2px;
 }
 .messageSendButton:hover {
   cursor: pointer;
+  background-color: #c6f0c6;
   // background-color: #c6f0c6;
 }
 .noSelectMessage {
