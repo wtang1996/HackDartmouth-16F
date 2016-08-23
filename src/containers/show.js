@@ -185,7 +185,7 @@ class Show extends Component {
                 <div className="showPostTitle">{this.props.post.title}</div>
                 <div className="showPostContent">Item Description: {this.props.post.content}</div>
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
-                <div className="showPostContent"> Say here if the post is lost or found</div>
+                <div className="showPostContent"> {this.renderAuthor()} {this.renderLost()} this item</div>
                 <div> {this.renderPhoto()}</div>
                 <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
                 <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
