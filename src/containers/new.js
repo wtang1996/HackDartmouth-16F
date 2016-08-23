@@ -68,24 +68,6 @@ class New extends Component {
     this.setState({ anonymous: !this.state.anonymous });
   }
 
-  setLost() {
-    this.setState({
-      lost: true,
-    });
-  }
-
-  setFound() {
-    this.setState({
-      lost: false,
-    });
-  }
-
-  resetType() {
-    this.setState({
-      type: false,
-    });
-  }
-
   onDrop(files) {
     const reader = new FileReader();
     reader.onload = this.callback;
@@ -112,7 +94,6 @@ class New extends Component {
     this.setState({ pic: data.target.result });
   }
 
-
   submit(e) {
     e.preventDefault();
     if (this.state.title !== '' && this.state.content !== '') {
@@ -131,27 +112,22 @@ class New extends Component {
     }
   }
 
-  renderPhoto() {
-    if (!this.state.pic) {
-      return (
-        <div className="Newphoto">
-          <div id="ns-header"></div>
-          <div className="ns-options">
-            <div className="ns-icons">
-              <div id="ns-Dropzone">
-                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
-                  <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
-                </Dropzone>
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>Photo uploaded</div>
-      );
-    }
+  setLost() {
+    this.setState({
+      lost: true,
+    });
+  }
+
+  setFound() {
+    this.setState({
+      lost: false,
+    });
+  }
+
+  resetType() {
+    this.setState({
+      type: false,
+    });
   }
 
   // renderRadio() {
@@ -201,6 +177,29 @@ class New extends Component {
 
   changeLostFound() {
     this.setState({ lost: !this.state.lost });
+  }
+
+  renderPhoto() {
+    if (!this.state.pic) {
+      return (
+        <div className="Newphoto">
+          <div id="ns-header"></div>
+          <div className="ns-options">
+            <div className="ns-icons">
+              <div id="ns-Dropzone">
+                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
+                  <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
+                </Dropzone>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>Photo uploaded</div>
+      );
+    }
   }
 
   renderClothing() {
@@ -346,100 +345,6 @@ class New extends Component {
       );
     }
   }
-
-  // renderLost() {
-  //   if (this.state.lost) {
-  //     return (
-  //       <div>
-          // <div className="checkTitle"> Lost Item </div>
-          // <div className="checkboxDiv">
-          //   <input type="checkbox" value="None" id="lostCheck" name="check" checked />
-          //   <label htmlFor="lostCheck" onClick={this.setLost}></label>
-          // </div>
-  //       </div>
-  //     );
-  //   } else {
-  //     return (
-  //       <div>
-  //         <div className="checkTitle"> Lost Item </div>
-  //         <div className="checkboxDiv">
-  //           <input type="checkbox" value="None" id="lostCheck" name="check" />
-  //           <label htmlFor="lostCheck" onClick={this.setLost}></label>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // }
-
-  // renderFound() {
-  //   if (this.state.lost) {
-  //     console.log('in first if');
-  //     return (
-  //       <div>
-  //         <div className="checkTitle"> Found Item </div>
-  //         <div className="checkboxDiv">
-  //           <input type="checkbox" value="None" id="foundCheck" name="check" />
-  //           <label htmlFor="foundCheck" onClick={this.setFound}></label>
-  //         </div>
-  //       </div>
-  //     );
-  //   } else {
-  //     console.log('in second if');
-  //     return (
-  //       <div>
-  //         <div className="checkTitle"> Found Item </div>
-  //         <div className="checkboxDiv">
-  //           <input type="checkbox" value="None" id="foundCheck" name="check" checked />
-  //           <label htmlFor="foundCheck" onClick={this.setFound}></label>
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // }
-
-  // renderLostFound() {
-  //   console.log(this.state.lost);
-  //   if (this.state.lost) {
-  //     return (
-  //       <div>
-  //         <div className="check">
-  //           <div className="checkTitle"> Lost Item </div>
-  //           <div className="checkboxDiv">
-  //             <input type="checkbox" value="None" id="lostCheck" name="check" checked />
-  //             <label htmlFor="lostCheck"></label>
-  //           </div>
-  //
-  //           <div className="checkTitle"> Found Item </div>
-  //           <div className="checkboxDiv">
-  //             <input type="checkbox" value="None" id="foundCheck" name="check" />
-  //             <label htmlFor="foundCheck" onClick={this.changeLostFound}></label>
-  //           </div>
-  //
-  //         </div>
-  //       </div>
-  //     );
-  //   } else {
-  //     console.log('showing second');
-  //     return (
-  //       <div>
-  //         <div className="check">
-  //           <div className="checkTitle"> Lost Item </div>
-  //           <div className="checkboxDiv">
-  //             <input type="checkbox" value="None" id="lostCheck" name="check" />
-  //             <label htmlFor="lostCheck" onClick={this.changeLostFound}></label>
-  //           </div>
-  //
-  //           <div className="checkTitle"> Found Item </div>
-  //           <div className="checkboxDiv">
-  //             <input type="checkbox" value="None" id="foundCheck" name="check" checked />
-  //             <label htmlFor="foundCheck"></label>
-  //           </div>
-  //
-  //         </div>
-  //       </div>
-  //     );
-  //   }
-  // }
 
 
   renderTags() {

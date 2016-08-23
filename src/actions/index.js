@@ -20,8 +20,8 @@ export const ActionTypes = {
   ERROR_MESSAGE: 'ERROR_MESSAGE',
 };
 
-// const ROOT_URL = 'https://digup.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
+const ROOT_URL = 'https://digup.herokuapp.com/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 
 export function errorMessage(error) {
   return (dispatch) => {

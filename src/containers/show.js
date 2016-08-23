@@ -27,6 +27,16 @@ class Show extends Component {
     this.startConversation = this.startConversation.bind(this);
     this.startAnonymousConversation = this.startAnonymousConversation.bind(this);
     this.contactSwitch = this.contactSwitch.bind(this);
+
+    this.renderClothing = this.renderClothing.bind(this);
+    this.renderBike = this.renderBike.bind(this);
+    this.renderTechnology = this.renderTechnology.bind(this);
+    this.renderOther = this.renderOther.bind(this);
+    this.renderTags = this.renderTags.bind(this);
+    this.changeBike = this.changeBike.bind(this);
+    this.changeTech = this.changeTech.bind(this);
+    this.changeOther = this.changeOther.bind(this);
+    this.changeClothing = this.changeClothing.bind(this);
   }
 
   componentWillMount() {
@@ -55,7 +65,7 @@ class Show extends Component {
         editing: true,
         title: this.props.post.title,
         content: this.props.post.content,
-        tags: this.props.post.tags,
+        // tags: this.props.post.tags,
       });
     }
   }
@@ -67,6 +77,38 @@ class Show extends Component {
       title: '',
       tags: '',
     });
+  }
+
+  changeClothing() {
+    if (this.state.tags !== 'Clothing') {
+      this.setState({
+        tags: 'Clothing',
+      });
+    }
+  }
+
+  changeBike() {
+    if (this.state.tags !== 'Bike') {
+      this.setState({
+        tags: 'Bike',
+      });
+    }
+  }
+
+  changeTech() {
+    if (this.state.tags !== 'Technology') {
+      this.setState({
+        tags: 'Technology',
+      });
+    }
+  }
+
+  changeOther() {
+    if (this.state.tags !== 'Other') {
+      this.setState({
+        tags: 'Other',
+      });
+    }
   }
 
   contactSwitch() {
@@ -172,9 +214,117 @@ class Show extends Component {
     }
   }
 
+  renderClothing() {
+    if (this.state.tags === 'Clothing') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" checked />
+            <label htmlFor="clothingCheck" onClick={this.changeClothing}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" />
+            <label htmlFor="clothingCheck" onClick={this.changeClothing}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderTechnology() {
+    if (this.state.tags === 'Technology') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" checked />
+            <label htmlFor="techCheck" onClick={this.changeTech}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" />
+            <label htmlFor="techCheck" onClick={this.changeTech}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderBike() {
+    if (this.state.tags === 'Bike') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" checked />
+            <label htmlFor="bikeCheck" onClick={this.changeBike}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" />
+            <label htmlFor="bikeCheck" onClick={this.changeBike}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderOther() {
+    if (this.state.tags === 'Other') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" checked />
+            <label htmlFor="otherCheck" onClick={this.changeOther}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" />
+            <label htmlFor="otherCheck" onClick={this.changeOther}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderTags() {
+    return (
+      <div>
+        {this.renderClothing()}
+        {this.renderBike()}
+        {this.renderTechnology()}
+        {this.renderOther()}
+      </div>
+    );
+  }
+
 
   render() {
     if (this.props.post) {
+      console.log(this.state.tags);
       if (this.props.post.authorId === this.props.user.id) {
         if (this.state.editing) {
           return (
@@ -184,7 +334,11 @@ class Show extends Component {
                 <div className="editPostContent">
                   Item Description: <textarea rows="8" cols="24" onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
                 </div>
-                <div className="editPostContent">Category: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} /> </div>
+                <div className="editPostContent">Tag:
+
+                  {this.renderTags()}
+
+                </div>
                 <button onClick={this.onEditChange} className="doneButton">
                   Done
                 </button>
