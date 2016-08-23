@@ -10,7 +10,7 @@ class Home extends Component {
 
     // init component state here
     this.state = {
-      tagsToShow: [],
+      tagsToShow: Immutable.Set(),
     };
 
     this.renderLost = this.renderLost.bind(this);
@@ -35,59 +35,83 @@ class Home extends Component {
   }
 
   addClothing() {
-    if (this.state.tagsToShow.indexOf('Clothing') === -1) {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.push('Clothing');
-      this.setState({ tagsToShow });
+    if (this.state.tagsToShow.get('Clothing')) {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Clothing'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Clothing');
+      // this.setState({ tagsToShow });
     } else {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.splice(this.state.tagsToShow.indexOf('Clothing', 1));
-      this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Clothing'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Clothing', 1));
+      // this.setState({ tagsToShow });
     }
   }
 
   addBike() {
-    if (this.state.tagsToShow.indexOf('Bike') === -1) {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.push('Bike');
-      this.setState({ tagsToShow });
+    if (this.state.tagsToShow.get('Bike')) {
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Bike'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Bike');
+      // this.setState({ tagsToShow });
     } else {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.splice(this.state.tagsToShow.indexOf('Bike', 1));
-      this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Bike'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Bike', 1));
+      // this.setState({ tagsToShow });
     }
   }
 
   addOther() {
-    if (this.state.tagsToShow.indexOf('Other') === -1) {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.push('Other');
-      this.setState({ tagsToShow });
+    if (this.state.tagsToShow.get('Other')) {
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Other');
+      // this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Other'),
+      });
     } else {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.splice(this.state.tagsToShow.indexOf('Other', 1));
-      this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Other'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Other', 1));
+      // this.setState({ tagsToShow });
     }
   }
 
   addTech() {
-    if (this.state.tagsToShow.indexOf('Technology') === -1) {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.push('Technology');
-      this.setState({ tagsToShow });
+    if (this.state.tagsToShow.get('Technology')) {
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.push('Technology');
+      // this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.delete('Technology'),
+      });
     } else {
-      let tagsToShow = this.state.tagsToShow.slice();
-      tagsToShow.splice(this.state.tagsToShow.indexOf('Technology', 1));
-      this.setState({ tagsToShow });
+      this.setState({
+        tagsToShow: this.state.tagsToShow.add('Technology'),
+      });
+      // let tagsToShow = this.state.tagsToShow.slice();
+      // tagsToShow.splice(this.state.tagsToShow.indexOf('Technology', 1));
+      // this.setState({ tagsToShow });
     }
   }
 
   displayPost(tag) {
     // console.log(tag);
-    if (this.state.tagsToShow.length === 0) {
+    if (this.state.tagsToShow.size === 0) {
       // console.log('empty tags');
       return true;
-    } else if (this.state.tagsToShow.indexOf(tag) !== -1) {
+    } else if (this.state.tagsToShow.get(tag)) {
       // console.log('tag shows up');
       return true;
     }
@@ -176,7 +200,7 @@ class Home extends Component {
   }
 
   renderClothing() {
-    if (this.state.tagsToShow.indexOf('Clothing') !== -1) {
+    if (this.state.tagsToShow.get('Clothing')) {
       return (
         <div className="check">
           <div className="checkTitle"> Clothing </div>
@@ -200,7 +224,7 @@ class Home extends Component {
   }
 
   renderTechnology() {
-    if (this.state.tagsToShow.indexOf('Technology') !== -1) {
+    if (this.state.tagsToShow.get('Technology')) {
       return (
         <div className="check">
           <div className="checkTitle"> Technology </div>
@@ -224,7 +248,7 @@ class Home extends Component {
   }
 
   renderBike() {
-    if (this.state.tagsToShow.indexOf('Bike') !== -1) {
+    if (this.state.tagsToShow.get('Bike')) {
       return (
         <div className="check">
           <div className="checkTitle"> Bike </div>
@@ -248,7 +272,7 @@ class Home extends Component {
   }
 
   renderOther() {
-    if (this.state.tagsToShow.indexOf('Other') !== -1) {
+    if (this.state.tagsToShow.get('Other')) {
       return (
         <div className="check">
           <div className="checkTitle"> Other </div>
