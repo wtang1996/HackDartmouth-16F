@@ -94,7 +94,7 @@ class Show extends Component {
     }
     if (!exist) {
       this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `Anonymous: ${this.props.post.title}` });
+        content: [], user: this.props.post.author, anonymous: true, anonTitle: `Anonymous: ${this.props.post.title}` });
     } else {
       browserHistory.push('/messages');
     }
