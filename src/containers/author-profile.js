@@ -12,6 +12,7 @@ class authorProfile extends Component {
 
     // init component state here
     this.state = {
+      data: '',
     };
     this.renderUserPosts = this.renderUserPosts.bind(this);
     this.renderPhoto = this.renderPhoto.bind(this);
