@@ -68,6 +68,7 @@ class Message extends Component {
     let key = 0;
     return (
       <div>
+        <span className="messagesTitle">Messages:</span>
       {
         this.state.currentMessage.content.map(line => {
           key++;
@@ -122,12 +123,18 @@ class Message extends Component {
   renderConversation() {
     if (this.state.currentMessage) {
       return (
-        <div>
-          {this.switchUser()}
-          <button onClick={this.onDeletion} className="deleteButton">Delete Message</button>
-          {this.renderContent()}
-          <textarea onChange={this.onContentChange} value={this.state.input} />
-          <button onClick={this.onSend} className="sendButton">Send</button>
+        <div className="messageDetailBox">
+          <div className="headerHolder">
+            <div className="messageHeader">{this.switchUser()}</div>
+          </div>
+          <div className="messageContent">
+            <button onClick={this.onDeletion} className="messageDeleteButton">Delete Conversation</button>
+            <div className="showMessages">{this.renderContent()} </div>
+            <div className="newMessage">
+              <textarea onChange={this.onContentChange} placeholder="new message" value={this.state.input} />
+              <button onClick={this.onSend} className="messageSendButton">Send</button>
+            </div>
+          </div>
         </div>
       );
     } else {

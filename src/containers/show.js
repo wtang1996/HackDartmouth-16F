@@ -175,16 +175,16 @@ class Show extends Component {
 
   render() {
     if (this.props.post) {
-      // CHANGE THIS LATER TO BE IF(THIS IS NOT THE USER'S OWN PAGE) {}
       if (this.props.post.authorId === this.props.user.id) {
         if (this.state.editing) {
           return (
             <div className="showPostContainer">
-              <div className="showPostBox">
-                This will be changed to mimic the new post page...
-                Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} />
-                Content: <input onChange={this.onContentChange} placeholder="content" value={this.state.content} />
-                Tags: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
+              <div className="editPostBox">
+                <div className="editPostTitle">Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} /> </div>
+                <div className="editPostContent">
+                  Item Description: <textarea rows="8" cols="24" onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
+                </div>
+                <div className="editPostContent">Category: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} /> </div>
                 <button onClick={this.onEditChange} className="doneButton">
                   Done
                 </button>
