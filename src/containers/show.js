@@ -16,7 +16,7 @@ class Show extends Component {
       title: '',
       tags: '',
       pictureURL: '',
-      data: '',
+      data: null,
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
@@ -30,7 +30,17 @@ class Show extends Component {
 
   componentWillMount() {
     this.props.fetchPost(this.props.params.id);
-    this.props.fetchMessages();
+    // this.props.fetchMessages();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('props', nextProps.post);
+    if (nextProps.post.key) {
+      jQuery.get(nextProps.post.pictureURL, (response) => {
+        console.log('THIS IS THE PHOTO DATA');
+        this.setState({ data: response });
+      });
+    }
   }
 
   onTitleChange(event) {
@@ -108,25 +118,15 @@ class Show extends Component {
 
   renderPhoto() {
     // console.log(this.props.post.pictureURL);
-    if (this.props.post.key) {
-      jQuery.get(this.props.post.pictureURL, (response) => {
-        // console.log('THIS IS THE PHOTO DATA');
-        this.setState({ data: response });
-      });
 
-      if (this.state.data) {
-        return (
-          <div className="imagefull">
-            <div className="imagebox">
-              <img className="image" role="presentation" src={this.state.data} />
-            </div>
+    if (this.state.data) {
+      return (
+        <div className="imagefull">
+          <div className="imagebox">
+            <img className="image" role="presentation" src={this.state.data} />
           </div>
-        );
-      } else {
-        return (
-          <div> Loading ... </div>
-        );
-      }
+        </div>
+      );
     } else {
       return (
         <div> No photo </div>
