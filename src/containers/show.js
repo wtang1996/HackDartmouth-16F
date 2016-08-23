@@ -90,10 +90,11 @@ class Show extends Component {
   }
 
   renderAuthor() {
+    // console.log(this.props.post);
     if (this.props.post.anonymous) {
       return <span> Anonymous</span>;
     } else {
-      return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.author}</Link>;
+      return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.authorName}</Link>;
     }
   }
 
@@ -106,10 +107,10 @@ class Show extends Component {
   }
 
   renderPhoto() {
-    console.log(this.props.post.pictureURL);
-    if (this.props.post.pictureURL) {
+    // console.log(this.props.post.pictureURL);
+    if (this.props.post.key) {
       jQuery.get(this.props.post.pictureURL, (response) => {
-        console.log('THIS IS THE PHOTO DATA');
+        // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
 
@@ -117,7 +118,7 @@ class Show extends Component {
         return (
           <div className="imagefull">
             <div className="imagebox">
-              <img role="presentation" width="400" src={this.state.data} />
+              <img className="image" role="presentation" src={this.state.data} />
             </div>
           </div>
         );
@@ -185,9 +186,8 @@ class Show extends Component {
                 <div className="showPostTitle">{this.props.post.title}</div>
                 <div className="showPostContent">Item Description: {this.props.post.content}</div>
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
-                <div className="showPostContent"> Say here if the post is lost or found</div>
                 <div> {this.renderPhoto()}</div>
-                <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
+                <div className="showPostContent"> {this.renderAuthor()} {this.renderLost()} this item.</div>
                 <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
               </div>
             </div>

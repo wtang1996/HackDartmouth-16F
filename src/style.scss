@@ -507,15 +507,21 @@ ul {
   margin-right: auto;
 }
 
-.imagebox a:hover {
-  // position:relative;
-  // top:-25px;
-  // left:-35px;
-  // width:500px;
-  // height:auto;
-  // display:block;
-  // z-index:999;
-  width: 500px;
+.image {
+  width:400px;
+}
+.image:hover {
+  // transform:scale(2,2);
+  // transform-origin:0 0;
+  position:relative;
+  margin-left: auto;
+  margin-right: auto;
+  top:-25px;
+  left:-35px;
+  transform:scale(1.5,1.5);
+  transform-origin:0 0;
+  display:block;
+  z-index:999;
 }
 
 
