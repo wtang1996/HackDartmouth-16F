@@ -24,8 +24,6 @@ class Profile extends Component {
   componentWillMount() {
     this.props.fetchUser();
     this.props.fetchPosts();
-    this.callback = this.callback.bind(this);
-    this.onDrop = this.onDrop.bind(this);
   }
 
   onEditChange(event) {
@@ -49,7 +47,7 @@ class Profile extends Component {
       console.log(upload.target.result);
     };
 
-    reader.onerror = function asdf(stuff) {
+    reader.onerror = function randomfunction(stuff) {
       console.log('error', stuff);
       console.log(stuff.getMessage());
     };
@@ -100,10 +98,10 @@ class Profile extends Component {
   }
 
   renderPhoto() {
-    console.log(this.props.user.pictureURL);
-    if (this.props.user.pictureURL) {
+    // console.log(this.props.user.pictureURL);
+    if (this.props.user.key) {
       jQuery.get(this.props.user.pictureURL, (response) => {
-        console.log('THIS IS THE PHOTO DATA');
+        // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
 
@@ -151,7 +149,7 @@ class Profile extends Component {
                 <div className="profileContent">Email: {this.props.user.email}</div>
                 <div>{this.renderUserPosts()}</div>
                 <button onClick={this.onEditChange} className="doneButton">
-                  Done
+                  Edit
                 </button>
               </div>
             </div>
@@ -165,7 +163,7 @@ class Profile extends Component {
                 <div className="profileContent">Email: {this.props.user.email}</div>
                 <div>{this.renderUserPosts()}</div>
                 <button onClick={this.onEditChange} className="doneButton">
-                  Done
+                  Edit
                 </button>
               </div>
             </div>
