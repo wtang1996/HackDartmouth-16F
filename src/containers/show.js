@@ -89,7 +89,7 @@ class Show extends Component {
       }
       return undefined;
     });
-    if (count > 1) {
+    if (count > 2) {
       exist = true;
     }
     if (!exist) {
@@ -110,15 +110,18 @@ class Show extends Component {
         if (message.anonTitle === `${this.props.post.title}`) {
           exist = true;
         }
+        if (message.contacted === true) {
+          exist = true;
+        }
       }
       return undefined;
     });
-    if (count > 1) {
+    if (count > 2) {
       exist = true;
     }
     if (!exist) {
       this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `${this.props.post.title}` });
+        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `${this.props.post.title}`, contacted: true });
     } else {
       browserHistory.push('/messages');
     }

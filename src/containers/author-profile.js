@@ -9,7 +9,6 @@ class authorProfile extends Component {
   constructor(props) {
     super(props);
 
-    // init component state here
     this.state = {
     };
 
@@ -34,7 +33,7 @@ class authorProfile extends Component {
       }
       return undefined;
     });
-    if (count > 1) {
+    if (count > 2) {
       exist = true;
     }
     if (!exist) {
@@ -54,15 +53,18 @@ class authorProfile extends Component {
         if (message.anonTitle === `${this.props.author.id}`) {
           exist = true;
         }
+        if (message.contacted === true) {
+          exist = true;
+        }
       }
       return undefined;
     });
-    if (count > 1) {
+    if (count > 2) {
       exist = true;
     }
     if (!exist) {
       this.props.createMessage({ userID: this.props.author.id, myID: this.props.user.id,
-        content: [], user: this.props.author.username, anonymous: false, anonTitle: `${this.props.author.id}` });
+        content: [], user: this.props.author.username, anonymous: false, anonTitle: `${this.props.author.id}`, contacted: true });
     } else {
       browserHistory.push('/messages');
     }
@@ -86,7 +88,6 @@ class authorProfile extends Component {
   }
 }
 
-// connects particular parts of redux state to this components props
 const mapStateToProps = (state) => (
   {
     author: state.profile.author,
@@ -95,6 +96,4 @@ const mapStateToProps = (state) => (
   }
 );
 
-
-// react-redux glue -- outputs Container that knows how to call actions
 export default connect(mapStateToProps, actions)(authorProfile);
