@@ -3,8 +3,6 @@ import { Link, browserHistory } from 'react-router';
 import * as actions from '../actions';
 import { connect } from 'react-redux';
 
-
-// function based "dumb" component with no state
 class Show extends Component {
   constructor(props) {
     super(props);
@@ -14,6 +12,7 @@ class Show extends Component {
       content: '',
       title: '',
       tags: '',
+      anonymous: true,
     };
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
@@ -24,6 +23,7 @@ class Show extends Component {
     this.renderLost = this.renderLost.bind(this);
     this.startConversation = this.startConversation.bind(this);
     this.startAnonymousConversation = this.startAnonymousConversation.bind(this);
+    this.contactSwitch = this.contactSwitch.bind(this);
   }
 
   componentWillMount() {
@@ -66,16 +66,27 @@ class Show extends Component {
     });
   }
 
+  contactSwitch() {
+    if (!this.props.post.anonymous) {
+      return <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>;
+    } else {
+      return <div className="showPostContact" onClick={this.startAnonymousConversation} > Contact Me! </div>;
+    }
+  }
+
   startAnonymousConversation() {
     let exist = false;
     let count = 0;
     this.props.messages.map(message => {
       if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
         count++;
+        if (message.anonTitle === `Anonymous: ${this.props.post.title}`) {
+          exist = true;
+        }
       }
       return undefined;
     });
-    if (count < 3) {
+    if (count > 1) {
       exist = true;
     }
     if (!exist) {
@@ -86,22 +97,25 @@ class Show extends Component {
     }
   }
 
+
   startConversation() {
     let exist = false;
+    let count = 0;
     this.props.messages.map(message => {
       if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
-        exist = true;
+        count++;
+        if (message.anonTitle === `${this.props.post.title}`) {
+          exist = true;
+        }
       }
       return undefined;
     });
+    if (count > 1) {
+      exist = true;
+    }
     if (!exist) {
-      if (!this.props.post.anonymous) {
-        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: null });
-      } else {
-        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `Anonymous: ${this.props.post.title}` });
-      }
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `${this.props.post.title}` });
     } else {
       browserHistory.push('/messages');
     }
@@ -109,7 +123,7 @@ class Show extends Component {
 
   renderAuthor() {
     if (this.props.post.anonymous) {
-      return <span> Anonymous</span>;
+      return <span> Anonymous </span>;
     } else {
       return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.author}</Link>;
     }
@@ -175,8 +189,7 @@ class Show extends Component {
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
                 <div className="showPostContent"> Say here if the post is lost or found</div>
                 <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
-                <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
-                <div className="showPostContact" onClick={this.startAnonymousConversation} > Contact Me (Anonymous)! </div>
+                {this.contactSwitch()}
               </div>
             </div>
           </div>
