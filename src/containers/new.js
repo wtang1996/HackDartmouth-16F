@@ -70,19 +70,19 @@ class New extends Component {
 
   setLost() {
     this.setState({
-      type: 'lost',
+      lost: true,
     });
   }
 
   setFound() {
     this.setState({
-      type: 'found',
+      lost: false,
     });
   }
 
   resetType() {
     this.setState({
-      type: '',
+      type: false,
     });
   }
 
@@ -168,33 +168,33 @@ class New extends Component {
   // }
 
   changeClothing() {
-    if (this.state.tags !== 'clothing') {
+    if (this.state.tags !== 'Clothing') {
       this.setState({
-        tags: 'clothing',
+        tags: 'Clothing',
       });
     }
   }
 
   changeBike() {
-    if (this.state.tags !== 'bike') {
+    if (this.state.tags !== 'Bike') {
       this.setState({
-        tags: 'bike',
+        tags: 'Bike',
       });
     }
   }
 
   changeTech() {
-    if (this.state.tags !== 'tech') {
+    if (this.state.tags !== 'Technology') {
       this.setState({
-        tags: 'tech',
+        tags: 'Technology',
       });
     }
   }
 
   changeOther() {
-    if (this.state.tags !== 'other') {
+    if (this.state.tags !== 'Other') {
       this.setState({
-        tags: 'other',
+        tags: 'Other',
       });
     }
   }
@@ -204,7 +204,7 @@ class New extends Component {
   }
 
   renderClothing() {
-    if (this.state.tags === 'clothing') {
+    if (this.state.tags === 'Clothing') {
       return (
         <div className="check">
           <div className="checkTitle"> Clothing </div>
@@ -228,7 +228,7 @@ class New extends Component {
   }
 
   renderTechnology() {
-    if (this.state.tags === 'tech') {
+    if (this.state.tags === 'Technology') {
       return (
         <div className="check">
           <div className="checkTitle"> Technology </div>
@@ -252,7 +252,7 @@ class New extends Component {
   }
 
   renderBike() {
-    if (this.state.tags === 'bike') {
+    if (this.state.tags === 'Bike') {
       return (
         <div className="check">
           <div className="checkTitle"> Bike </div>
@@ -276,7 +276,7 @@ class New extends Component {
   }
 
   renderOther() {
-    if (this.state.tags === 'other') {
+    if (this.state.tags === 'Other') {
       return (
         <div className="check">
           <div className="checkTitle"> Other </div>
@@ -300,7 +300,7 @@ class New extends Component {
   }
 
   renderLostItem() {
-    if (this.state.type === 'lost') {
+    if (this.state.lost === true) {
       return (
         <div className="check">
           <div className="checkTitle"> Lost Item </div>
@@ -324,7 +324,7 @@ class New extends Component {
   }
 
   renderFoundItem() {
-    if (this.state.type === 'found') {
+    if (this.state.lost === false) {
       return (
         <div className="check">
           <div className="checkTitle"> Found Item </div>
@@ -371,75 +371,75 @@ class New extends Component {
   //   }
   // }
 
-  renderFound() {
-    if (this.state.lost) {
-      console.log('in first if');
-      return (
-        <div>
-          <div className="checkTitle"> Found Item </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="foundCheck" name="check" />
-            <label htmlFor="foundCheck" onClick={this.setFound}></label>
-          </div>
-        </div>
-      );
-    } else {
-      console.log('in second if');
-      return (
-        <div>
-          <div className="checkTitle"> Found Item </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="foundCheck" name="check" checked />
-            <label htmlFor="foundCheck" onClick={this.setFound}></label>
-          </div>
-        </div>
-      );
-    }
-  }
+  // renderFound() {
+  //   if (this.state.lost) {
+  //     console.log('in first if');
+  //     return (
+  //       <div>
+  //         <div className="checkTitle"> Found Item </div>
+  //         <div className="checkboxDiv">
+  //           <input type="checkbox" value="None" id="foundCheck" name="check" />
+  //           <label htmlFor="foundCheck" onClick={this.setFound}></label>
+  //         </div>
+  //       </div>
+  //     );
+  //   } else {
+  //     console.log('in second if');
+  //     return (
+  //       <div>
+  //         <div className="checkTitle"> Found Item </div>
+  //         <div className="checkboxDiv">
+  //           <input type="checkbox" value="None" id="foundCheck" name="check" checked />
+  //           <label htmlFor="foundCheck" onClick={this.setFound}></label>
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
 
-  renderLostFound() {
-    console.log(this.state.lost);
-    if (this.state.lost) {
-      return (
-        <div>
-          <div className="check">
-            <div className="checkTitle"> Lost Item </div>
-            <div className="checkboxDiv">
-              <input type="checkbox" value="None" id="lostCheck" name="check" checked />
-              <label htmlFor="lostCheck"></label>
-            </div>
-
-            <div className="checkTitle"> Found Item </div>
-            <div className="checkboxDiv">
-              <input type="checkbox" value="None" id="foundCheck" name="check" />
-              <label htmlFor="foundCheck" onClick={this.changeLostFound}></label>
-            </div>
-
-          </div>
-        </div>
-      );
-    } else {
-      console.log('showing second');
-      return (
-        <div>
-          <div className="check">
-            <div className="checkTitle"> Lost Item </div>
-            <div className="checkboxDiv">
-              <input type="checkbox" value="None" id="lostCheck" name="check" />
-              <label htmlFor="lostCheck" onClick={this.changeLostFound}></label>
-            </div>
-
-            <div className="checkTitle"> Found Item </div>
-            <div className="checkboxDiv">
-              <input type="checkbox" value="None" id="foundCheck" name="check" checked />
-              <label htmlFor="foundCheck"></label>
-            </div>
-
-          </div>
-        </div>
-      );
-    }
-  }
+  // renderLostFound() {
+  //   console.log(this.state.lost);
+  //   if (this.state.lost) {
+  //     return (
+  //       <div>
+  //         <div className="check">
+  //           <div className="checkTitle"> Lost Item </div>
+  //           <div className="checkboxDiv">
+  //             <input type="checkbox" value="None" id="lostCheck" name="check" checked />
+  //             <label htmlFor="lostCheck"></label>
+  //           </div>
+  //
+  //           <div className="checkTitle"> Found Item </div>
+  //           <div className="checkboxDiv">
+  //             <input type="checkbox" value="None" id="foundCheck" name="check" />
+  //             <label htmlFor="foundCheck" onClick={this.changeLostFound}></label>
+  //           </div>
+  //
+  //         </div>
+  //       </div>
+  //     );
+  //   } else {
+  //     console.log('showing second');
+  //     return (
+  //       <div>
+  //         <div className="check">
+  //           <div className="checkTitle"> Lost Item </div>
+  //           <div className="checkboxDiv">
+  //             <input type="checkbox" value="None" id="lostCheck" name="check" />
+  //             <label htmlFor="lostCheck" onClick={this.changeLostFound}></label>
+  //           </div>
+  //
+  //           <div className="checkTitle"> Found Item </div>
+  //           <div className="checkboxDiv">
+  //             <input type="checkbox" value="None" id="foundCheck" name="check" checked />
+  //             <label htmlFor="foundCheck"></label>
+  //           </div>
+  //
+  //         </div>
+  //       </div>
+  //     );
+  //   }
+  // }
 
 
   renderTags() {

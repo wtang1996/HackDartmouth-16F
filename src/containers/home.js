@@ -20,6 +20,7 @@ class Home extends Component {
     this.addTech = this.addTech.bind(this);
     this.addOther = this.addOther.bind(this);
     this.renderAuthor = this.renderAuthor.bind(this);
+    this.displayPost = this.displayPost.bind(this);
   }
 
   componentWillMount() {
@@ -75,6 +76,19 @@ class Home extends Component {
     }
   }
 
+  displayPost(tag) {
+    // console.log(tag);
+    if (this.state.tagsToShow.length === 0) {
+      // console.log('empty tags');
+      return true;
+    } else if (this.state.tagsToShow.indexOf(tag) !== -1) {
+      // console.log('tag shows up');
+      return true;
+    }
+    // console.log('doesnt show up');
+    return false;
+  }
+
   // Function to render the found item listings
   renderFound() {
     return (
@@ -84,7 +98,8 @@ class Home extends Component {
         {
           this.props.posts.map((post) => {
             // if (!post.type === 'found') {
-            if (!post.lost) {
+            if (post.lost === false && this.displayPost(post.tags)) {
+            // if (true) {
               return (
                 <li key={post.id} className="postSummary">
                   <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
@@ -117,8 +132,7 @@ class Home extends Component {
         <ul>
         {
           this.props.posts.map((post) => {
-            // if (post.type === 'lost') {
-            if (post.lost) {
+            if (post.lost === true && this.displayPost(post.tags)) {
               return (
                 <li key={post.id} className="postSummary">
                   <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
@@ -198,9 +212,8 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.props.posts);
-    console.log(this.state.tagsToShow);
-    if (this.props.posts.length > 0 && this.props.user !== null) {
+    // if (this.props.posts.length > 0 && this.props.user !== null) {
+    if (this.props.user !== null) {
       return (
         <div>
           <div className="newListingBox">
