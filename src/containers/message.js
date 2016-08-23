@@ -14,8 +14,9 @@ class Message extends Component {
     this.renderUserList = this.renderUserList.bind(this);
     this.renderConversation = this.renderConversation.bind(this);
     this.onSend = this.onSend.bind(this);
-    this.updateConversation = this.updateConversation.bind(this);
+    // this.updateConversation = this.updateConversation.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.switchUser = this.switchUser.bind(this);
   }
 
   componentWillMount() {
@@ -40,18 +41,30 @@ class Message extends Component {
     if (this.state.currentMessage.content) {
       content = this.state.currentMessage.content;
     }
-    content.push(`${this.props.user.username}: ${this.state.input}`);
+    if (this.state.currentMessage.anonymous) {
+      content.push(`${this.props.user.id}: ${this.state.input}`);
+    } else {
+      content.push(`${this.props.user.username}: ${this.state.input}`);
+    }
     this.props.updateMessage({ content }, this.state.currentMessage.id);
     this.setState({
       input: '',
     });
   }
+  //
+  // updateConversation() {
+  //   if (this.state.content !== this.props.message.content) {
+  //     setInterval(this.setState({
+  //       content: this.props.message.content,
+  //     }), 5000);
+  //   }
+  // }
 
-  updateConversation() {
-    if (this.state.content !== this.props.message.content) {
-      setInterval(this.setState({
-        content: this.props.message.content,
-      }), 5000);
+  switchUser() {
+    if (this.state.currentMessage.anonymous) {
+      return this.state.currentMessage.anonTitle;
+    } else {
+      return this.state.currentMessage.user;
     }
   }
 
@@ -59,8 +72,10 @@ class Message extends Component {
     let key = 0;
     return (
       <div>
+        <span className="messagesTitle">Messages:</span>
       {
         this.state.currentMessage.content.map(line => {
+          console.log(line);
           key++;
           return <div key={key} > {line} </div>;
         })
@@ -83,7 +98,7 @@ class Message extends Component {
         Conversations
         {
           this.props.messages.map((message) => {
-            if (message.anonymous) {
+            if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
                   <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.anonTitle}</button>
@@ -113,12 +128,18 @@ class Message extends Component {
   renderConversation() {
     if (this.state.currentMessage) {
       return (
-        <div>
-          {this.state.currentMessage.anonTitle || this.state.currentMessage.user}
-          <button onClick={this.onDeletion} className="deleteButton">Delete Message</button>
-          {this.renderContent()}
-          <textarea onChange={this.onContentChange} value={this.state.input} />
-          <button onClick={this.onSend} className="sendButton">Send</button>
+        <div className="messageDetailBox">
+          <div className="headerHolder">
+            <div className="messageHeader">{this.switchUser()}</div>
+          </div>
+          <div className="messageContent">
+            <button onClick={this.onDeletion} className="messageDeleteButton">Delete Conversation</button>
+            <div className="showMessages">{this.renderContent()} </div>
+            <div className="newMessage">
+              <textarea onChange={this.onContentChange} placeholder="new message" value={this.state.input} />
+              <button onClick={this.onSend} className="messageSendButton">Send</button>
+            </div>
+          </div>
         </div>
       );
     } else {

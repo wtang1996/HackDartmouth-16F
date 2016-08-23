@@ -4,8 +4,6 @@ import * as actions from '../actions';
 import { connect } from 'react-redux';
 import jQuery from 'jquery';
 
-
-// function based "dumb" component with no state
 class Show extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +13,7 @@ class Show extends Component {
       content: '',
       title: '',
       tags: '',
+      anonymous: true,
       pictureURL: '',
       data: null,
     };
@@ -26,6 +25,8 @@ class Show extends Component {
     this.renderAuthor = this.renderAuthor.bind(this);
     this.renderLost = this.renderLost.bind(this);
     this.startConversation = this.startConversation.bind(this);
+    this.startAnonymousConversation = this.startAnonymousConversation.bind(this);
+    this.contactSwitch = this.contactSwitch.bind(this);
   }
 
   componentWillMount() {
@@ -78,22 +79,59 @@ class Show extends Component {
     });
   }
 
-  startConversation() {
+  contactSwitch() {
+    if (!this.props.post.anonymous) {
+      return <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>;
+    } else {
+      return <div className="showPostContact" onClick={this.startAnonymousConversation} > Contact Me! </div>;
+    }
+  }
+
+  startAnonymousConversation() {
     let exist = false;
+    let count = 0;
     this.props.messages.map(message => {
       if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
-        exist = true;
+        count++;
+        if (message.anonTitle === `Anonymous: ${this.props.post.title}`) {
+          exist = true;
+        }
       }
       return undefined;
     });
+    if (count > 2) {
+      exist = true;
+    }
     if (!exist) {
-      if (!this.props.post.anonymous) {
-        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: null });
-      } else {
-        this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-          content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `Anonymous: ${this.props.post.title}` });
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+        content: [], user: this.props.post.author, anonymous: true, anonTitle: `Anonymous: ${this.props.post.title}` });
+    } else {
+      browserHistory.push('/messages');
+    }
+  }
+
+
+  startConversation() {
+    let exist = false;
+    let count = 0;
+    this.props.messages.map(message => {
+      if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
+        count++;
+        if (message.anonTitle === `${this.props.post.title}`) {
+          exist = true;
+        }
+        if (message.contacted === true) {
+          exist = true;
+        }
       }
+      return undefined;
+    });
+    if (count > 2) {
+      exist = true;
+    }
+    if (!exist) {
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `${this.props.post.title}`, contacted: true });
     } else {
       browserHistory.push('/messages');
     }
@@ -102,7 +140,7 @@ class Show extends Component {
   renderAuthor() {
     // console.log(this.props.post);
     if (this.props.post.anonymous) {
-      return <span> Anonymous</span>;
+      return <span> Anonymous </span>;
     } else {
       return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.authorName}</Link>;
     }
@@ -137,16 +175,16 @@ class Show extends Component {
 
   render() {
     if (this.props.post) {
-      // CHANGE THIS LATER TO BE IF(THIS IS NOT THE USER'S OWN PAGE) {}
       if (this.props.post.authorId === this.props.user.id) {
         if (this.state.editing) {
           return (
             <div className="showPostContainer">
-              <div className="showPostBox">
-                This will be changed to mimic the new post page...
-                Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} />
-                Content: <input onChange={this.onContentChange} placeholder="content" value={this.state.content} />
-                Tags: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} />
+              <div className="editPostBox">
+                <div className="editPostTitle">Title: <input onChange={this.onTitleChange} placeholder="title" value={this.state.title} /> </div>
+                <div className="editPostContent">
+                  Item Description: <textarea rows="8" cols="24" onChange={this.onContentChange} placeholder="Description" value={this.state.content} />
+                </div>
+                <div className="editPostContent">Category: <input onChange={this.onTagsChange} placeholder="tags" value={this.state.tags} /> </div>
                 <button onClick={this.onEditChange} className="doneButton">
                   Done
                 </button>
@@ -188,7 +226,7 @@ class Show extends Component {
                 <div className="showPostContent">Item Tags: {this.props.post.tags}</div>
                 <div> {this.renderPhoto()}</div>
                 <div className="showPostContent"> {this.renderAuthor()} {this.renderLost()} this item.</div>
-                <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
+                {this.contactSwitch()}
               </div>
             </div>
           </div>
