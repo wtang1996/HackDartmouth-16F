@@ -14,8 +14,9 @@ class Message extends Component {
     this.renderUserList = this.renderUserList.bind(this);
     this.renderConversation = this.renderConversation.bind(this);
     this.onSend = this.onSend.bind(this);
-    this.updateConversation = this.updateConversation.bind(this);
+    // this.updateConversation = this.updateConversation.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.switchUser = this.switchUser.bind(this);
   }
 
   componentWillMount() {
@@ -46,12 +47,20 @@ class Message extends Component {
       input: '',
     });
   }
+  //
+  // updateConversation() {
+  //   if (this.state.content !== this.props.message.content) {
+  //     setInterval(this.setState({
+  //       content: this.props.message.content,
+  //     }), 5000);
+  //   }
+  // }
 
-  updateConversation() {
-    if (this.state.content !== this.props.message.content) {
-      setInterval(this.setState({
-        content: this.props.message.content,
-      }), 5000);
+  switchUser() {
+    if (this.state.currentMessage.anonymous) {
+      return this.state.currentMessage.anonTitle;
+    } else {
+      return this.state.currentMessage.user;
     }
   }
 
@@ -84,7 +93,7 @@ class Message extends Component {
         Conversations
         {
           this.props.messages.map((message) => {
-            if (message.anonymous) {
+            if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
                   <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.anonTitle}</button>
@@ -116,7 +125,7 @@ class Message extends Component {
       return (
         <div className="messageDetailBox">
           <div className="headerHolder">
-            <div className="messageHeader">{this.state.currentMessage.anonTitle || this.state.currentMessage.user}</div>
+            <div className="messageHeader">{this.switchUser()}</div>
           </div>
           <div className="messageContent">
             <button onClick={this.onDeletion} className="messageDeleteButton">Delete Conversation</button>
