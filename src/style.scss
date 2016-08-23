@@ -219,18 +219,21 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  word-wrap: break-word;
 }
 .lost {
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
+  max-width: 350px;
 }
 .found {
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
+  max-width: 350px;
 }
 .listTitle {
   font-size: 26px;
