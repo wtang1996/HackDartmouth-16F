@@ -23,6 +23,7 @@ class Show extends Component {
     this.renderAuthor = this.renderAuthor.bind(this);
     this.renderLost = this.renderLost.bind(this);
     this.startConversation = this.startConversation.bind(this);
+    this.startAnonymousConversation = this.startAnonymousConversation.bind(this);
   }
 
   componentWillMount() {
@@ -63,6 +64,26 @@ class Show extends Component {
       title: '',
       tags: '',
     });
+  }
+
+  startAnonymousConversation() {
+    let exist = false;
+    let count = 0;
+    this.props.messages.map(message => {
+      if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
+        count++;
+      }
+      return undefined;
+    });
+    if (count < 3) {
+      exist = true;
+    }
+    if (!exist) {
+      this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
+        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `Anonymous: ${this.props.post.title}` });
+    } else {
+      browserHistory.push('/messages');
+    }
   }
 
   startConversation() {
@@ -155,6 +176,7 @@ class Show extends Component {
                 <div className="showPostContent"> Say here if the post is lost or found</div>
                 <div className="showPostContent"> Posted by: {this.renderAuthor()}</div>
                 <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>
+                <div className="showPostContact" onClick={this.startAnonymousConversation} > Contact Me (Anonymous)! </div>
               </div>
             </div>
           </div>

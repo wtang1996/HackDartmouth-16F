@@ -13,6 +13,7 @@ class authorProfile extends Component {
     };
 
     this.startConversation = this.startConversation.bind(this);
+    // this.startAnonymousConversation = this.startAnonymousConversation.bind(this);
   }
 
   componentWillMount() {
@@ -20,12 +21,34 @@ class authorProfile extends Component {
     this.props.fetchMessages();
   }
 
+  // startAnonymousConversation() {
+  //   let exist = false;
+  //   let count = 0;
+  //   this.props.messages.map(message => {
+  //     if (message.userID === this.props.post.authorId && message.myID === this.props.user.id) {
+  //       count++;
+  //       console.log(count);
+  //     }
+  //     return undefined;
+  //   });
+  //   if (count < 3) {
+  //     exist = true;
+  //   }
+  //   if (!exist) {
+  //     this.props.createMessage({ userID: this.props.author.id, myID: this.props.user.id,
+  //       content: [], user: this.props.author.uername, anonymous: true, anonTitle: `Anonymous: ${this.props.author.id}` });
+  //   } else {
+  //     browserHistory.push('/messages');
+  //   }
+  // }
+
   startConversation() {
     let exist = false;
     this.props.messages.map(message => {
-      if (message.userID === this.props.author.id && message.myID === this.props.user.id) {
+      if (message.userID === this.props.author.id && message.myyID === this.props.user.id) {
         exist = true;
       }
+      console.log(exist);
       return undefined;
     });
     if (!exist) {
