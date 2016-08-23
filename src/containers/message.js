@@ -86,7 +86,7 @@ class Message extends Component {
             if (message.anonymous) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessage: message }); }}>Anonymous: {this.props.post.title}</button>
+                  <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.anonTitle}</button>
                 </li>
               );
             } else if (message.userID === this.props.user.id) {
@@ -114,7 +114,7 @@ class Message extends Component {
     if (this.state.currentMessage) {
       return (
         <div>
-          {this.state.currentMessage.user}
+          {this.state.currentMessage.anonTitle || this.state.currentMessage.user}
           <button onClick={this.onDeletion} className="deleteButton">Delete Message</button>
           {this.renderContent()}
           <textarea onChange={this.onContentChange} value={this.state.input} />
