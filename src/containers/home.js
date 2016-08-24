@@ -105,7 +105,7 @@ class Home extends Component {
         <div className="listTitle">Found Item Listings</div>
         <ul>
         {
-          this.props.posts.reverse().map((post) => {
+          Array.prototype.slice.call(this.props.posts).reverse().map((post) => {
             // if (!post.type === 'found') {
             if (post.lost === false && this.displayPost(post.tags)) {
             // if (true) {
@@ -140,7 +140,7 @@ class Home extends Component {
         <div className="listTitle">Lost Item Listings</div>
         <ul>
         {
-          this.props.posts.reverse().map((post) => {
+          Array.prototype.slice.call(this.props.posts).reverse().map((post) => {
             if (post.lost === true && this.displayPost(post.tags)) {
               return (
                 <li key={post.id} className="postSummary">
@@ -292,7 +292,6 @@ class Home extends Component {
   }
 
   render() {
-    console.log(this.state.tagsToShow);
     if (this.props.user !== null) {
       return (
         <div>
