@@ -31,6 +31,9 @@ class Home extends Component {
 
   componentWillMount() {
     this.props.fetchPosts();
+  }
+
+  componentWillUpdate() {
     this.props.fetchUser();
   }
 
