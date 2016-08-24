@@ -187,8 +187,8 @@ class New extends Component {
           <div className="ns-options">
             <div className="ns-icons">
               <div id="ns-Dropzone">
-                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
-                  <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
+                <Dropzone ref="dropzone" className="photoSpace" onDrop={this.onDrop} multiple={false}>
+                  <i id="drop-zone-icon" className="material-icons">Upload a photo Here</i>
                 </Dropzone>
               </div>
             </div>
@@ -349,7 +349,7 @@ class New extends Component {
 
   renderTags() {
     return (
-      <div>
+      <div className="allTags">
         Tags
         {this.renderClothing()}
         {this.renderBike()}
@@ -377,17 +377,15 @@ class New extends Component {
                     <label htmlFor="anonCheck"></label>
                   </div>
                 </div>
-                <div> {this.renderPhoto()} </div>
                 <div className="check">
-
                   {this.renderLostItem()}
                   {this.renderFoundItem()}
-
-
                 </div>
               </div>
-              {this.renderTags()}
-
+              <div>
+                {this.renderTags()}
+                <div> {this.renderPhoto()} </div>
+              </div>
             </div>
             <div className="buttonContainer">
               <div className="postButtons">

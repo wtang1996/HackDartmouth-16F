@@ -81,7 +81,7 @@ class SignUp extends Component {
           <div className="ns-options">
             <div className="ns-icons">
               <div id="ns-Dropzone">
-                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
+                <Dropzone ref="dropzone" className="photoSpace" onDrop={this.onDrop} multiple={false}>
                   <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
                 </Dropzone>
               </div>
