@@ -60,9 +60,17 @@ class Message extends Component {
 
   switchUser() {
     if (this.props.message.anonymous) {
-      return this.props.message.anonTitle;
+      if (this.props.message.userID === this.props.user.id) {
+        return this.props.message.myID;
+      } else {
+        return this.props.message.userID;
+      }
     } else {
-      return this.props.user.username;
+      if (this.props.message.userID === this.props.user.id) {
+        return (this.props.message.myName);
+      } else {
+        return (this.props.message.user);
+      }
     }
   }
 
