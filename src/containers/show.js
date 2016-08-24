@@ -65,7 +65,7 @@ class Show extends Component {
         editing: true,
         title: this.props.post.title,
         content: this.props.post.content,
-        // tags: this.props.post.tags,
+        tags: '',
       });
     }
   }
