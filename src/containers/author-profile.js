@@ -33,6 +33,8 @@ class authorProfile extends Component {
       // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
+    } else {
+      this.setState({ data: null });
     }
   }
 
