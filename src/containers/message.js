@@ -14,7 +14,6 @@ class Message extends Component {
     this.renderUserList = this.renderUserList.bind(this);
     this.renderConversation = this.renderConversation.bind(this);
     this.onSend = this.onSend.bind(this);
-    // this.updateConversation = this.updateConversation.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.switchUser = this.switchUser.bind(this);
   }
@@ -22,6 +21,7 @@ class Message extends Component {
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchUser();
+    setInterval(this.props.fetchMessages, 5000);
   }
 
   onContentChange(event) {
@@ -41,20 +41,16 @@ class Message extends Component {
     if (this.state.currentMessage.content) {
       content = this.state.currentMessage.content;
     }
-    content.push(`${this.props.user.username}: ${this.state.input}`);
+    if (this.state.currentMessage.anonymous) {
+      content.push(`${this.props.user.id}: ${this.state.input}`);
+    } else {
+      content.push(`${this.props.user.username}: ${this.state.input}`);
+    }
     this.props.updateMessage({ content }, this.state.currentMessage.id);
     this.setState({
       input: '',
     });
   }
-  //
-  // updateConversation() {
-  //   if (this.state.content !== this.props.message.content) {
-  //     setInterval(this.setState({
-  //       content: this.props.message.content,
-  //     }), 5000);
-  //   }
-  // }
 
   switchUser() {
     if (this.state.currentMessage.anonymous) {
@@ -71,6 +67,7 @@ class Message extends Component {
         <span className="messagesTitle">Messages:</span>
       {
         this.state.currentMessage.content.map(line => {
+          console.log(line);
           key++;
           return <div key={key} > {line} </div>;
         })
