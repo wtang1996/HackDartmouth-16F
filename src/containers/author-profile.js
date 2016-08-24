@@ -26,6 +26,16 @@ class authorProfile extends Component {
     this.props.fetchPosts();
   }
 
+  componentWillReceiveProps(nextProps) {
+  // console.log(this.props.author.pictureURL);
+    if (nextProps.author.key) {
+      jQuery.get(nextProps.author.pictureURL, (response) => {
+      // console.log('THIS IS THE PHOTO DATA');
+        this.setState({ data: response });
+      });
+    }
+  }
+
   startAnonymousConversation() {
     let exist = false;
     let count = 0;
@@ -83,20 +93,22 @@ class authorProfile extends Component {
         {
           this.props.posts.map((post) => {
             if (post.authorId === this.props.author.id) {
-              return (
-                <li key={post.id} className="postSummary">
-                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                  <div className="tagsAndAuthor">
-                    <div className="tag">
-                      {post.tags.split(',').map((tag) => {
-                        return (
-                          tag
-                        );
-                      })}
+              if (!post.anonymous) {
+                return (
+                  <li key={post.id} className="postSummary">
+                    <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
+                    <div className="tagsAndAuthor">
+                      <div className="tag">
+                        {post.tags.split(',').map((tag) => {
+                          return (
+                            tag
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
-                </li>
-              );
+                  </li>
+                );
+              }
             }
             return undefined;
           })
@@ -107,29 +119,17 @@ class authorProfile extends Component {
   }
 
   renderPhoto() {
-    // console.log(this.props.user.pictureURL);
-    if (this.props.user.key) {
-      jQuery.get(this.props.user.pictureURL, (response) => {
-        // console.log('THIS IS THE PHOTO DATA');
-        this.setState({ data: response });
-      });
-
-      if (this.state.data) {
-        return (
-          <div className="imagefull">
-            <div className="imagebox">
-              <img role="presentation" width="400" src={this.state.data} />
-            </div>
+    if (this.state.data) {
+      return (
+        <div className="imagefull">
+          <div className="imagebox">
+            <img role="presentation" width="400" src={this.state.data} />
           </div>
-        );
-      } else {
-        return (
-          <div> Loading ... </div>
-        );
-      }
+        </div>
+      );
     } else {
       return (
-        <div> Loading ... </div>
+        <div> No Photo </div>
       );
     }
   }
