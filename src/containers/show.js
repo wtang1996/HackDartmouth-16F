@@ -361,9 +361,6 @@ class Show extends Component {
                 <button onClick={this.onDeletion} className="deleteButton">
                   Delete Post
                 </button>
-                <button onClick={this.onDeletion} className="resolveButton">
-                  Mark Post as Resolved
-                </button>
               </div>
             </div>
           );
