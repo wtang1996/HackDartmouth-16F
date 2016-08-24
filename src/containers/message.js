@@ -21,11 +21,11 @@ class Message extends Component {
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchUser();
-    setInterval(this.props.fetchMessages, 5000);
+    setInterval(this.props.fetchMessages, 3000);
   }
 
   componentWillUpdate() {
-    if (this.state.currentMessageId) {
+    if (this.state.currentMessageId !== '') {
       this.props.fetchMessage(this.state.currentMessageId);
     }
   }
@@ -123,7 +123,7 @@ class Message extends Component {
   }
 
   renderConversation() {
-    if (this.props.message) {
+    if (this.state.currentMessageId !== '') {
       return (
         <div className="messageDetailBox">
           <div className="headerHolder">
