@@ -52,24 +52,24 @@ export function createPost(post) {
   };
 }
 
-export function updatePost(post, id) {
-  return (dispatch) => {
-    const fields = { title: post.title, content: post.content, tags: post.tags };
-    axios.put(`${ROOT_URL}/posts/${id}`, fields, { headers: { authorization: localStorage.getItem('token') } })
-    .then(response => {
-      dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
-    }).catch(error => {
-      dispatch(errorMessage(`Error updating post: ${error.response.data}`));
-    });
-  };
-}
-
 export function fetchPost(id) {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/posts/${id}`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
     }).catch(error => {
       dispatch(errorMessage(`Error fetching post: ${error.response.data}`));
+    });
+  };
+}
+
+export function updatePost(post, id) {
+  return (dispatch) => {
+    const fields = { title: post.title, content: post.content, tags: post.tags };
+    axios.put(`${ROOT_URL}/posts/${id}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    .then(response => {
+      dispatch(fetchPost(id));
+    }).catch(error => {
+      dispatch(errorMessage(`Error updating post: ${error.response.data}`));
     });
   };
 }

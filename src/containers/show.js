@@ -174,6 +174,7 @@ class Show extends Component {
     if (this.props.post.anonymous) {
       return <span> Anonymous </span>;
     } else {
+      console.log(this.props.post.authorName);
       return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.authorName}</Link>;
     }
   }

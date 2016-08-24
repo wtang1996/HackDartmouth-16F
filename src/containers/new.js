@@ -89,6 +89,18 @@ class New extends Component {
     console.log('first is ', files[0]);
   }
 
+  setFound() {
+    this.setState({
+      lost: false,
+    });
+  }
+
+  setLost() {
+    this.setState({
+      lost: true,
+    });
+  }
+
   callback(data) {
     console.log('storing all the data');
     this.setState({ pic: data.target.result });
@@ -110,18 +122,6 @@ class New extends Component {
     } else {
       alert('You need to provide title and description fields');
     }
-  }
-
-  setLost() {
-    this.setState({
-      lost: true,
-    });
-  }
-
-  setFound() {
-    this.setState({
-      lost: false,
-    });
   }
 
   resetType() {
