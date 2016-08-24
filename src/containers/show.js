@@ -46,11 +46,13 @@ class Show extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log('props', nextProps.post);
-    if (nextProps.post.key) {
+    if (nextProps.post.key !== '') {
       jQuery.get(nextProps.post.pictureURL, (response) => {
         console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
+    } else {
+      this.setState({ data: null });
     }
   }
 
@@ -198,6 +200,7 @@ class Show extends Component {
 
   renderPhoto() {
     if (this.state.data) {
+      console.log();
       return (
         <div className="imagefull">
           <div className="imagebox">

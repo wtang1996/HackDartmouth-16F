@@ -146,9 +146,6 @@ class Profile extends Component {
                 <div className="profileTitle">Profile for {this.props.user.username}</div>
                 <div className="profileContent">Email: {this.props.user.email}</div>
                 <div>{this.renderUserPosts()}</div>
-                <button onClick={this.onEditChange} className="doneButton">
-                  Edit
-                </button>
               </div>
             </div>
           );
@@ -160,9 +157,6 @@ class Profile extends Component {
                 <div className="profileTitle">Profile for {this.props.user.username}</div>
                 <div className="profileContent">Email: {this.props.user.email}</div>
                 <div>{this.renderUserPosts()}</div>
-                <button onClick={this.onEditChange} className="doneButton">
-                  Edit
-                </button>
               </div>
             </div>
           );
