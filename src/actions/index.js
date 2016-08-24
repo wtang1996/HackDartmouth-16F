@@ -20,7 +20,6 @@ export const ActionTypes = {
   ERROR_MESSAGE: 'ERROR_MESSAGE',
 };
 
-
 const ROOT_URL = 'https://digup.herokuapp.com/api';
 // const ROOT_URL = 'http://localhost:9090/api';
 
@@ -53,25 +52,24 @@ export function createPost(post) {
   };
 }
 
+export function fetchPost(id) {
+  return (dispatch) => {
+    axios.get(`${ROOT_URL}/posts/${id}`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
+    }).catch(error => {
+      dispatch(errorMessage(`Error fetching post: ${error.response.data}`));
+    });
+  };
+}
+
 export function updatePost(post, id) {
   return (dispatch) => {
     const fields = { title: post.title, content: post.content, tags: post.tags };
     axios.put(`${ROOT_URL}/posts/${id}`, fields, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
+      dispatch(fetchPost(id));
     }).catch(error => {
       dispatch(errorMessage(`Error updating post: ${error.response.data}`));
-    });
-  };
-}
-
-export function fetchPost(id) {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}`).then(response => {
-      dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
-      console.log(`fetch post: ${response.data}`);
-    }).catch(error => {
-      dispatch(errorMessage(`Error fetching post: ${error.response.data}`));
     });
   };
 }
@@ -137,7 +135,6 @@ export function deleteMessage(id) {
     axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });
-      browserHistory.push('/');
     }).catch(error => {
       dispatch(errorMessage(`Error deleting message: ${error.response.data}`));
     });
