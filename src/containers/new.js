@@ -6,7 +6,6 @@ import Dropzone from 'react-dropzone';
 
 import * as actions from '../actions';
 
-// smart component keeps its own state
 class New extends Component {
   constructor(props) {
     super(props);
@@ -24,11 +23,9 @@ class New extends Component {
     this.onContentChange = this.onContentChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onLostChange = this.onLostChange.bind(this);
-    // this.onFoundChange = this.onFoundChange.bind(this);
     this.onAnonymousChange = this.onAnonymousChange.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
-    // this.renderRadio = this.renderRadio.bind(this);
 
     this.renderClothing = this.renderClothing.bind(this);
     this.renderBike = this.renderBike.bind(this);

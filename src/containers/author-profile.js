@@ -88,7 +88,7 @@ class authorProfile extends Component {
   renderUserPosts() {
     return (
       <div className="profileContent">
-        <h2>Your Posts</h2>
+        <h2>{`${this.props.author.username}'s `} Posts</h2>
         <ul>
         {
           this.props.posts.map((post) => {
