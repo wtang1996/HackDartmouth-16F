@@ -14,7 +14,6 @@ class Message extends Component {
     this.renderUserList = this.renderUserList.bind(this);
     this.renderConversation = this.renderConversation.bind(this);
     this.onSend = this.onSend.bind(this);
-    // this.updateConversation = this.updateConversation.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.switchUser = this.switchUser.bind(this);
   }
@@ -51,14 +50,6 @@ class Message extends Component {
       input: '',
     });
   }
-  //
-  // updateConversation() {
-  //   if (this.state.content !== this.props.message.content) {
-  //     setInterval(this.setState({
-  //       content: this.props.message.content,
-  //     }), 5000);
-  //   }
-  // }
 
   switchUser() {
     if (this.state.currentMessage.anonymous) {
@@ -75,7 +66,6 @@ class Message extends Component {
         <span className="messagesTitle">Messages:</span>
       {
         this.state.currentMessage.content.map(line => {
-          console.log(line);
           key++;
           return <div key={key} > {line} </div>;
         })

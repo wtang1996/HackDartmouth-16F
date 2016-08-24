@@ -121,14 +121,13 @@ class Show extends Component {
     }
     if (!exist) {
       this.props.createMessage({ userID: this.props.post.authorId, myID: this.props.user.id,
-        content: [], user: this.props.post.author, anonymous: this.props.post.anonymous, anonTitle: `${this.props.post.title}`, contacted: true });
+        content: [], user: this.props.post.authorName, anonymous: this.props.post.anonymous, anonTitle: `${this.props.post.title}`, contacted: true });
     } else {
       browserHistory.push('/messages');
     }
   }
 
   renderAuthor() {
-    // console.log(this.props.post);
     if (this.props.post.anonymous) {
       return <span> Anonymous </span>;
     } else {
@@ -145,10 +144,8 @@ class Show extends Component {
   }
 
   renderPhoto() {
-    // console.log(this.props.post.pictureURL);
     if (this.props.post.key) {
       jQuery.get(this.props.post.pictureURL, (response) => {
-        // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
 
