@@ -638,6 +638,9 @@ ul {
   background-color: #e6e6e6;
   border: thin solid #c6c6c6;
 }
+.image {
+  transition-duration: 1s;
+}
 
 /***********************************/
 /********** Message Page ***********/
@@ -822,4 +825,13 @@ ul {
   .newFields {
     margin: 20px;
   }
+  .image {
+    width: 20%;
+    height: 20%;
+    transition-duration: .5s;
+  }
+  .profileContent {
+    word-wrap: break-word;
+  }
+
 }

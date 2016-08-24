@@ -112,7 +112,7 @@ class Profile extends Component {
       return (
         <div className="imagefull">
           <div className="imagebox">
-            <img role="presentation" width="400" src={this.state.data} />
+            <img className="image" role="presentation" width="400" src={this.state.data} />
           </div>
         </div>
       );
