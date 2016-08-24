@@ -125,7 +125,7 @@ class Show extends Component {
     if (!this.props.post.anonymous) {
       return <div className="showPostContact" onClick={this.startConversation} > Contact Me! </div>;
     } else {
-      return <div className="showPostContact" onClick={this.startAnonymousConversation} > Contact Me! </div>;
+      return <div className="showPostContact" onClick={this.startAnonymousConversation} > Contact Me (Anonymously)! </div>;
     }
   }
 
