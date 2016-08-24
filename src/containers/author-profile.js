@@ -28,8 +28,8 @@ class authorProfile extends Component {
 
   componentWillReceiveProps(nextProps) {
   // console.log(this.props.author.pictureURL);
-    if (this.props.author.key) {
-      jQuery.get(this.props.author.pictureURL, (response) => {
+    if (nextProps.author.key) {
+      jQuery.get(nextProps.author.pictureURL, (response) => {
       // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
