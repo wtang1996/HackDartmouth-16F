@@ -425,6 +425,20 @@ ul {
 .checkboxDiv input[type=checkbox]:checked + label:after {
   opacity: 1;
 }
+// photo
+#ns-Dropzone {
+}
+.material-icons {
+  border: thin solid white;
+}
+.photoSpace {
+  border: thin solid black;
+  min-width: 220px;
+  min-height: 100px;
+  max-width: 220px;
+  max-height: 100px;
+  cursor: pointer;
+}
 
 /***********************************/
 /********** Show Post Page *********/

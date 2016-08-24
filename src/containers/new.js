@@ -103,7 +103,7 @@ class New extends Component {
           <div className="ns-options">
             <div className="ns-icons">
               <div id="ns-Dropzone">
-                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
+                <Dropzone className="photoSpace" ref="dropzone" onDrop={this.onDrop} multiple={false}>
                   <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
                 </Dropzone>
               </div>
@@ -171,7 +171,6 @@ class New extends Component {
                     <label htmlFor="anonCheck"></label>
                   </div>
                 </div>
-                <div> {this.renderPhoto()} </div>
                 <div className="check">
                   <div className="checkTitle"> Lost Item </div>
                   <div className="checkboxDiv">
@@ -184,6 +183,7 @@ class New extends Component {
                     <label htmlFor="foundCheck"></label>
                   </div>
                 </div>
+                <div> {this.renderPhoto()} </div>
               </div>
               <div className="checksContainer">
                 {this.renderTags()}
