@@ -7,7 +7,7 @@ class Message extends Component {
     super(props);
     this.state = {
       input: '',
-      currentMessage: null,
+      currentMessageId: '',
     };
     this.onContentChange = this.onContentChange.bind(this);
     this.onDeletion = this.onDeletion.bind(this);
@@ -21,6 +21,13 @@ class Message extends Component {
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchUser();
+    setInterval(this.props.fetchMessages, 5000);
+  }
+
+  componentWillUpdate() {
+    if (this.props.message) {
+      setInterval(this.props.fetchMessage(this.props.message.id), 5000);
+    }
   }
 
   onContentChange(event) {
@@ -28,34 +35,34 @@ class Message extends Component {
   }
 
   onDeletion(event) {
-    this.props.deleteMessage(this.state.currentMessage.id);
+    this.props.deleteMessage(this.props.message.id);
     this.setState({
       input: '',
-      currentMessage: this.props.messages.message,
+      currentMessageId: '',
     });
   }
 
   onSend(event) {
     let content = [];
-    if (this.state.currentMessage.content) {
-      content = this.state.currentMessage.content;
+    if (this.props.message.content) {
+      content = this.props.message.content;
     }
-    if (this.state.currentMessage.anonymous) {
+    if (this.props.message.anonymous) {
       content.push(`${this.props.user.id}: ${this.state.input}`);
     } else {
       content.push(`${this.props.user.username}: ${this.state.input}`);
     }
-    this.props.updateMessage({ content }, this.state.currentMessage.id);
+    this.props.updateMessage({ content }, this.props.message.id);
     this.setState({
       input: '',
     });
   }
 
   switchUser() {
-    if (this.state.currentMessage.anonymous) {
-      return this.state.currentMessage.anonTitle;
+    if (this.props.message.anonymous) {
+      return this.props.message.anonTitle;
     } else {
-      return this.state.currentMessage.user;
+      return this.props.message.user;
     }
   }
 
@@ -65,7 +72,7 @@ class Message extends Component {
       <div>
         <span className="messagesTitle">Messages:</span>
       {
-        this.state.currentMessage.content.map(line => {
+        this.props.message.content.map(line => {
           key++;
           return <div key={key} > {line} </div>;
         })
@@ -91,19 +98,19 @@ class Message extends Component {
             if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.anonTitle}</button>
+                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.anonTitle}</button>
                 </li>
               );
             } else if (message.userID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.myName}</button>
+                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.myName}</button>
                 </li>
               );
             } else if (message.myID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessage: message }); }}>{message.user}</button>
+                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.user}</button>
                 </li>
               );
             }
@@ -116,7 +123,7 @@ class Message extends Component {
   }
 
   renderConversation() {
-    if (this.state.currentMessage) {
+    if (this.props.message) {
       return (
         <div className="messageDetailBox">
           <div className="headerHolder">
@@ -162,6 +169,7 @@ class Message extends Component {
 const mapStateToProps = (state) => (
   {
     messages: state.messages.all,
+    message: state.messages.message,
     user: state.profile.user,
   }
 );

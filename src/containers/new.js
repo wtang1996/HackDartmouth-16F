@@ -15,7 +15,7 @@ class New extends Component {
       content: '',
       title: '',
       tags: '',
-      lost: false,
+      type: '',
       anonymous: false,
       pic: '',
       files: [],
@@ -28,6 +28,25 @@ class New extends Component {
     this.onAnonymousChange = this.onAnonymousChange.bind(this);
     this.submit = this.submit.bind(this);
     this.renderTags = this.renderTags.bind(this);
+    // this.renderRadio = this.renderRadio.bind(this);
+
+    this.renderClothing = this.renderClothing.bind(this);
+    this.renderBike = this.renderBike.bind(this);
+    this.renderTechnology = this.renderTechnology.bind(this);
+    this.renderOther = this.renderOther.bind(this);
+
+    this.renderLostItem = this.renderLostItem.bind(this);
+    this.renderFoundItem = this.renderFoundItem.bind(this);
+
+    this.setLost = this.setLost.bind(this);
+    this.setFound = this.setFound.bind(this);
+    this.resetType = this.resetType.bind(this);
+
+
+    this.changeBike = this.changeBike.bind(this);
+    this.changeTech = this.changeTech.bind(this);
+    this.changeOther = this.changeOther.bind(this);
+    this.changeClothing = this.changeClothing.bind(this);
     this.callback = this.callback.bind(this);
     this.onDrop = this.onDrop.bind(this);
   }
@@ -48,7 +67,6 @@ class New extends Component {
   onAnonymousChange(event) {
     this.setState({ anonymous: !this.state.anonymous });
   }
-
 
   onDrop(files) {
     const reader = new FileReader();
@@ -71,11 +89,22 @@ class New extends Component {
     console.log('first is ', files[0]);
   }
 
+  setFound() {
+    this.setState({
+      lost: false,
+    });
+  }
+
+  setLost() {
+    this.setState({
+      lost: true,
+    });
+  }
+
   callback(data) {
     console.log('storing all the data');
     this.setState({ pic: data.target.result });
   }
-
 
   submit(e) {
     e.preventDefault();
@@ -85,7 +114,7 @@ class New extends Component {
         title: '',
         content: '',
         tags: '',
-        lost: false,
+        type: '',
         anonymous: false,
         pic: '',
         files: [],
@@ -93,6 +122,61 @@ class New extends Component {
     } else {
       alert('You need to provide title and description fields');
     }
+  }
+
+  resetType() {
+    this.setState({
+      type: false,
+    });
+  }
+
+  // renderRadio() {
+  //   return (
+  //     <div>
+  //       <select name="cars">
+  //         <option value="volvo">Volvo</option>
+  //         <option value="saab">Saab</option>
+  //         <option value="fiat">Fiat</option>
+  //         <option value="audi">Audi</option>
+  //       </select>
+  //     </div>
+  //   );
+  // }
+
+  changeClothing() {
+    if (this.state.tags !== 'Clothing') {
+      this.setState({
+        tags: 'Clothing',
+      });
+    }
+  }
+
+  changeBike() {
+    if (this.state.tags !== 'Bike') {
+      this.setState({
+        tags: 'Bike',
+      });
+    }
+  }
+
+  changeTech() {
+    if (this.state.tags !== 'Technology') {
+      this.setState({
+        tags: 'Technology',
+      });
+    }
+  }
+
+  changeOther() {
+    if (this.state.tags !== 'Other') {
+      this.setState({
+        tags: 'Other',
+      });
+    }
+  }
+
+  changeLostFound() {
+    this.setState({ lost: !this.state.lost });
   }
 
   renderPhoto() {
@@ -103,8 +187,8 @@ class New extends Component {
           <div className="ns-options">
             <div className="ns-icons">
               <div id="ns-Dropzone">
-                <Dropzone ref="dropzone" onDrop={this.onDrop} multiple={false}>
-                  <i id="drop-zone-icon" className="material-icons">Upload a photo</i>
+                <Dropzone ref="dropzone" className="photoSpace" onDrop={this.onDrop} multiple={false}>
+                  <i id="drop-zone-icon" className="material-icons">Upload a photo Here</i>
                 </Dropzone>
               </div>
             </div>
@@ -118,43 +202,165 @@ class New extends Component {
     }
   }
 
-  renderTags() {
-    return (
-      <div>
-        Tags
+  renderClothing() {
+    if (this.state.tags === 'Clothing') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Clothing </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="clothingCheck" name="check" checked />
+            <label htmlFor="clothingCheck" onClick={this.changeClothing}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
         <div className="check">
           <div className="checkTitle"> Clothing </div>
           <div className="checkboxDiv">
             <input type="checkbox" value="None" id="clothingCheck" name="check" />
-            <label htmlFor="clothingCheck"></label>
+            <label htmlFor="clothingCheck" onClick={this.changeClothing}></label>
           </div>
         </div>
+      );
+    }
+  }
+
+  renderTechnology() {
+    if (this.state.tags === 'Technology') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Technology </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="techCheck" name="check" checked />
+            <label htmlFor="techCheck" onClick={this.changeTech}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
         <div className="check">
           <div className="checkTitle"> Technology </div>
           <div className="checkboxDiv">
             <input type="checkbox" value="None" id="techCheck" name="check" />
-            <label htmlFor="techCheck"></label>
+            <label htmlFor="techCheck" onClick={this.changeTech}></label>
           </div>
         </div>
+      );
+    }
+  }
+
+  renderBike() {
+    if (this.state.tags === 'Bike') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Bike </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="bikeCheck" name="check" checked />
+            <label htmlFor="bikeCheck" onClick={this.changeBike}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
         <div className="check">
           <div className="checkTitle"> Bike </div>
           <div className="checkboxDiv">
             <input type="checkbox" value="None" id="bikeCheck" name="check" />
-            <label htmlFor="bikeCheck"></label>
+            <label htmlFor="bikeCheck" onClick={this.changeBike}></label>
           </div>
         </div>
+      );
+    }
+  }
+
+  renderOther() {
+    if (this.state.tags === 'Other') {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Other </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="otherCheck" name="check" checked />
+            <label htmlFor="otherCheck" onClick={this.changeOther}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
         <div className="check">
           <div className="checkTitle"> Other </div>
           <div className="checkboxDiv">
             <input type="checkbox" value="None" id="otherCheck" name="check" />
-            <label htmlFor="otherCheck"></label>
+            <label htmlFor="otherCheck" onClick={this.changeOther}></label>
           </div>
         </div>
+      );
+    }
+  }
+
+  renderLostItem() {
+    if (this.state.lost === true) {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Lost Item </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="lostCheck" name="check" checked />
+            <label htmlFor="lostCheck" onClick={this.setLost}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Lost Item </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="lostCheck" name="check" />
+            <label htmlFor="lostCheck" onClick={this.setLost}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  renderFoundItem() {
+    if (this.state.lost === false) {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Found Item </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="foundCheck" name="check" checked />
+            <label htmlFor="foundCheck" onClick={this.setFound}></label>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="check">
+          <div className="checkTitle"> Found Item </div>
+          <div className="checkboxDiv">
+            <input type="checkbox" value="None" id="foundCheck" name="check" />
+            <label htmlFor="foundCheck" onClick={this.setFound}></label>
+          </div>
+        </div>
+      );
+    }
+  }
+
+
+  renderTags() {
+    return (
+      <div className="allTags">
+        Tags
+        {this.renderClothing()}
+        {this.renderBike()}
+        {this.renderTechnology()}
+        {this.renderOther()}
       </div>
     );
   }
 
   render() {
+    console.log(this.state.type);
     return (
       <div>
         <h1 className="submissionTitle">New Post</h1>
@@ -171,22 +377,14 @@ class New extends Component {
                     <label htmlFor="anonCheck"></label>
                   </div>
                 </div>
-                <div> {this.renderPhoto()} </div>
                 <div className="check">
-                  <div className="checkTitle"> Lost Item </div>
-                  <div className="checkboxDiv">
-                    <input type="checkbox" value="None" id="lostCheck" name="check" onClick={this.onLostChange} />
-                    <label htmlFor="lostCheck"></label>
-                  </div>
-                  <div className="checkTitle"> Found Item </div>
-                  <div className="checkboxDiv">
-                    <input type="checkbox" value="None" id="foundCheck" name="check" />
-                    <label htmlFor="foundCheck"></label>
-                  </div>
+                  {this.renderLostItem()}
+                  {this.renderFoundItem()}
                 </div>
               </div>
-              <div className="checksContainer">
+              <div>
                 {this.renderTags()}
+                <div> {this.renderPhoto()} </div>
               </div>
             </div>
             <div className="buttonContainer">
