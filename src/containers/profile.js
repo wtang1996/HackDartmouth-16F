@@ -26,6 +26,16 @@ class Profile extends Component {
     this.props.fetchPosts();
   }
 
+  componentWillReceiveProps(nextProps) {
+    console.log('props', nextProps.user);
+    if (nextProps.user.key) {
+      jQuery.get(nextProps.user.pictureURL, (response) => {
+        console.log('THIS IS THE PHOTO DATA');
+        this.setState({ data: response });
+      });
+    }
+  }
+
   onEditChange(event) {
     if (this.state.editing) {
       this.setState({
@@ -98,29 +108,17 @@ class Profile extends Component {
   }
 
   renderPhoto() {
-    // console.log(this.props.user.pictureURL);
-    if (this.props.user.key) {
-      jQuery.get(this.props.user.pictureURL, (response) => {
-        // console.log('THIS IS THE PHOTO DATA');
-        this.setState({ data: response });
-      });
-
-      if (this.state.data) {
-        return (
-          <div className="imagefull">
-            <div className="imagebox">
-              <img role="presentation" width="400" src={this.state.data} />
-            </div>
+    if (this.state.data) {
+      return (
+        <div className="imagefull">
+          <div className="imagebox">
+            <img role="presentation" width="400" src={this.state.data} />
           </div>
-        );
-      } else {
-        return (
-          <div> Loading ... </div>
-        );
-      }
+        </div>
+      );
     } else {
       return (
-        <div> Loading ... </div>
+        <div> No Photo </div>
       );
     }
   }

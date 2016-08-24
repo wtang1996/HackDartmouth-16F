@@ -18,7 +18,7 @@ const store = createStore(reducers, {}, compose(
 
 const token = localStorage.getItem('token');
 if (token) {
-  store.dispatch({ type: ActionTypes.AUTH_USER });
+  store.dispatch({ type: ActionTypes.AUTH_USER, payload: token.sub });
 }
 
 ReactDOM.render(
