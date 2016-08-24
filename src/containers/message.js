@@ -25,8 +25,8 @@ class Message extends Component {
   }
 
   componentWillUpdate() {
-    if (this.props.message) {
-      setInterval(this.props.fetchMessage(this.props.message.id), 5000);
+    if (this.state.currentMessageId) {
+      this.props.fetchMessage(this.state.currentMessageId);
     }
   }
 
@@ -98,19 +98,19 @@ class Message extends Component {
             if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.anonTitle}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.anonTitle}</button>
                 </li>
               );
             } else if (message.userID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.myName}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.myName}</button>
                 </li>
               );
             } else if (message.myID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.user}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.user}</button>
                 </li>
               );
             }
