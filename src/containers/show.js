@@ -65,7 +65,7 @@ class Show extends Component {
         editing: true,
         title: this.props.post.title,
         content: this.props.post.content,
-        // tags: this.props.post.tags,
+        tags: '',
       });
     }
   }
@@ -174,6 +174,7 @@ class Show extends Component {
     if (this.props.post.anonymous) {
       return <span> Anonymous </span>;
     } else {
+      console.log(this.props.post.authorName);
       return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.authorName}</Link>;
     }
   }
