@@ -21,7 +21,7 @@ class Message extends Component {
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchUser();
-    setInterval(this.props.fetchMessages, 3000);
+    setInterval(this.props.fetchMessages, 5000);
   }
 
   componentWillUpdate() {
