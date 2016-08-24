@@ -62,7 +62,7 @@ class Message extends Component {
     if (this.props.message.anonymous) {
       return this.props.message.anonTitle;
     } else {
-      return this.props.message.user;
+      return this.props.user.username;
     }
   }
 
