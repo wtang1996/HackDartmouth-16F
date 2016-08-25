@@ -90,7 +90,6 @@ export function fetchMessages() {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/messages`).then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
-      console.log(`messages: ${response.data}`);
     }).catch(error => {
       dispatch(errorMessage(`Error fetching all messages: ${error.response.data}`));
     });
@@ -188,7 +187,6 @@ export function fetchUser() {
       dispatch({ type: ActionTypes.FETCH_USER, payload: {
         user: response.data,
       } });
-      console.log(`user data: ${response.data}`);
     }).catch(error => {
       dispatch(errorMessage(`Cannot get user data: ${error.response.data}`));
     });

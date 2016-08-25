@@ -26,6 +26,7 @@ class Message extends Component {
 
   componentWillUpdate() {
     if (this.state.currentMessageId !== '') {
+      console.log('sdf');
       this.props.fetchMessage(this.state.currentMessageId);
     }
   }
@@ -52,7 +53,8 @@ class Message extends Component {
     } else {
       content.push(`${this.props.user.username}: ${this.state.input}`);
     }
-    this.props.updateMessage({ content }, this.props.message.id);
+    this.props.updateMessage({ content }, this.state.currentMessageId);
+    this.props.fetchMessage(this.state.currentMessageId);
     this.setState({
       input: '',
     });
