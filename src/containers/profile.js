@@ -22,15 +22,13 @@ class Profile extends Component {
   }
 
   componentWillMount() {
-    this.props.fetchUser();
     this.props.fetchPosts();
+    this.props.fetchUser();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('props', nextProps.user);
     if (nextProps.user.key) {
       jQuery.get(nextProps.user.pictureURL, (response) => {
-        console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
     }
@@ -54,7 +52,6 @@ class Profile extends Component {
     reader.onload = this.callback;
     reader.onload = (upload) => {
       this.setState({ pic: upload.target.result });
-      console.log(upload.target.result);
     };
 
     reader.onerror = function randomfunction(stuff) {
@@ -63,15 +60,9 @@ class Profile extends Component {
     };
 
     reader.readAsDataURL(files[0]);
-
-   // const newArray = this.state.files.slice();
-    console.log('Received files: ', files);
-   // newArray.push(files);
-    console.log('first is ', files[0]);
   }
 
   callback(data) {
-    console.log('storing all the data');
     this.setState({ pic: data.target.result });
   }
 
@@ -124,7 +115,8 @@ class Profile extends Component {
   }
 
   render() {
-    if (this.props.user != null) {
+    if (this.props.user !== null) {
+      console.log('here');
       // check if your own profile
       if (true) {
         if (this.state.isEditing) {
@@ -174,14 +166,11 @@ class Profile extends Component {
         );
       }
     } else {
-      return (
-        <div> Loading ... </div>
-      );
+      console.log('asdf');
+      return <div>Loading......</div>;
     }
   }
 }
-
-// connects particular parts of redux state to this components props
 
 const mapStateToProps = (state) => (
   {

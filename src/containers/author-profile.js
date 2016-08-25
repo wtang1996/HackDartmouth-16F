@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { browserHistory, Link } from 'react-router';
@@ -27,10 +26,8 @@ class authorProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-  // console.log(this.props.author.pictureURL);
     if (nextProps.author.key) {
       jQuery.get(nextProps.author.pictureURL, (response) => {
-      // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
     }
@@ -88,7 +85,7 @@ class authorProfile extends Component {
   renderUserPosts() {
     return (
       <div className="profileContent">
-        <h2>{`${this.props.author.username}'s `} Posts</h2>
+        <h2>Your Posts</h2>
         <ul>
         {
           this.props.posts.map((post) => {
