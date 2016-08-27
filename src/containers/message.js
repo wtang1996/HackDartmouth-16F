@@ -16,19 +16,14 @@ class Message extends Component {
     this.onSend = this.onSend.bind(this);
     this.renderContent = this.renderContent.bind(this);
     this.switchUser = this.switchUser.bind(this);
+    this.updateMessage = this.updateMessage.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchUser();
     setInterval(this.props.fetchMessages, 5000);
-  }
-
-  componentWillUpdate() {
-    if (this.state.currentMessageId !== '') {
-      console.log('sdf');
-      this.props.fetchMessage(this.state.currentMessageId);
-    }
+    setInterval(this.updateMessage, 5000);
   }
 
   onContentChange(event) {
@@ -60,35 +55,47 @@ class Message extends Component {
     });
   }
 
+  updateMessage() {
+    if (this.state.currentMessageId !== '') {
+      this.props.fetchMessage(this.state.currentMessageId);
+    }
+  }
+
   switchUser() {
-    if (this.props.message.anonymous) {
-      if (this.props.message.userID === this.props.user.id) {
-        return this.props.message.myID;
+    if (this.props.message) {
+      if (this.props.message.anonymous) {
+        if (this.props.message.userID === this.props.user.id) {
+          return this.props.message.myID;
+        } else {
+          return this.props.message.userID;
+        }
       } else {
-        return this.props.message.userID;
-      }
-    } else {
-      if (this.props.message.userID === this.props.user.id) {
-        return (this.props.message.myName);
-      } else {
-        return (this.props.message.user);
+        if (this.props.message.userID === this.props.user.id) {
+          return (this.props.message.myName);
+        } else {
+          return (this.props.message.user);
+        }
       }
     }
+    return undefined;
   }
 
   renderContent() {
     let key = 0;
-    return (
-      <div>
-        <span className="messagesTitle">Messages:</span>
-      {
-        this.props.message.content.map(line => {
-          key++;
-          return <div key={key} > {line} </div>;
-        })
-      }
-      </div>
-    );
+    if (this.props.message) {
+      return (
+        <div>
+          <span className="messagesTitle">Messages:</span>
+          {
+            this.props.message.content.map(line => {
+              key++;
+              return <div key={key} > {line} </div>;
+            })
+          }
+        </div>
+      );
+    }
+    return undefined;
   }
 
 
@@ -108,19 +115,19 @@ class Message extends Component {
             if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.anonTitle}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); this.props.fetchMessage(message.id); }}>{message.anonTitle}</button>
                 </li>
               );
             } else if (message.userID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.myName}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); this.props.fetchMessage(message.id); }}>{message.myName}</button>
                 </li>
               );
             } else if (message.myID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.user}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); this.props.fetchMessage(message.id); }}>{message.user}</button>
                 </li>
               );
             }
