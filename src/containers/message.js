@@ -52,7 +52,6 @@ class Message extends Component {
       content.push(`${this.props.user.username}: ${this.state.input}`);
     }
     this.props.updateMessage({ content }, this.props.message.id);
-    this.props.fetchMessage(this.props.message.id);
     this.setState({
       input: '',
     });

@@ -36,7 +36,7 @@ export function fetchPosts() {
     axios.get(`${ROOT_URL}/posts`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POSTS, posts: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching all posts: ${error.response}`));
+      console.log(error.response);
     });
   };
 }
@@ -92,7 +92,7 @@ export function fetchMessages() {
     axios.get(`${ROOT_URL}/messages`).then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching all messages: ${error.response}`));
+      console.log(error.response);
     });
   };
 }
@@ -190,7 +190,7 @@ export function fetchUser() {
         user: response.data,
       } });
     }).catch(error => {
-      dispatch(errorMessage(`Cannot get user data: ${error.response}`));
+      console.log(error.response);
     });
   };
 }
