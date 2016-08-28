@@ -31,9 +31,25 @@ Using Travis Cl to run automatic linting and automatic pushes to surge, Eslint w
 
 TODO:  descriptions of code organization and tools and libraries used
 
+Libraries used in this project include  
+   
+    `"axios": "^0.13.1",
+    "dropzone": "^4.3.0",
+    "immutable": "^3.8.1",
+    "jquery": "^3.1.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-dropzone": "^3.5.3",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.5.2",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"`
+
 ## Setup
 
 TODO: how to get the project dev environment up and running, npm install etc
+
+First, use the command `npm install` to install all the dependencies.
 
 ## Deployment
 
