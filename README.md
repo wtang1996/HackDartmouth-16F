@@ -73,15 +73,14 @@ Libraries used in the back end:
 ### Front End Dev Environment
 
 First, run `npm install` to fetch all the webpack dependencies.
+
 Then `npm start` will start the front end website on http://localhost:8080.
 
 ### Back End Dev Environment
 
 `npm run dev` will start the backend app on http://localhost:9090 in dev reloading mode.
 
-Remember to change the server api url
-`// const ROOT_URL = 'https://digup.herokuapp.com/api';
- const ROOT_URL = 'http://localhost:9090/api';`
+Remember to change the server api url to `const ROOT_URL = 'http://localhost:9090/api';`
 
 Also run the `mongod &` process in background, which the node app will connect to.
 
