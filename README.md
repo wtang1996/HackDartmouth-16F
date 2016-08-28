@@ -8,7 +8,7 @@ Signin Page
 ![Signin Page](/img/Signin.png)
 
 Signup Page
-![Signup Page](/img/Signup.png)
+![Signup Page](/img/signup.png)
 
 Main Screen
 ![main screen](/img/mainScreen.png)
