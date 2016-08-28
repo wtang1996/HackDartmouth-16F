@@ -39,7 +39,7 @@ TODO: how to get the project dev environment up and running, npm install etc
 
 ### Front End
 
-After pushing to github, type command `npm run deploy` into console, and the website would be built and deployed to the default domain digup.surge.sh
+After pushing to github, type command `npm run deploy` into console, and the website would be built and deployed to the default domain https://digup.surge.sh
 
 ### Back End
 

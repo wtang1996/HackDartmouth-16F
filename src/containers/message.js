@@ -26,7 +26,7 @@ class Message extends Component {
 
   componentDidMount() {
     // setInterval(this.props.fetchMessages, 1000);
-    setInterval(this.updateMessage, 1000);
+    setInterval(this.updateMessage, 3000);
   }
 
   onContentChange(event) {
