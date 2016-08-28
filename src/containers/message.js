@@ -8,6 +8,7 @@ class Message extends Component {
     this.state = {
       input: '',
       currentMessageId: '',
+      intervalId: '',
     };
     this.onContentChange = this.onContentChange.bind(this);
     this.onDeletion = this.onDeletion.bind(this);
@@ -22,11 +23,14 @@ class Message extends Component {
   componentWillMount() {
     this.props.fetchMessages();
     this.props.fetchUser();
+    const foo = setInterval(this.updateMessage, 1000);
+    this.setState({
+      intervalId: foo,
+    });
   }
 
-  componentDidMount() {
-    // setInterval(this.props.fetchMessages, 1000);
-    setInterval(this.updateMessage, 3000);
+  componentWillUnmount() {
+    clearInterval(this.state.intervalId);
   }
 
   onContentChange(event) {
@@ -34,7 +38,7 @@ class Message extends Component {
   }
 
   onDeletion(event) {
-    this.props.deleteMessage(this.props.message.id);
+    this.props.deleteMessage(this.state.currentMessageId);
     this.setState({
       input: '',
       currentMessageId: '',
@@ -58,8 +62,9 @@ class Message extends Component {
   }
 
   updateMessage() {
-    if (this.props.message) {
-      this.props.fetchMessage(this.props.message.id);
+    if (this.state.currentMessageId) {
+      console.log(this.state.currentMessageId);
+      this.props.fetchMessage(this.state.currentMessageId);
     }
   }
 
@@ -117,19 +122,19 @@ class Message extends Component {
             if (message.anonymous && (message.userID === this.props.user.id || message.myID === this.props.user.id)) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.anonTitle}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.anonTitle}</button>
                 </li>
               );
             } else if (message.userID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.myName}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.myName}</button>
                 </li>
               );
             } else if (message.myID === this.props.user.id) {
               return (
                 <li key={message.id}>
-                  <button onClick={() => { this.props.fetchMessage(message.id); }}>{message.user}</button>
+                  <button onClick={() => { this.setState({ currentMessageId: message.id }); }}>{message.user}</button>
                 </li>
               );
             }
@@ -142,7 +147,7 @@ class Message extends Component {
   }
 
   renderConversation() {
-    if (this.props.message) {
+    if (this.state.currentMessageId) {
       return (
         <div className="messageDetailBox">
           <div className="headerHolder">
