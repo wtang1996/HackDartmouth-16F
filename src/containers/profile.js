@@ -55,8 +55,8 @@ class Profile extends Component {
     };
 
     reader.onerror = function randomfunction(stuff) {
-      console.log('error', stuff);
-      console.log(stuff.getMessage());
+      // console.log('error', stuff);
+      // console.log(stuff.getMessage());
     };
 
     reader.readAsDataURL(files[0]);
@@ -116,7 +116,7 @@ class Profile extends Component {
 
   render() {
     if (this.props.user !== null) {
-      console.log('here');
+      // console.log('here');
       // check if your own profile
       if (true) {
         if (this.state.isEditing) {
@@ -166,7 +166,6 @@ class Profile extends Component {
         );
       }
     } else {
-      console.log('asdf');
       return <div>Loading......</div>;
     }
   }

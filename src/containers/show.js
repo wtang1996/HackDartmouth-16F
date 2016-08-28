@@ -41,14 +41,16 @@ class Show extends Component {
 
   componentWillMount() {
     this.props.fetchPost(this.props.params.id);
+    this.props.fetchUser();
+    this.props.fetchPosts();
     // this.props.fetchMessages();
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('props', nextProps.post);
+    // console.log('props', nextProps.post);
     if (nextProps.post.key !== '') {
       jQuery.get(nextProps.post.pictureURL, (response) => {
-        console.log('THIS IS THE PHOTO DATA');
+        // console.log('THIS IS THE PHOTO DATA');
         this.setState({ data: response });
       });
     } else {
@@ -185,7 +187,7 @@ class Show extends Component {
     if (this.props.post.anonymous) {
       return <span> Anonymous </span>;
     } else {
-      console.log(this.props.post.authorName);
+      // console.log(this.props.post.authorName);
       return <Link to={`profile/${this.props.post.authorId}`} className="authorLink">{this.props.post.authorName}</Link>;
     }
   }
@@ -200,7 +202,6 @@ class Show extends Component {
 
   renderPhoto() {
     if (this.state.data) {
-      console.log();
       return (
         <div className="imagefull">
           <div className="imagebox">
@@ -324,8 +325,8 @@ class Show extends Component {
 
 
   render() {
-    if (this.props.post) {
-      console.log(this.state.tags);
+    if (this.props.post && this.props.user) {
+      // console.log(this.state.tags);
       if (this.props.post.authorId === this.props.user.id) {
         if (this.state.editing) {
           return (

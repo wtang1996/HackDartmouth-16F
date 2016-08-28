@@ -18,6 +18,7 @@ export const ActionTypes = {
   FETCH_USER: 'FETCH_USER',
   FETCH_AUTHOR: 'FETCH_AUTHOR',
   ERROR_MESSAGE: 'ERROR_MESSAGE',
+  FETCH_MESSAGE_ERROR: 'FETCH_MESSAGE_ERROR',
 };
 
 const ROOT_URL = 'https://digup.herokuapp.com/api';
@@ -35,7 +36,7 @@ export function fetchPosts() {
     axios.get(`${ROOT_URL}/posts`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POSTS, posts: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching all posts: ${error.response.data}`));
+      dispatch(errorMessage(`Error fetching all posts: ${error.response}`));
     });
   };
 }
@@ -47,7 +48,7 @@ export function createPost(post) {
       dispatch({ type: ActionTypes.CREATE_POST, payload: { post } });
       browserHistory.push('/');
     }).catch(error => {
-      dispatch(errorMessage(`Error creating post: ${error.response.data}`));
+      dispatch(errorMessage(`Error creating post: ${error.response}`));
     });
   };
 }
@@ -57,7 +58,7 @@ export function fetchPost(id) {
     axios.get(`${ROOT_URL}/posts/${id}`).then(response => {
       dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching post: ${error.response.data}`));
+      dispatch(errorMessage(`Error fetching post: ${error.response}`));
     });
   };
 }
@@ -69,7 +70,7 @@ export function updatePost(post, id) {
     .then(response => {
       dispatch(fetchPost(id));
     }).catch(error => {
-      dispatch(errorMessage(`Error updating post: ${error.response.data}`));
+      dispatch(errorMessage(`Error updating post: ${error.response}`));
     });
   };
 }
@@ -81,7 +82,7 @@ export function deletePost(id) {
       dispatch({ type: ActionTypes.DELETE_POST, payload: null });
       browserHistory.push('/');
     }).catch(error => {
-      dispatch(errorMessage(`Error deleting post: ${error.response.data}`));
+      dispatch(errorMessage(`Error deleting post: ${error.response}`));
     });
   };
 }
@@ -91,7 +92,7 @@ export function fetchMessages() {
     axios.get(`${ROOT_URL}/messages`).then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching all messages: ${error.response.data}`));
+      dispatch(errorMessage(`Error fetching all messages: ${error.response}`));
     });
   };
 }
@@ -103,7 +104,7 @@ export function createMessage(message) {
       dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { message } });
       browserHistory.push('/messages');
     }).catch(error => {
-      dispatch(errorMessage(`Error creating message: ${error.response.data}`));
+      dispatch(errorMessage(`Error creating message: ${error.response}`));
     });
   };
 }
@@ -114,7 +115,7 @@ export function updateMessage(message, id) {
     .then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error updating message: ${error.response.data}`));
+      dispatch(errorMessage(`Error updating message: ${error.response}`));
     });
   };
 }
@@ -124,7 +125,7 @@ export function fetchMessage(id) {
     axios.get(`${ROOT_URL}/messages/${id}`).then(response => {
       dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching message: ${error.response.data}`));
+      dispatch({ type: ActionTypes.FETCH_MESSAGE_ERROR });
     });
   };
 }
@@ -134,8 +135,9 @@ export function deleteMessage(id) {
     axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
       dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });
+      dispatch(fetchMessages());
     }).catch(error => {
-      dispatch(errorMessage(`Error deleting message: ${error.response.data}`));
+      dispatch(errorMessage(`Error deleting message: ${error.response}`));
     });
   };
 }
@@ -162,7 +164,7 @@ export function signinUser({ email, password }) {
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/');
     }).catch(error => {
-      dispatch(authError(`Sign In Failed: ${error.response.data}`));
+      dispatch(authError(`Sign In Failed: ${error.response}`));
     });
   };
 }
@@ -175,7 +177,7 @@ export function signupUser({ email, password, username, pic }) {
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/');
     }).catch(error => {
-      dispatch(authError(`Sign Up Failed: ${error.response.data}`));
+      dispatch(authError(`Sign Up Failed: ${error.response}`));
     });
   };
 }
@@ -188,7 +190,7 @@ export function fetchUser() {
         user: response.data,
       } });
     }).catch(error => {
-      dispatch(errorMessage(`Cannot get user data: ${error.response.data}`));
+      dispatch(errorMessage(`Cannot get user data: ${error.response}`));
     });
   };
 }
@@ -200,7 +202,7 @@ export function fetchAuthor(id) {
         author: response.data,
       } });
     }).catch(error => {
-      dispatch(errorMessage(`Cannot get author data: ${error.response.data}`));
+      dispatch(errorMessage(`Cannot get author data: ${error.response}`));
     });
   };
 }

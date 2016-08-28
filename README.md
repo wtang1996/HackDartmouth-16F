@@ -28,7 +28,14 @@ TODO: how to get the project dev environment up and running, npm install etc
 
 ## Deployment
 
-TODO: how to deploy the project
+### Front End
+
+Type in command `npm run deploy`, and then node will build the website and deploy it to
+the default domain digup.surge.sh
+
+### Back End
+
+Heroku 
 
 ## Authors
 
