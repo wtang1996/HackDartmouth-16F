@@ -4,17 +4,26 @@
 
 ## Sample Screenshots
 
-Login Page
-![Login Page](/img/login.png?raw=true "Login Page")
+Signin Page
+![Signin Page](/img/Signin.png)
 
 Signup Page
-![Signup Page](/img/signup.png?raw=true "Signup Page")
+![Signup Page](/img/Signup.png)
 
 Main Screen
 ![main screen](/img/mainScreen.png)
 
+Post
+![post](/img/Post.png)
+
+New Post
+![new post](/img/newPost.png)
+
 Messages
 ![messages](/img/messages.png)
+
+Profile
+![profile](/img/Profile.png)
 
 ## Architecture
 Using Travis Cl to run automatic linting and automatic pushes to surge, Eslint with Airbnb config, and git-hooks to reduce the chances of accidentally ruining the repositories.
