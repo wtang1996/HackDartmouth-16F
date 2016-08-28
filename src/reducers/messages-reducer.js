@@ -20,6 +20,10 @@ const MessagesReducer = (state = initialState, action) => {
       return state;
     case ActionTypes.DELETE_MESSAGE:
       return state;
+    case ActionTypes.FETCH_MESSAGE_ERROR:
+      return Object.assign({}, state, {
+        message: null,
+      });
     default:
       return state;
   }
