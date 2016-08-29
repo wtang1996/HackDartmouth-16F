@@ -12,7 +12,7 @@ Users sign in here to view existing posts with valid authentication credentials.
 
 Signup Page
 
-Users may sign up to create an account to access post listings and create posts.
+Users may sign up to create an account to access post listings and create posts with a unique email address, username, password, and profile picture.
 
 ![Signup Page](/img/signup.png)
 
@@ -42,7 +42,7 @@ Accessible through the upper navbar and provides a list of all current conversat
 
 Profile
 
-Accessible through the upper navbar and details the user's posts, information, and profile picture.
+Accessible through the upper navbar and details the user's posts, personal information, and profile picture.
 
 ![profile](/img/Profile.png)
 
