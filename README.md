@@ -31,8 +31,13 @@ TODO:  descriptions of code organization and tools and libraries used
 
 Using Travis Cl to run automatic linting and automatic pushes to surge, Eslint with Airbnb config, and git-hooks to reduce the chances of accidentally ruining the repositories.
 
+### Front End
 
+TODO
 
+### Back End
+
+For the Back End, we used express and mongodb to build a CRUD api server. Express is a web framework for Node.js, which provides a way to listen for and respond to incoming web requests. We host the backend server on Heroku and connect the app to a mongo database by provisioning the Sandbox verson of mLab. We were able to create a few data models such as post, user and message to store the data from front end. The back end also supports authentication. We used Passport.js to make JWT's for us.
 
 
 
