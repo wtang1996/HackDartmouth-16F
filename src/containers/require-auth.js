@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 export default function (ComposedComponent) {
-  // function based "dumb" component with no state
   class RequireAuth extends Component {
 
     componentWillMount() {
@@ -23,13 +22,11 @@ export default function (ComposedComponent) {
     }
   }
 
-  // connects particular parts of redux state to this components props
   const mapStateToProps = (state) => (
     {
       authenticated: state.auth.authenticated,
     }
   );
 
-  // react-redux glue -- outputs Container that know state in props
   return connect(mapStateToProps, null)(RequireAuth);
 }

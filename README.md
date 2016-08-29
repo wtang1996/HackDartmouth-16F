@@ -5,39 +5,44 @@
 ## Sample Screenshots
 
 Signin Page
+Users sign in here to view existing posts with valid authentication credentials.
 ![Signin Page](/img/Signin.png)
 
 Signup Page
+Users may sign up to create an account to access post listings and create posts.
 ![Signup Page](/img/signup.png)
 
-Main Screen
+Home Page
+A side by side listings main screen with lost and found items. Users can use this page to navigate through posts, create personal posts, and filter by tags.
 ![main screen](/img/mainScreen.png)
 
 Post
+Accessible through the home page and provides detailed information on the specific properties of the item including a description, tags, image, and a means of contacting the post's owner.
 ![post](/img/Post.png)
 
 New Post
+Accessible through the home page and provides a auto-generated form for the user to fill out and upload the title, tag, description, photo, anonymity, and whether it was lost or found.
 ![new post](/img/newPost.png)
 
 Messages
+Accessible through the upper navbar and provides a list of all current conversations with other anonymous or unanonymous users.
 ![messages](/img/messages.png)
 
 Profile
+Accessible through the upper navbar and details the user's posts, information, and profile picture.
 ![profile](/img/Profile.png)
 
 ## Architecture
 
-TODO:  descriptions of code organization and tools and libraries used
-
-Using Travis Cl to run automatic linting and automatic pushes to surge, Eslint with Airbnb config, and git-hooks to reduce the chances of accidentally ruining the repositories.
+We currently implement Travis Cl to run automatic linting, Eslint with Airbnb config, and git-hooks to mitigate the damages to the repository structure caused by accidental pushes on both front and back ends.
 
 ### Front End
 
-TODO
+Our front end is organized around react-redux containers and components. Each page view refers back to its respective container and retrieves global states from the store while importing specific actions relevant to its function within the overall website. Actions are passed through dispatch to respective reducers to manifest state changes. For our authentication, we implemented user generated tokens to determine authenticity with permissions checks via digup-backend.
 
 ### Back End
 
-For the Back End, we used express and mongodb to build a CRUD api server. Express is a web framework for Node.js, which provides a way to listen for and respond to incoming web requests. We host the backend server on Heroku and connect the app to a mongo database by provisioning the Sandbox verson of mLab. We were able to create a few data models such as post, user and message to store the data from front end. The back end also supports authentication. We used Passport.js to make JWT's for us.
+For the Back End, we used express and mongodb to build a CRUD api server. Express is a web framework for Node.js, which provides a way to listen for and respond to incoming web requests. We host the backend server on Heroku and connect the app to a mongo database by provisioning the Sandbox verson of mLab. We were able to create a few data models such as post, user and message to store the data from front end. The back end also supports authentication with a salt+hashing algorithm. We used Passport.js to make JWT's for us.
 
 
 
@@ -106,3 +111,5 @@ After pushing to github, type command `npm run deploy` into console, and the web
 Brian Francis, Adam Philipps, James Wang, James Edwards, Weijia Tang
 
 ## Acknowledgments
+
+Huge thanks to every member and our amazing full-stack instructor Tim Tregubov for making all this possible
