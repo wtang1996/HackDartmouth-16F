@@ -5,31 +5,45 @@
 ## Sample Screenshots
 
 Signin Page
+
 Users sign in here to view existing posts with valid authentication credentials.
+
 ![Signin Page](/img/Signin.png)
 
 Signup Page
+
 Users may sign up to create an account to access post listings and create posts.
+
 ![Signup Page](/img/signup.png)
 
 Home Page
+
 A side by side listings main screen with lost and found items. Users can use this page to navigate through posts, create personal posts, and filter by tags.
+
 ![main screen](/img/mainScreen.png)
 
 Post
+
 Accessible through the home page and provides detailed information on the specific properties of the item including a description, tags, image, and a means of contacting the post's owner.
+
 ![post](/img/Post.png)
 
 New Post
+
 Accessible through the home page and provides a auto-generated form for the user to fill out and upload the title, tag, description, photo, anonymity, and whether it was lost or found.
+
 ![new post](/img/newPost.png)
 
 Messages
+
 Accessible through the upper navbar and provides a list of all current conversations with other anonymous or unanonymous users.
+
 ![messages](/img/messages.png)
 
 Profile
+
 Accessible through the upper navbar and details the user's posts, information, and profile picture.
+
 ![profile](/img/Profile.png)
 
 ## Architecture
