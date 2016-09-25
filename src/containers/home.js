@@ -15,6 +15,7 @@ class Home extends Component {
       item2: '',
       item3: '',
       pick: 1,
+      pickeditems: [],
     };
 
     this.random = this.random.bind(this);
@@ -36,6 +37,7 @@ class Home extends Component {
     e.preventDefault();
     this.props.createList({ title: this.state.title, category: this.state.category, tags: [this.state.item1, this.state.item2, this.state.item3], pick: this.state.pick });
     this.random();
+    this.props.generate(this.state.pickeditems);
     this.setState({
       title: '',
       category: '',
@@ -43,25 +45,26 @@ class Home extends Component {
       item2: '',
       item3: '',
       pick: 1,
-      pickeditems: [],
     });
   }
 
   random() {
-    const pickeditems = [];
     const items = [this.state.item1, this.state.item2, this.state.item3];
 
     let index = 1;
     let randomindex;
+    const randlist = [];
 
     while (index <= this.state.pick) {
       randomindex = Math.floor(Math.random() * items.length);
-      pickeditems.push(items[randomindex]);
+      randlist.push(items[randomindex]);
       items.splice(randomindex, 1);
       index++;
     }
 
-    this.props.generate(pickeditems);
+    this.setState({
+      pickeditems: randlist,
+    });
   }
 
   // Function to render the found item listings
@@ -124,6 +127,7 @@ class Home extends Component {
                 <input onChange={(event) => { this.setState({ item1: event.target.value }); }} placeholder="item1" value={this.state.item1} />
                 <input onChange={(event) => { this.setState({ item2: event.target.value }); }} placeholder="item2" value={this.state.item2} />
                 <input onChange={(event) => { this.setState({ item3: event.target.value }); }} placeholder="item3" value={this.state.item3} />
+                <input onChange={(event) => { this.setState({ pick: event.target.value }); }} placeholder="number of pick" value={this.state.pick} />
               </div>
             </div>
             <div className="buttonContainer">
@@ -141,12 +145,12 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <div>Your pick is {this.state.pickeditems}!!!</div>
         <div className="lostFoundBoxes">
           {this.renderOwn()}
           {this.renderGenerator()}
           {this.renderDefault()}
         </div>
-        <div>{this.props.result}</div>
       </div>
     );
   }

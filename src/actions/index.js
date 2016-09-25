@@ -139,7 +139,8 @@ export function fetchUser() {
 
 export function generate(result) {
   return (dispatch) => {
-    dispatch({ type: 'RESULT', result: result.pickeditems });
+    browserHistory.push('/result');
     console.log(result.pickeditems);
+    dispatch({ type: 'RESULT', result: result.pickeditems });
   };
 }
