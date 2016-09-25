@@ -77,13 +77,13 @@ class Home extends Component {
       <div className="found">
         <div className="listTitle">Default Lists</div>
         <ul>
-          <li className="postSummary">Hanover Restaurants</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'Hanover Restaurants', category: 'restaurant', item1: 'Yama', item2: 'Orient', item3: 'Murphy\'s' })}>Hanover Restaurants</li>
           <script className="tag">Restaurant</script>
-          <li className="postSummary">Dartmouth Study Spaces</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'My Study Space', category: 'study space', item1: 'room', item2: 'Stacks', item3: 'FFB' })}>Dartmouth Study Spaces</li>
           <script className="tag">Study Space</script>
-          <li className="postSummary">Dartmouth Greek Houses</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'Frats', category: 'frat', item1: 'Sigep', item2: 'PsiU', item3: 'Beta' })}>Dartmouth Greek Houses</li>
           <script className="tag">Greek House</script>
-          <li className="postSummary">Colors</li>
+          <li className="postSummary"onClick={() => this.setState({ title: 'Colors', category: 'coor', item1: 'red', item2: 'yellow', item3: 'pink' })}>Colors</li>
           <script className="tag">Color</script>
           <li className="postSummary">Dartmouth Dining Services Locations</li>
           <script className="tag">Restaurant</script>
