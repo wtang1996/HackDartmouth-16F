@@ -15,7 +15,7 @@ class Home extends Component {
       item2: '',
       item3: '',
       pick: 1,
-      pickeditems: [],
+      pickeditems: null,
     };
 
     this.random = this.random.bind(this);
@@ -23,6 +23,7 @@ class Home extends Component {
     this.renderOwn = this.renderOwn.bind(this);
     this.renderDefault = this.renderDefault.bind(this);
     this.renderGenerator = this.renderGenerator.bind(this);
+    this.renderPick = this.renderPick.bind(this);
   }
 
   componentWillMount() {
@@ -37,7 +38,6 @@ class Home extends Component {
     e.preventDefault();
     this.props.createList({ title: this.state.title, category: this.state.category, tags: [this.state.item1, this.state.item2, this.state.item3], pick: this.state.pick });
     this.random();
-    this.props.generate(this.state.pickeditems);
     this.setState({
       title: '',
       category: '',
@@ -142,10 +142,17 @@ class Home extends Component {
     );
   }
 
+  renderPick() {
+    if (this.state.pickeditems) {
+      return <div className="result">Your pick is {this.state.pickeditems}!!!</div>;
+    }
+    return undefined;
+  }
+
   render() {
     return (
       <div>
-        <div>Your pick is {this.state.pickeditems}!!!</div>
+          {this.renderPick()}
         <div className="lostFoundBoxes">
           {this.renderOwn()}
           {this.renderGenerator()}
