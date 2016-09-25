@@ -59,9 +59,9 @@ class Home extends Component {
       pickeditems.push(items[randomindex]);
       items.splice(randomindex, 1);
       index++;
-    }.then({
-      this.props.generate(pickeditems);
-    })
+    }
+
+    this.props.generate(pickeditems);
   }
 
   // Function to render the found item listings
@@ -115,15 +115,15 @@ class Home extends Component {
   renderGenerator() {
     return (
       <div>
-        <h1 className="submissionTitle">Create New List</h1>
+        <h1 className="submissionTitle">New List</h1>
         <div className="newFields">
           <form onSubmit={this.submit} className="postBox">
             <div className="infoContainer">
               <div className="textContainer">
                 <input onChange={(event) => { this.setState({ title: event.target.value }); }} placeholder="List Title" value={this.state.title} />
-                <input onChange={(event) => { this.setState({ item1: event.target.value }); }} placeholder="Item 1" value={this.state.item1} />
-                <input onChange={(event) => { this.setState({ item2: event.target.value }); }} placeholder="Item 2" value={this.state.item2} />
-                <input onChange={(event) => { this.setState({ item3: event.target.value }); }} placeholder="Item 3" value={this.state.item3} />
+                <input onChange={(event) => { this.setState({ item1: event.target.value }); }} placeholder="item1" value={this.state.item1} />
+                <input onChange={(event) => { this.setState({ item2: event.target.value }); }} placeholder="item2" value={this.state.item2} />
+                <input onChange={(event) => { this.setState({ item3: event.target.value }); }} placeholder="item3" value={this.state.item3} />
               </div>
             </div>
             <div className="buttonContainer">
