@@ -11,8 +11,9 @@ body {
   position: relative;
   font-family: "Trebuchet MS", sans-serif;
   color: rgb(10%, 10%, 10%);
-  background: linear-gradient(to bottom, #255AC5, #37A2DC);
-  background-repeat: repeat-y;
+  background: linear-gradient(purple, blue);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   font-size: 16px;
   color: white;
   margin: 0;
@@ -248,6 +249,7 @@ ul {
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  width: 180px;
   margin: 7px 0;
   margin-right: 10px;
   border-radius: 3px;
@@ -291,7 +293,7 @@ ul {
   width: 450px;
   border: solid, thin, darkgray;
   border-radius: 5px;
-  background-color: #71D316;
+  background: #6DB3F2 url('http://wizzley.com/static/img/bg/texture8.png');
   padding: 20px;
   color: midnightblue;
   align-items: center;
