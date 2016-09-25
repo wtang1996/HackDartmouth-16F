@@ -6,11 +6,11 @@ const PostsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_LISTS:
       return Object.assign({}, state, {
-        all: action.posts,
+        all: action.lists,
       });
     case ActionTypes.FETCH_LIST:
       return Object.assign({}, state, {
-        post: action.post,
+        post: action.list,
       });
     case ActionTypes.UPDATE_LIST:
       return Object.assign({}, state, {

@@ -29,6 +29,7 @@ export function errorMessage(error) {
 export function fetchLists() {
   return (dispatch) => {
     axios.get(`${ROOT_URL}/lists`).then(response => {
+      console.log(response);
       dispatch({ type: ActionTypes.FETCH_LISTS, lists: response.data });
     }).catch(error => {
       console.log(error.response);
@@ -133,5 +134,12 @@ export function fetchUser() {
     }).catch(error => {
       console.log(error.response);
     });
+  };
+}
+
+export function generate(result) {
+  return (dispatch) => {
+    dispatch({ type: 'RESULT', result: result.pickeditems });
+    console.log(result.pickeditems);
   };
 }

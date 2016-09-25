@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import * as actions from '../actions';
-import Immutable from 'immutable';
 
 class Home extends Component {
   constructor(props) {
@@ -18,6 +17,7 @@ class Home extends Component {
       pick: 1,
     };
 
+    this.random = this.random.bind(this);
     this.submit = this.submit.bind(this);
     this.renderOwn = this.renderOwn.bind(this);
     this.renderDefault = this.renderDefault.bind(this);
@@ -25,16 +25,17 @@ class Home extends Component {
   }
 
   componentWillMount() {
-    // this.props.fetchLists();
+    this.props.fetchLists();
   }
-
-  componentWillUpdate() {
-    // this.props.fetchUser();
-  }
+  //
+  // componentWillUpdate() {
+  //   this.props.fetchUser();
+  // }
 
   submit(e) {
     e.preventDefault();
     this.props.createList({ title: this.state.title, category: this.state.category, tags: [this.state.item1, this.state.item2, this.state.item3], pick: this.state.pick });
+    this.random();
     this.setState({
       title: '',
       category: '',
@@ -42,7 +43,25 @@ class Home extends Component {
       item2: '',
       item3: '',
       pick: 1,
+      pickeditems: [],
     });
+  }
+
+  random() {
+    const pickeditems = [];
+    const items = [this.state.item1, this.state.item2, this.state.item3];
+
+    let index = 1;
+    let randomindex;
+
+    while (index <= this.state.pick) {
+      randomindex = Math.floor(Math.random() * items.length);
+      pickeditems.push(items[randomindex]);
+      items.splice(randomindex, 1);
+      index++;
+    }.then({
+      this.props.generate(pickeditems);
+    })
   }
 
   // Function to render the found item listings
@@ -68,26 +87,29 @@ class Home extends Component {
 
   // Function to render the lost item listings
   renderOwn() {
-    return (
-      <div className="lost">
-        <div className="listTitle">My Lists</div>
-        <ul>
-        {
-          Array.prototype.slice.call(this.props.lists).reverse().map((list) => {
-            return (
-              <li key={list.id} className="postSummary">
-                <Link to={`lists/${list.id}`} className="Title">{list.title}</Link>
-                <div className="tagsAndAuthor">
-                  <div className="tag">{list.category}</div>
-                  <div className="date">{list.date}</div>
-                </div>
-              </li>
-            );
-          })
-        }
-        </ul>
-      </div>
-    );
+    if (this.props.lists != null) {
+      return (
+        <div className="lost">
+          <div className="listTitle">My Lists</div>
+          <ul>
+          {
+              this.props.lists.map((list) => {
+                return (
+                  <li key={list.id} className="postSummary">
+                    <Link to={`lists/${list.id}`} className="Title">{list.title}</Link>
+                    <div className="tagsAndAuthor">
+                      <div className="tag">{list.category}</div>
+                      <div className="date">{list.date}</div>
+                    </div>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </div>
+      );
+    }
+    return undefined;
   }
 
   renderGenerator() {
@@ -124,6 +146,7 @@ class Home extends Component {
           {this.renderGenerator()}
           {this.renderDefault()}
         </div>
+        <div>{this.props.result}</div>
       </div>
     );
   }
@@ -132,7 +155,7 @@ class Home extends Component {
 const mapStateToProps = (state) => (
   {
     lists: state.lists.all,
-    user: state.profile.user,
+    result: state.result.result,
   }
 );
 
