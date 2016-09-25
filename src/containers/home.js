@@ -78,11 +78,16 @@ class Home extends Component {
       <div className="found">
         <div className="listTitle">Default Lists</div>
         <ul>
-          <li onClick={} className="Title">Hanover Restaurants</li>
-          <li onClick={} className="Title">Dartmouth Study Spaces</li>
-          <li onClick={} className="Title">Dartmouth Greek Houses</li>
-          <li className="Title">Colors</li>
-          <li className="Title">Dartmouth Dining Services Locations</li>
+          <li className="postSummary">Hanover Restaurants</li>
+          <script className="tag">Restaurant</script>
+          <li className="postSummary">Dartmouth Study Spaces</li>
+          <script className="tag">Study Space</script>
+          <li className="postSummary">Dartmouth Greek Houses</li>
+          <script className="tag">Greek House</script>
+          <li className="postSummary">Colors</li>
+          <script className="tag">Color</script>
+          <li className="postSummary">Dartmouth Dining Services Locations</li>
+          <script className="tag">Restaurant</script>
         </ul>
       </div>
     );
