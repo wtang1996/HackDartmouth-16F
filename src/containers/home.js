@@ -13,19 +13,9 @@ class Home extends Component {
       tagsToShow: Immutable.Set(),
     };
 
-    this.renderLost = this.renderLost.bind(this);
-    this.renderFound = this.renderFound.bind(this);
-    this.renderTags = this.renderTags.bind(this);
-    this.renderClothing = this.renderClothing.bind(this);
-    this.renderTechnology = this.renderTechnology.bind(this);
-    this.renderBike = this.renderBike.bind(this);
-    this.renderOther = this.renderOther.bind(this);
+    this.renderOwn = this.renderOwn.bind(this);
+    this.renderDefault = this.renderDefault.bind(this);
 
-    this.addClothing = this.addClothing.bind(this);
-    this.addBike = this.addBike.bind(this);
-    this.addTech = this.addTech.bind(this);
-    this.addOther = this.addOther.bind(this);
-    this.renderAuthor = this.renderAuthor.bind(this);
     this.displayPost = this.displayPost.bind(this);
   }
 
@@ -37,145 +27,49 @@ class Home extends Component {
     this.props.fetchUser();
   }
 
-  addClothing() {
-    if (this.state.tagsToShow.get('Clothing')) {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.delete('Clothing'),
-      });
-    } else {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.add('Clothing'),
-      });
-    }
-  }
-
-  addBike() {
-    if (this.state.tagsToShow.get('Bike')) {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.delete('Bike'),
-      });
-    } else {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.add('Bike'),
-      });
-    }
-  }
-
-  addOther() {
-    if (this.state.tagsToShow.get('Other')) {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.delete('Other'),
-      });
-    } else {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.add('Other'),
-      });
-    }
-  }
-
-  addTech() {
-    if (this.state.tagsToShow.get('Technology')) {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.delete('Technology'),
-      });
-    } else {
-      this.setState({
-        tagsToShow: this.state.tagsToShow.add('Technology'),
-      });
-    }
-  }
-
-  displayPost(tag) {
-    // console.log(tag);
-    if (this.state.tagsToShow.size === 0) {
-      // console.log('empty tags');
-      return true;
-    } else if (this.state.tagsToShow.get(tag)) {
-      // console.log('tag shows up');
-      return true;
-    }
-    // console.log('doesnt show up');
-    return false;
-  }
-
   // Function to render the found item listings
-  renderFound() {
+  renderDefault() {
     return (
       <div className="found">
-        <div className="listTitle">Found Item Listings</div>
+        <div className="listTitle">Default Lists</div>
         <ul>
-        {
-          Array.prototype.slice.call(this.props.posts).reverse().map((post) => {
-            // if (!post.type === 'found') {
-            if (post.lost === false && this.displayPost(post.tags)) {
-            // if (true) {
-              return (
-                <li key={post.id} className="postSummary">
-                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                  <div className="tagsAndAuthor">
-                    <div className="tag">
-                      {post.tags.split(',').map((tag) => {
-                        return (
-                          tag
-                        );
-                      })}
-                    </div>
-                    {this.renderAuthor(post)}
-                  </div>
-                </li>
-              );
-            }
-            return undefined;
-          })
-        }
+          <li className="Title">Hanover Restaurants</li>
+          <script className="tag">Restaurant</script>
+          <li className="Title">Dartmouth Study Spaces</li>
+          <script className="tag">Study Space</script>
+          <li className="Title">Dartmouth Greek Houses</li>
+          <script className="tag">Greek House</script>
+          <li className="Title">Colors</li>
+          <script className="tag">Color</script>
+          <li className="Title">Dartmouth Dining Services Locations</li>
+          <script className="tag">Restaurant</script>
         </ul>
       </div>
     );
   }
 
   // Function to render the lost item listings
-  renderLost() {
+  renderOwn() {
     return (
       <div className="lost">
         <div className="listTitle">Lost Item Listings</div>
         <ul>
         {
-          Array.prototype.slice.call(this.props.posts).reverse().map((post) => {
-            if (post.lost === true && this.displayPost(post.tags)) {
-              return (
-                <li key={post.id} className="postSummary">
-                  <Link to={`posts/${post.id}`} className="Title">{post.title}</Link>
-                  <div className="tagsAndAuthor">
-                    <div className="tag">
-                      {post.tags.split(',').map((tag) => {
-                        return (
-                          tag
-                        );
-                      })}
-                    </div>
-                    {this.renderAuthor(post)}
-                  </div>
-                </li>
-              );
-            }
-            return undefined;
+          Array.prototype.slice.call(this.props.lists).reverse().map((list) => {
+            return (
+              <li key={list.id} className="postSummary">
+                <Link to={`lists/${list.id}`} className="Title">{list.title}</Link>
+                <div className="tagsAndAuthor">
+                  <div className="tag">{list.category}</div>
+                  <div className="date">{list.date}</div>
+                </div>
+              </li>
+            );
           })
         }
         </ul>
       </div>
     );
-  }
-
-  renderAuthor(post) {
-    if (post.anonymous) {
-      return <div className="nonLinkText"> Anonymous</div>;
-    } else {
-      if (post.authorId === this.props.user.id) {
-        return <Link to={'profile'} className="authorLink"> {post.authorName}</Link>;
-      } else {
-        return <Link to={`profile/${post.authorId}`} className="authorLink"> {post.authorName}</Link>;
-      }
-    }
   }
 
   renderClothing() {
@@ -318,7 +212,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => (
   {
-    posts: state.posts.all,
+    lists: state.lists.all,
     user: state.profile.user,
   }
 );

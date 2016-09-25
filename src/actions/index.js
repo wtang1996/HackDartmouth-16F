@@ -2,26 +2,20 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 
 export const ActionTypes = {
-  FETCH_POSTS: 'FETCH_POSTS',
-  FETCH_POST: 'FETCH_POST',
-  CREATE_POST: 'CREATE_POST',
-  UPDATE_POST: 'UPDATE_POST',
-  DELETE_POST: 'DELETE_POST',
-  FETCH_MESSAGES: 'FETCH_MESSAGES',
-  FETCH_MESSAGE: 'FETCH_MESSAGE',
-  CREATE_MESSAGE: 'CREATE_MESSAGE',
-  UPDATE_MESSAGE: 'UPDATE_MESSAGE',
-  DELETE_MESSAGE: 'DELETE_MESSAGE',
+  FETCH_LISTS: 'FETCH_LISTS',
+  FETCH_LIST: 'FETCH_LIST',
+  CREATE_LIST: 'CREATE_LIST',
+  UPDATE_LIST: 'UPDATE_LIST',
+  DELETE_LIST: 'DELETE_LIST',
   AUTH_USER: 'AUTH_USER',
   DEAUTH_USER: 'DEAUTH_USER',
   AUTH_ERROR: 'AUTH_ERROR',
   FETCH_USER: 'FETCH_USER',
-  FETCH_AUTHOR: 'FETCH_AUTHOR',
   ERROR_MESSAGE: 'ERROR_MESSAGE',
   FETCH_MESSAGE_ERROR: 'FETCH_MESSAGE_ERROR',
 };
 
-const ROOT_URL = 'https://digup.herokuapp.com/api';
+const ROOT_URL = 'https://hackathon-undecided.herokuapp.com/api';
 // const ROOT_URL = 'http://localhost:9090/api';
 
 export function errorMessage(error) {
@@ -31,113 +25,58 @@ export function errorMessage(error) {
   };
 }
 
-export function fetchPosts() {
+export function fetchLists() {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts`).then(response => {
-      dispatch({ type: ActionTypes.FETCH_POSTS, posts: response.data });
+    axios.get(`${ROOT_URL}/lists`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_LISTS, lists: response.data });
     }).catch(error => {
       console.log(error.response);
     });
   };
 }
 
-export function createPost(post) {
+export function createList(list) {
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/posts`, post, { headers: { authorization: localStorage.getItem('token') } })
+    axios.post(`${ROOT_URL}/lists`, list, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.CREATE_POST, payload: { post } });
+      dispatch({ type: ActionTypes.CREATE_LIST, payload: { list } });
       browserHistory.push('/');
     }).catch(error => {
-      dispatch(errorMessage(`Error creating post: ${error.response}`));
+      dispatch(errorMessage(`Error creating list: ${error.response}`));
     });
   };
 }
 
-export function fetchPost(id) {
+export function fetchList(id) {
   return (dispatch) => {
-    axios.get(`${ROOT_URL}/posts/${id}`).then(response => {
-      dispatch({ type: ActionTypes.FETCH_POST, post: response.data });
+    axios.get(`${ROOT_URL}/lists/${id}`).then(response => {
+      dispatch({ type: ActionTypes.FETCH_LIST, list: response.data });
     }).catch(error => {
-      dispatch(errorMessage(`Error fetching post: ${error.response}`));
+      dispatch(errorMessage(`Error fetching list: ${error.response}`));
     });
   };
 }
 
-export function updatePost(post, id) {
+export function updateList(list, id) {
   return (dispatch) => {
-    const fields = { title: post.title, content: post.content, tags: post.tags };
-    axios.put(`${ROOT_URL}/posts/${id}`, fields, { headers: { authorization: localStorage.getItem('token') } })
+    const fields = { title: list.title, content: list.content, tags: list.tags };
+    axios.put(`${ROOT_URL}/lists/${id}`, fields, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch(fetchPost(id));
+      dispatch(fetchList(id));
     }).catch(error => {
-      dispatch(errorMessage(`Error updating post: ${error.response}`));
+      dispatch(errorMessage(`Error updating list: ${error.response}`));
     });
   };
 }
 
-export function deletePost(id) {
+export function deleteList(id) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/posts/${id}`, { headers: { authorization: localStorage.getItem('token') } })
+    axios.delete(`${ROOT_URL}/lists/${id}`, { headers: { authorization: localStorage.getItem('token') } })
     .then(response => {
-      dispatch({ type: ActionTypes.DELETE_POST, payload: null });
+      dispatch({ type: ActionTypes.DELETE_LIST, payload: null });
       browserHistory.push('/');
     }).catch(error => {
-      dispatch(errorMessage(`Error deleting post: ${error.response}`));
-    });
-  };
-}
-
-export function fetchMessages() {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/messages`).then(response => {
-      dispatch({ type: ActionTypes.FETCH_MESSAGES, messages: response.data });
-    }).catch(error => {
-      console.log(error.response);
-    });
-  };
-}
-
-export function createMessage(message) {
-  return (dispatch) => {
-    axios.post(`${ROOT_URL}/messages`, message, { headers: { authorization: localStorage.getItem('token') } })
-    .then(response => {
-      dispatch({ type: ActionTypes.CREATE_MESSAGE, payload: { message } });
-      browserHistory.push('/messages');
-    }).catch(error => {
-      dispatch(errorMessage(`Error creating message: ${error.response}`));
-    });
-  };
-}
-
-export function updateMessage(message, id) {
-  return (dispatch) => {
-    axios.put(`${ROOT_URL}/messages/${id}`, message, { headers: { authorization: localStorage.getItem('token') } })
-    .then(response => {
-      dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
-    }).catch(error => {
-      dispatch(errorMessage(`Error updating message: ${error.response}`));
-    });
-  };
-}
-
-export function fetchMessage(id) {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/messages/${id}`).then(response => {
-      dispatch({ type: ActionTypes.FETCH_MESSAGE, message: response.data });
-    }).catch(error => {
-      dispatch({ type: ActionTypes.FETCH_MESSAGE_ERROR });
-    });
-  };
-}
-
-export function deleteMessage(id) {
-  return (dispatch) => {
-    axios.delete(`${ROOT_URL}/messages/${id}`, { headers: { authorization: localStorage.getItem('token') } })
-    .then(response => {
-      dispatch({ type: ActionTypes.DELETE_MESSAGE, payload: null });
-      dispatch(fetchMessages());
-    }).catch(error => {
-      dispatch(errorMessage(`Error deleting message: ${error.response}`));
+      dispatch(errorMessage(`Error deleting list: ${error.response}`));
     });
   };
 }
@@ -191,18 +130,6 @@ export function fetchUser() {
       } });
     }).catch(error => {
       console.log(error.response);
-    });
-  };
-}
-
-export function fetchAuthor(id) {
-  return (dispatch) => {
-    axios.get(`${ROOT_URL}/profile/${id}`, { headers: { authorization: localStorage.getItem('token') } }).then(response => {
-      dispatch({ type: ActionTypes.FETCH_AUTHOR, payload: {
-        author: response.data,
-      } });
-    }).catch(error => {
-      dispatch(errorMessage(`Cannot get author data: ${error.response}`));
     });
   };
 }

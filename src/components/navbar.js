@@ -23,8 +23,7 @@ class NavBar extends Component {
     if (this.props.authenticated) {
       return (
         <div className="rightLinks">
-          <Link to="messages" className="messages">Messages</Link>
-          <Link to="/signin" className="nbSignout" onClick={this.onSignOut}>Sign out</Link>
+          <Link to="/signin" className="nbSignout" onClick={this.onSignOut}>Log Out</Link>
           <Link to="profile" className="profile">Profile</Link>
         </div>
       );
@@ -37,14 +36,14 @@ class NavBar extends Component {
     if (this.props.authenticated) {
       return (
         <div className="Navbar">
-          <Link to="/" className="siteName">Digup</Link>
+          <Link to="/" className="siteName">Undecided</Link>
           {this.renderSign()}
         </div>
       );
     } else {
       return (
         <div className="Navbar">
-          <Link to="/signin" className="siteName">Digup</Link>
+          <Link to="/signin" className="siteName">Undecided</Link>
           {this.renderSign()}
         </div>
       );

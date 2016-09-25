@@ -14,8 +14,8 @@ class App extends Component {
   renderFooter() {
     return (
       <footer>
-        <a href="mailto:digupdartmouth@gmail.com">
-          Contact the Digup Team
+        <a href="mailto:teamundecided16f@gmail.com">
+          Contact the Undecided Team
         </a>
       </footer>
     );
