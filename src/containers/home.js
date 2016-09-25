@@ -69,7 +69,6 @@ class Home extends Component {
   }
 
   pop() {
-
   }
 
   // Function to render the found item listings
@@ -104,7 +103,7 @@ class Home extends Component {
               this.props.lists.map((list) => {
                 return (
                   <li key={list.id} className="postSummary">
-                    <div className="Title">{list.title}</div>
+                    <div className="Title" id="hah" onClick={() => this.setState({ title: list.title, category: list.category, item1: list.tags.split(',', 1), item2: list.tags.split(',')[1], item3: list.tags.split(',')[2] })}>{list.title}</div>
                     <div className="tagsAndAuthor">
                       <div className="tag">{list.category}</div>
                       <div className="date">{list.date}</div>
