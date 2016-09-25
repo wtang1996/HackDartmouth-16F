@@ -14,6 +14,8 @@ class Home extends Component {
       item1: '',
       item2: '',
       item3: '',
+      item4: '',
+      item5: '',
       pick: 1,
       pickeditems: null,
     };
@@ -37,7 +39,7 @@ class Home extends Component {
 
   submit(e) {
     e.preventDefault();
-    this.props.createList({ title: this.state.title, category: this.state.category, tags: [this.state.item1, this.state.item2, this.state.item3], pick: this.state.pick });
+    this.props.createList({ title: this.state.title, category: this.state.category, tags: [this.state.item1, this.state.item2, this.state.item3, this.state.item4, this.state.item5], pick: this.state.pick });
     this.random();
     this.setState({
       title: '',
@@ -45,12 +47,15 @@ class Home extends Component {
       item1: '',
       item2: '',
       item3: '',
+      item4: '',
+      item5: '',
       pick: 1,
     });
+    this.props.fetchLists();
   }
 
   random() {
-    const items = [this.state.item1, this.state.item2, this.state.item3];
+    const items = [this.state.item1, this.state.item2, this.state.item3, this.state.item4, this.state.item5];
 
     let index = 1;
     let randomindex;
@@ -103,7 +108,7 @@ class Home extends Component {
               this.props.lists.map((list) => {
                 return (
                   <li key={list.id} className="postSummary">
-                    <div className="Title" id="hah" onClick={() => this.setState({ title: list.title, category: list.category, item1: list.tags.split(',', 1), item2: list.tags.split(',')[1], item3: list.tags.split(',')[2] })}>{list.title}</div>
+                    <div className="Title" id="hah" onClick={() => this.setState({ title: list.title, category: list.category, item1: list.tags.split(',', 1), item2: list.tags.split(',')[1], item3: list.tags.split(',')[2], item4: list.tags.split(',')[3], item5: list.tags.split(',')[4] })}>{list.title}</div>
                     <div className="tagsAndAuthor">
                       <div className="tag">{list.category}</div>
                       <div className="date">{list.date}</div>
@@ -133,6 +138,8 @@ class Home extends Component {
                 <input onChange={(event) => { this.setState({ item1: event.target.value }); }} placeholder="item1" value={this.state.item1} />
                 <input onChange={(event) => { this.setState({ item2: event.target.value }); }} placeholder="item2" value={this.state.item2} />
                 <input onChange={(event) => { this.setState({ item3: event.target.value }); }} placeholder="item3" value={this.state.item3} />
+                <input onChange={(event) => { this.setState({ item4: event.target.value }); }} placeholder="item4" value={this.state.item4} />
+                <input onChange={(event) => { this.setState({ item5: event.target.value }); }} placeholder="item5" value={this.state.item5} />
                 <input onChange={(event) => { this.setState({ pick: event.target.value }); }} placeholder="number of pick" value={this.state.pick} />
               </div>
             </div>
@@ -157,7 +164,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main">
         <div className="lostFoundBoxes">
           {this.renderOwn()}
           {this.renderGenerator()}

@@ -248,11 +248,12 @@ ul {
 .postSummary {
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
+  padding: 5px;
   width: 180px;
   margin: 7px 0;
   margin-right: 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   border-width: thin;
   border-style: solid;
   border-color: lighten(black, 15%);
@@ -261,6 +262,7 @@ ul {
 }
 .Title {
   font-size: 18px;
+  font-color: black;
 }
 .tagsAndAuthor {
   display:flex;
@@ -797,10 +799,26 @@ ul {
   align-self: center;
 }
 
+@keyframes temp {
+  0%   {background-color: red;}
+  25%  {background-color: yellow;}
+  50%  {background-color: blue;}
+  100% {background-color: green;}
+}
+
 .result {
   align-self: center;
-  font-size: 18px;
+  font-size: 50px;
   font-weight: bold;
+  font-color: green;
+  animation-name: temp;
+  animation-duration: 4s;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /***********************************/
