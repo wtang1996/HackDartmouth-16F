@@ -242,7 +242,8 @@ footer {
 }
 ul {
   padding-left: 0px;
-}
+  list-style-type: none; }
+
 .postSummary {
   display: flex;
   justify-content: space-between;
@@ -833,5 +834,10 @@ ul {
   .profileContent {
     word-wrap: break-word;
   }
+
+  /************************************/
+  /**********Misc. Edits***************/
+  /************************************/
+  
 
 }
