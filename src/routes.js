@@ -9,6 +9,7 @@ import RequireAuth from './containers/require-auth';
 import Profile from './containers/profile';
 import Error from './containers/error';
 import Result from './containers/result';
+import Show from './containers/show';
 
 export default(
   <Route path="/" component={App}>
@@ -18,5 +19,6 @@ export default(
     <Route path="profile" component={RequireAuth(Profile)} />
     <Route path="error" component={Error} />
     <Route path="result" component={Result} />
+    <Route path="lists/:id" component={Show} />
   </Route>
 );

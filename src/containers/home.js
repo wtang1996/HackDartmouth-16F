@@ -104,10 +104,11 @@ class Home extends Component {
               this.props.lists.map((list) => {
                 return (
                   <li key={list.id} className="postSummary">
-                    <Link to={`lists/${list.id}`} className="Title">{list.title}</Link>
+                    <div className="Title">{list.title}</div>
                     <div className="tagsAndAuthor">
                       <div className="tag">{list.category}</div>
                       <div className="date">{list.date}</div>
+                      <button><Link to={`lists/${list.id}`}>Show</Link></button>
                     </div>
                   </li>
                 );
