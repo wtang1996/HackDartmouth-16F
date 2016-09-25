@@ -63,7 +63,7 @@ class Home extends Component {
 
     while (index <= this.state.pick) {
       randomindex = Math.floor(Math.random() * items.length);
-      randlist.push(items[randomindex]);
+      randlist.push(items[randomindex] + ' ');
       items.splice(randomindex, 1);
       index++;
     }
@@ -82,15 +82,15 @@ class Home extends Component {
       <div className="found">
         <div className="listTitle">Default Lists</div>
         <ul>
-          <li className="postSummary" onClick={() => this.setState({ title: 'Hanover Restaurants', category: 'restaurant', item1: 'Yama', item2: 'Orient', item3: 'Murphy\'s' })}>Hanover Restaurants</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'Hanover Restaurants', category: 'restaurant', item1: 'Sushiya', item2: 'Orient', item3: 'Murphy\'s', item4: 'Molly\'s', item5: 'Thai Orchid' })}>Hanover Restaurants</li>
           <script className="tag">Restaurant</script>
-          <li className="postSummary" onClick={() => this.setState({ title: 'My Study Space', category: 'study space', item1: 'room', item2: 'Stacks', item3: 'FFB' })}>Dartmouth Study Spaces</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'My Study Space', category: 'study space', item1: 'room', item2: 'Stacks', item3: 'FFB', item4: 'Fairchild', item5: 'Kresge' })}>Dartmouth Study Spaces</li>
           <script className="tag">Study Space</script>
-          <li className="postSummary" onClick={() => this.setState({ title: 'Frats', category: 'frat', item1: 'Sigep', item2: 'PsiU', item3: 'Beta' })}>Dartmouth Greek Houses</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'Frats', category: 'frat', item1: 'Sigep', item2: 'PsiU', item3: 'Beta', item4: 'KD', item5: 'KDE' })}>Dartmouth Greek Houses</li>
           <script className="tag">Greek House</script>
-          <li className="postSummary"onClick={() => this.setState({ title: 'Colors', category: 'coor', item1: 'red', item2: 'yellow', item3: 'pink' })}>Colors</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'Colors', category: 'color', item1: 'red', item2: 'yellow', item3: 'pink', item4: 'white', item5: 'green' })}>Colors</li>
           <script className="tag">Color</script>
-          <li className="postSummary">Dartmouth Dining Services Locations</li>
+          <li className="postSummary" onClick={() => this.setState({ title: 'Dining places', category: 'food', item1: 'Hop', item2: 'Foco', item3: 'Collis', item4: 'Novack', item5: 'Stack Bar' })}>Dartmouth Dining Services Locations</li>
           <script className="tag">Restaurant</script>
         </ul>
       </div>
