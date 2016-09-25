@@ -10,11 +10,18 @@ class Home extends Component {
 
     // init component state here
     this.state = {
-      tagsToShow: Immutable.Set(),
+      title: '',
+      category: '',
+      item1: '',
+      item2: '',
+      item3: '',
+      pick: 1,
     };
 
+    this.submit = this.submit.bind(this);
     this.renderOwn = this.renderOwn.bind(this);
     this.renderDefault = this.renderDefault.bind(this);
+    this.renderGenerator = this.renderGenerator.bind(this);
   }
 
   componentWillMount() {
@@ -23,6 +30,19 @@ class Home extends Component {
 
   componentWillUpdate() {
     // this.props.fetchUser();
+  }
+
+  submit(e) {
+    e.preventDefault();
+    this.props.createList({ title: this.state.title, category: this.state.category, tags: [this.state.item1, this.state.item2, this.state.item3], pick: this.state.pick });
+    this.setState({
+      title: '',
+      category: '',
+      item1: '',
+      item2: '',
+      item3: '',
+      pick: 1,
+    });
   }
 
   // Function to render the found item listings
@@ -50,7 +70,7 @@ class Home extends Component {
   renderOwn() {
     return (
       <div className="lost">
-        <div className="listTitle">Lost Item Listings</div>
+        <div className="listTitle">My Lists</div>
         <ul>
         {
           Array.prototype.slice.call(this.props.lists).reverse().map((list) => {
@@ -70,12 +90,39 @@ class Home extends Component {
     );
   }
 
+  renderGenerator() {
+    return (
+      <div>
+        <h1 className="submissionTitle">New List</h1>
+        <div className="newFields">
+          <form onSubmit={this.submit} className="postBox">
+            <div className="infoContainer">
+              <div className="textContainer">
+                <input onChange={(event) => { this.setState({ title: event.target.value }); }} placeholder="List Title" value={this.state.title} />
+                <input onChange={(event) => { this.setState({ item1: event.target.value }); }} placeholder="item1" value={this.state.item1} />
+                <input onChange={(event) => { this.setState({ item2: event.target.value }); }} placeholder="item2" value={this.state.item2} />
+                <input onChange={(event) => { this.setState({ item3: event.target.value }); }} placeholder="item3" value={this.state.item3} />
+              </div>
+            </div>
+            <div className="buttonContainer">
+              <div className="postButtons">
+                <button>Submit</button>
+                <Link to="/" className="postCancel">Cancel</Link>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
         <div className="lostFoundBoxes">
-          {this.renderDefault()}
           {this.renderOwn()}
+          {this.renderGenerator()}
+          {this.renderDefault()}
         </div>
       </div>
     );
