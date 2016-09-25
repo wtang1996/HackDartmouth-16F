@@ -70,7 +70,7 @@ class Show extends Component {
     } else {
       return (
         <div className="tags" onClick={() => this.setState({ isTagsEditing: true })}>
-          {this.props.list.tags}
+          {this.props.list.tags.toString()}
         </div>
         );
     }
