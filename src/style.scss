@@ -9,9 +9,9 @@ html {
 
 body {
   position: relative;
-  font-family: "Roboto", sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
   color: rgb(10%, 10%, 10%);
-  background: linear-gradient(to right, #0D2C48, #4D6C88);
+  background: linear-gradient(to bottom, #255AC5, #37A2DC);
   background-repeat: repeat-y;
   font-size: 16px;
   color: white;
@@ -60,7 +60,7 @@ a:hover, a:active {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 160px;
+  width: 190px;
   border: solid, thin, darkgray;
   border-radius: 5px;
   background-color: #e6e6e6;
@@ -146,9 +146,9 @@ footer {
   bottom: 0;
   left: 0;
   height: 4%;
-  padding-top: 1.2%;
+  padding-top: .8%;
   padding-bottom: .8%;
-  background-color: #e0e0e0;
+  background-color: #BEC0C4;
   border-top: thin solid lightgray;
   display: flex;
   flex-direction: row;
@@ -290,7 +290,7 @@ ul {
   width: 450px;
   border: solid, thin, darkgray;
   border-radius: 5px;
-  background-color: #e6e6e6;
+  background-color: #71D316;
   padding: 20px;
   color: midnightblue;
   align-items: center;
@@ -358,7 +358,7 @@ ul {
 }
 .postCancel {
   font-size: 16px;
-  background-color: firebrick;
+  background-color: #FF0000;
   color: white;
   border-radius: 4px;
   padding: 6px 10px;
