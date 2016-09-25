@@ -24,6 +24,7 @@ class Home extends Component {
     this.renderDefault = this.renderDefault.bind(this);
     this.renderGenerator = this.renderGenerator.bind(this);
     this.renderPick = this.renderPick.bind(this);
+    this.pop = this.pop.bind(this);
   }
 
   componentWillMount() {
@@ -67,22 +68,21 @@ class Home extends Component {
     });
   }
 
+  pop() {
+
+  }
+
   // Function to render the found item listings
   renderDefault() {
     return (
       <div className="found">
         <div className="listTitle">Default Lists</div>
         <ul>
-          <li className="Title">Hanover Restaurants</li>
-          <script className="tag">Restaurant</script>
-          <li className="Title">Dartmouth Study Spaces</li>
-          <script className="tag">Study Space</script>
-          <li className="Title">Dartmouth Greek Houses</li>
-          <script className="tag">Greek House</script>
+          <li onClick={} className="Title">Hanover Restaurants</li>
+          <li onClick={} className="Title">Dartmouth Study Spaces</li>
+          <li onClick={} className="Title">Dartmouth Greek Houses</li>
           <li className="Title">Colors</li>
-          <script className="tag">Color</script>
           <li className="Title">Dartmouth Dining Services Locations</li>
-          <script className="tag">Restaurant</script>
         </ul>
       </div>
     );
@@ -124,6 +124,7 @@ class Home extends Component {
             <div className="infoContainer">
               <div className="textContainer">
                 <input onChange={(event) => { this.setState({ title: event.target.value }); }} placeholder="List Title" value={this.state.title} />
+                <input onChange={(event) => { this.setState({ category: event.target.value }); }} placeholder="Category" value={this.state.category} />
                 <input onChange={(event) => { this.setState({ item1: event.target.value }); }} placeholder="item1" value={this.state.item1} />
                 <input onChange={(event) => { this.setState({ item2: event.target.value }); }} placeholder="item2" value={this.state.item2} />
                 <input onChange={(event) => { this.setState({ item3: event.target.value }); }} placeholder="item3" value={this.state.item3} />
