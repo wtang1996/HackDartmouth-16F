@@ -15,7 +15,8 @@ export const ActionTypes = {
   FETCH_MESSAGE_ERROR: 'FETCH_MESSAGE_ERROR',
 };
 
-const ROOT_URL = 'https://hackathon-undecided.herokuapp.com/api';
+const ROOT_URL = 'https://hw5p2.herokuapp.com/api';
+// const ROOT_URL = 'https://hackathon-undecided.herokuapp.com/api';
 // const ROOT_URL = 'http://localhost:9090/api';
 
 export function errorMessage(error) {
@@ -109,9 +110,10 @@ export function signinUser({ email, password }) {
 }
 
 
-export function signupUser({ email, password, username, pic }) {
+export function signupUser({ email, password, username }) {
+  console.log(email, password, username);
   return (dispatch) => {
-    axios.post(`${ROOT_URL}/signup`, { email, password, username, pic }).then(response => {
+    axios.post(`${ROOT_URL}/signup`, { email, password, username }).then(response => {
       dispatch({ type: ActionTypes.AUTH_USER });
       localStorage.setItem('token', response.data.token);
       browserHistory.push('/');

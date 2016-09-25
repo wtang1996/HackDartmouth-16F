@@ -4,21 +4,21 @@ const initialState = { all: [], post: null };
 
 const PostsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.FETCH_POSTS:
+    case ActionTypes.FETCH_LISTS:
       return Object.assign({}, state, {
         all: action.posts,
       });
-    case ActionTypes.FETCH_POST:
+    case ActionTypes.FETCH_LIST:
       return Object.assign({}, state, {
         post: action.post,
       });
-    case ActionTypes.UPDATE_POST:
+    case ActionTypes.UPDATE_LIST:
       return Object.assign({}, state, {
         post: action.fields,
       });
-    case ActionTypes.CREATE_POST:
+    case ActionTypes.CREATE_LIST:
       return state;
-    case ActionTypes.DELETE_POST:
+    case ActionTypes.DELETE_LIST:
       return state;
     default:
       return state;

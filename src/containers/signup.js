@@ -19,7 +19,6 @@ class SignUp extends Component {
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.submit = this.submit.bind(this);
-    this.callback = this.callback.bind(this);
   }
 
   onEmailChange(event) {

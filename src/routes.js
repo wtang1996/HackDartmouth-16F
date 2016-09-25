@@ -11,7 +11,7 @@ import Error from './containers/error';
 
 export default(
   <Route path="/" component={App}>
-    <IndexRoute component={RequireAuth(Home)} />
+    <IndexRoute component={Home} />
     <Route path="signin" component={SignIn} />
     <Route path="signup" component={SignUp} />
     <Route path="profile" component={RequireAuth(Profile)} />

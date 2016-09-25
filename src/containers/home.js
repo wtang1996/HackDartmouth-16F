@@ -15,16 +15,14 @@ class Home extends Component {
 
     this.renderOwn = this.renderOwn.bind(this);
     this.renderDefault = this.renderDefault.bind(this);
-
-    this.displayPost = this.displayPost.bind(this);
   }
 
   componentWillMount() {
-    this.props.fetchPosts();
+    // this.props.fetchLists();
   }
 
   componentWillUpdate() {
-    this.props.fetchUser();
+    // this.props.fetchUser();
   }
 
   // Function to render the found item listings
@@ -72,141 +70,15 @@ class Home extends Component {
     );
   }
 
-  renderClothing() {
-    if (this.state.tagsToShow.get('Clothing')) {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Clothing </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} checked />
-            <label htmlFor="clothingCheck"></label>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Clothing </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="clothingCheck" name="check" onClick={this.addClothing} />
-            <label htmlFor="clothingCheck"></label>
-          </div>
-        </div>
-      );
-    }
-  }
-
-  renderTechnology() {
-    if (this.state.tagsToShow.get('Technology')) {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Technology </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} checked />
-            <label htmlFor="techCheck"></label>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Technology </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="techCheck" name="check" onClick={this.addTech} />
-            <label htmlFor="techCheck"></label>
-          </div>
-        </div>
-      );
-    }
-  }
-
-  renderBike() {
-    if (this.state.tagsToShow.get('Bike')) {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Bike </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} checked />
-            <label htmlFor="bikeCheck"></label>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Bike </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="bikeCheck" name="check" onClick={this.addBike} />
-            <label htmlFor="bikeCheck"></label>
-          </div>
-        </div>
-      );
-    }
-  }
-
-  renderOther() {
-    if (this.state.tagsToShow.get('Other')) {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Other </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} checked />
-            <label htmlFor="otherCheck"></label>
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div className="check">
-          <div className="checkTitle"> Other </div>
-          <div className="checkboxDiv">
-            <input type="checkbox" value="None" id="otherCheck" name="check" onClick={this.addOther} />
-            <label htmlFor="otherCheck"></label>
-          </div>
-        </div>
-      );
-    }
-  }
-
-  renderTags() {
+  render() {
     return (
       <div>
-        <div className="homeTags">
-          <div className="colOne">
-            {this.renderClothing()}
-            {this.renderTechnology()}
-          </div>
-          <div className="colTwo">
-            {this.renderBike()}
-            {this.renderOther()}
-          </div>
+        <div className="lostFoundBoxes">
+          {this.renderDefault()}
+          {this.renderOwn()}
         </div>
       </div>
     );
-  }
-
-  render() {
-    if (this.props.user !== null) {
-      return (
-        <div>
-          <div className="newListingBox">
-            <Link to="posts/new" className="newListing">New Listing +</Link>
-          </div>
-          <div className="filters">
-            <div className="filtersBox">
-              <div className="tagTitle"> Filter Results by Tags </div>
-              {this.renderTags()}
-            </div>
-          </div>
-          <div className="lostFoundBoxes">
-            {this.renderLost()}
-            {this.renderFound()}
-          </div>
-        </div>
-      );
-    } else {
-      return <div>Loading......</div>;
-    }
   }
 }
 
