@@ -45,13 +45,13 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <h1 className="submissionTitle">Sign up</h1>
+        <h1 className="submissionTitle">Sign Up</h1>
         <div className="signInContainer">
           <form onSubmit={this.submit} className="signInBox">
-            Username: <input onChange={this.onUsernameChange} value={this.state.username} />
-            Email: <input onChange={this.onEmailChange} value={this.state.email} />
-            Password: <input type="password" onChange={this.onPasswordChange} value={this.state.password} />
-            <button>Sign up</button>
+            Username <input onChange={this.onUsernameChange} value={this.state.username} />
+            Email <input onChange={this.onEmailChange} value={this.state.email} />
+            Password <input type="password" onChange={this.onPasswordChange} value={this.state.password} />
+            <button>Sign Up</button>
             <Link to="signin" className="signUpLink">Already have an account? Sign in here!</Link>
           </form>
         </div>

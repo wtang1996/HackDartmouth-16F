@@ -32,19 +32,19 @@ class SignIn extends Component {
     if (this.state.email !== '' && this.state.password !== '') {
       this.props.signinUser({ email: this.state.email, password: this.state.password });
     } else {
-      alert('Please sign in with valid email and password');
+      alert('Please sign in with a valid email and password');
     }
   }
 
   render() {
     return (
       <div>
-        <h1 className="submissionTitle">Sign in</h1>
+        <h1 className="submissionTitle">Sign In</h1>
         <div className="signInContainer">
           <form onSubmit={this.submit} className="signInBox">
-            Email: <input onChange={this.onEmailChange} value={this.state.email} />
-            Password: <input type="password" onChange={this.onPasswordChange} value={this.state.password} />
-            <button>Sign in</button>
+            Email <input onChange={this.onEmailChange} value={this.state.email} />
+            Password <input type="password" onChange={this.onPasswordChange} value={this.state.password} />
+            <button>Sign In</button>
             <Link to="signup" className="signUpLink">New to Undecided? Sign up here!</Link>
           </form>
         </div>
