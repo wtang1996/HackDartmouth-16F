@@ -10,7 +10,7 @@ class Show extends Component {
     // init component state here
     this.state = {
       title: '',
-      tags: '',
+      tags: [],
       category: '',
       author: '',
       isTitleEditing: false,
@@ -69,7 +69,9 @@ class Show extends Component {
       );
     } else {
       return (
-        <div className="tags" onClick={() => this.setState({ isTagsEditing: true })}>{this.props.list.tags}</div>
+        <div className="tags" onClick={() => this.setState({ isTagsEditing: true })}>
+          {this.props.list.tags}
+        </div>
         );
     }
   }
@@ -79,7 +81,6 @@ class Show extends Component {
       return (
         <div className="show">
           <h1>{this.renderTitle()}</h1>
-          <div>Author: {this.props.list.author}</div>
           <div>{this.renderTags()}</div>
           <button onClick={this.delete} className="delete">Delete</button>
         </div>

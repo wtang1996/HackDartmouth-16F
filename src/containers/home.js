@@ -151,7 +151,7 @@ class Home extends Component {
 
   renderPick() {
     if (this.state.pickeditems) {
-      return <div className="result">Your pick is {this.state.pickeditems}!!!</div>;
+      return <div className="result">Your pick is: {this.state.pickeditems}!</div>;
     }
     return undefined;
   }
@@ -159,12 +159,12 @@ class Home extends Component {
   render() {
     return (
       <div>
-          {this.renderPick()}
         <div className="lostFoundBoxes">
           {this.renderOwn()}
           {this.renderGenerator()}
           {this.renderDefault()}
         </div>
+        {this.renderPick()}
       </div>
     );
   }
